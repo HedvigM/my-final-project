@@ -68,6 +68,31 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+app.post('/signin', async (req, res) => {
+  const { name, password } = req.body;
+
+  try {
+    const member = await Member.findOne({ name });
+
+    if (member && bcrypt.compareSync(password, member.password)) {
+      res.status(200).json({
+        response: {
+          memberId: member._id,
+          name: member.name,
+          accessToken: member.accessToken
+        },
+        success: true
+      });
+    } else {
+      res
+        .status(404)
+        .json({ response: 'Name and password dont match', success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
 // Start the server
 app.listen(port, () => {
   // eslint-disable-next-line
