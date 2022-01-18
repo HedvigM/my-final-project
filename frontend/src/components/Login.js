@@ -1,19 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState /* useEffect */ } from 'react';
+import { /* useSelector, */ useDispatch, batch } from 'react-redux';
+import { API_URL } from '../utils/url';
+import member from '../reducers/member';
 
 export const Login = () => {
   const [memberName, setMemberName] = useState('');
   const [password, setPassword] = useState('');
-  const [mode, setMode] = useState('signup');
+  const [mode, setMode] = useState('signin');
+
+  /* const accessToken = useSelector((store) => store.member.accessToken */
+
+  const dispatch = useDispatch();
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-
-    /*  useEffect(() => {
-        if (accessToken) {
-          navigate('/');
-        }
-      }, [accessToken, navigate]); */
   };
+
+  /*   useEffect(() => {
+    if (accessToken) {
+      navigate('/');
+    }
+  }, [accessToken, navigate]); */
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ memberName, password })
+  };
+  // fething
+  fetch(API_URL(mode), options)
+    .then((res) => res.json())
+    .then((data) => {
+      if (data.success) {
+        batch(() => {
+          dispatch(member.actions.setMemberId(data.response.memberId));
+          dispatch(member.actions.setMemberName(data.response.memberName));
+          dispatch(member.actions.setaccessToken(data.response.accessToken));
+        });
+      } else {
+        batch(() => {
+          dispatch(member.actions.setMemberId(null));
+          dispatch(member.actions.setMemberName(null));
+          dispatch(member.actions.setaccessToken(null));
+        });
+      }
+    });
+
   return (
     <>
       {/*Sign in/ Sign up Radio Buttons  */}
@@ -54,6 +88,8 @@ export const Login = () => {
           type="password"
           value={password}
           onChange={(event) => setPassword(event.target.value)}></input>
+
+        <button type="submit">Login</button>
       </form>
     </>
   );
