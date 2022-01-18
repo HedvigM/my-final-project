@@ -3,10 +3,13 @@ import './App.css';
 import styled from 'styled-components';
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
 import { Login } from './components/Login';
+import { Profile } from './components/Profile';
 import { Footer } from './components/Footer';
+import { NotFound } from './components/NotFound';
 import member from './reducers/member';
 
 const reducer = combineReducers({
@@ -17,13 +20,19 @@ const store = configureStore({ reducer });
 const App = () => {
   return (
     <Provider store={store}>
-      <Container>
-        <Header />
-        <InnerContainer>
-          <Login />
-        </InnerContainer>
-        <Footer />
-      </Container>
+      <BrowserRouter>
+        <Container>
+          <Header />
+          <InnerContainer>
+            <Routes>
+              <Route path="/" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </InnerContainer>
+          <Footer />
+        </Container>
+      </BrowserRouter>
     </Provider>
   );
 };
@@ -36,7 +45,6 @@ const Container = styled.div`
   justify-content: space-between;
 
   min-height: 100vh;
-  background-color: #ae9d97;
 `;
 const InnerContainer = styled.div`
   min-width: 334px;

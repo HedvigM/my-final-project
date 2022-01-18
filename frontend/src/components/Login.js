@@ -1,5 +1,6 @@
-import React, { useState /* useEffect */ } from 'react';
-import { /* useSelector, */ useDispatch, batch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch, batch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../utils/url';
 import member from '../reducers/member';
 
@@ -8,20 +9,21 @@ export const Login = () => {
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState('signin');
 
-  /* const accessToken = useSelector((store) => store.member.accessToken */
+  const accessToken = useSelector((store) => store.member.accessToken);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onFormSubmit = (event) => {
     event.preventDefault();
     doTheFetch();
   };
 
-  /*   useEffect(() => {
+  useEffect(() => {
     if (accessToken) {
       navigate('/');
     }
-  }, [accessToken, navigate]); */
+  }, [accessToken, navigate]);
 
   const options = {
     method: 'POST',
@@ -34,7 +36,6 @@ export const Login = () => {
   const doTheFetch = async () => {
     fetch(API_URL(mode), options)
       .then((res) => res.json())
-
       .then((data) => {
         console.log(data);
         if (data.success) {

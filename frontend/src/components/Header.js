@@ -1,5 +1,34 @@
 import React from 'react';
+import { MyTunes } from './MyTunes';
+import { SearchMembers } from './SearchMembers';
+import { SearchTunes } from './SearchTunes';
+import styled from 'styled-components';
 
 export const Header = () => {
-  return <h1>I'm a Header!</h1>;
+  return (
+    <Container>
+      <Ic>
+        <MyTunes />
+      </Ic>
+      <Ic>
+        <SearchMembers />
+      </Ic>
+
+      <Ic>
+        <SearchTunes />
+      </Ic>
+    </Container>
+  );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: var(--secondary-color);
+  color: white;
+`;
+
+const Ic = styled.div`
+  padding: 10px;
+`;

@@ -73,17 +73,25 @@ app.post('/signup', async (req, res) => {
 
 app.post('/signin', async (req, res) => {
   console.log('anslutning till /signin');
-  const { memberName, password } = req.body;
+  //  const { memberName, password } = req.body;
+
+  const loginMember = req.body;
+  console.log(loginMember);
 
   try {
-    const member = await Member.findOne({ memberName });
+    const databaseMember = await Member.findOne({
+      memberName: loginMember.memberName
+    });
 
-    if (member && bcrypt.compareSync(password, memberName.password)) {
+    if (
+      databaseMember &&
+      bcrypt.compareSync(loginMember.password, databaseMember.password)
+    ) {
       res.status(200).json({
         response: {
-          memberId: memberName._id,
-          memberName: memberName.memberName,
-          accessToken: memberName.accessToken
+          memberId: databaseMember._id,
+          memberName: databaseMember.memberName,
+          accessToken: databaseMember.accessToken
         },
         success: true
       });
@@ -93,6 +101,7 @@ app.post('/signin', async (req, res) => {
         .json({ response: 'Name and password dont match', success: false });
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({ response: error, success: false });
   }
 });
