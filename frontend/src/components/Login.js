@@ -37,13 +37,13 @@ export const Login = () => {
         batch(() => {
           dispatch(member.actions.setMemberId(data.response.memberId));
           dispatch(member.actions.setMemberName(data.response.memberName));
-          dispatch(member.actions.setaccessToken(data.response.accessToken));
+          dispatch(member.actions.setAccessToken(data.response.accessToken));
         });
       } else {
         batch(() => {
           dispatch(member.actions.setMemberId(null));
           dispatch(member.actions.setMemberName(null));
-          dispatch(member.actions.setaccessToken(null));
+          dispatch(member.actions.setAccessToken(null));
         });
       }
     });

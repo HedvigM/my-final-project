@@ -1,14 +1,22 @@
 import React from 'react';
 import './App.css';
 import styled from 'styled-components';
+import { Provider } from 'react-redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import { Header } from './components/Header';
 import { Login } from './components/Login';
 import { Footer } from './components/Footer';
+import member from './reducers/member';
 
+const reducer = combineReducers({
+  member: member.reducer
+});
+
+const store = configureStore({ reducer });
 const App = () => {
   return (
-    <>
+    <Provider store={store}>
       <Container>
         <Header />
         <InnerContainer>
@@ -16,7 +24,7 @@ const App = () => {
         </InnerContainer>
         <Footer />
       </Container>
-    </>
+    </Provider>
   );
 };
 

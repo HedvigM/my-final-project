@@ -14,7 +14,7 @@ const member = createSlice({
     setMemberName: (store, action) => {
       store.name = action.payload;
     },
-    setaccessToken: (store, action) => {
+    setAccessToken: (store, action) => {
       store.accessToken = action.payload;
     }
   }
