@@ -14,6 +14,7 @@ export const Login = () => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
+    doTheFetch();
   };
 
   /*   useEffect(() => {
@@ -29,24 +30,28 @@ export const Login = () => {
     },
     body: JSON.stringify({ memberName, password })
   };
-  // fething
-  fetch(API_URL(mode), options)
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.success) {
-        batch(() => {
-          dispatch(member.actions.setMemberId(data.response.memberId));
-          dispatch(member.actions.setMemberName(data.response.memberName));
-          dispatch(member.actions.setAccessToken(data.response.accessToken));
-        });
-      } else {
-        batch(() => {
-          dispatch(member.actions.setMemberId(null));
-          dispatch(member.actions.setMemberName(null));
-          dispatch(member.actions.setAccessToken(null));
-        });
-      }
-    });
+
+  const doTheFetch = async () => {
+    fetch(API_URL(mode), options)
+      .then((res) => res.json())
+
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          batch(() => {
+            dispatch(member.actions.setMemberId(data.response.memberId));
+            dispatch(member.actions.setMemberName(data.response.memberName));
+            dispatch(member.actions.setAccessToken(data.response.accessToken));
+          });
+        } else {
+          batch(() => {
+            dispatch(member.actions.setMemberId(null));
+            dispatch(member.actions.setMemberName(null));
+            dispatch(member.actions.setAccessToken(null));
+          });
+        }
+      });
+  };
 
   return (
     <>

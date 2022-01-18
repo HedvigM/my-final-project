@@ -4,7 +4,7 @@ const member = createSlice({
   name: 'member',
   initialState: {
     memberId: null,
-    name: null,
+    memberName: null,
     accessToken: null
   },
   reducers: {
@@ -12,7 +12,7 @@ const member = createSlice({
       store.memberId = action.payload;
     },
     setMemberName: (store, action) => {
-      store.name = action.payload;
+      store.memberName = action.payload;
     },
     setAccessToken: (store, action) => {
       store.accessToken = action.payload;

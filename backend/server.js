@@ -8,15 +8,8 @@ const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/session';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
-const port = process.env.PORT || 8080;
-const app = express();
-
-// add the middleware damien shows...
-app.use(cors());
-app.use(express.json());
-
 const MemberSchema = new mongoose.Schema({
-  name: {
+  memberName: {
     type: String,
     unique: true,
     required: true
@@ -33,12 +26,20 @@ const MemberSchema = new mongoose.Schema({
 
 const Member = mongoose.model('Member', MemberSchema);
 
+const port = process.env.PORT || 8080;
+const app = express();
+
+// add the middleware damien shows...
+app.use(cors());
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('Hello Music Lovers!');
 });
 
 app.post('/signup', async (req, res) => {
-  const { name, password } = req.body;
+  console.log('anslutning till /signup');
+  const { memberName, password } = req.body;
 
   // I will need to explain this more to my future self.
   try {
@@ -49,19 +50,21 @@ app.post('/signup', async (req, res) => {
     }
 
     const newMember = await new Member({
-      name,
+      memberName,
       password: bcrypt.hashSync(password, salt)
     }).save();
 
     res.status(201).json({
       response: {
         memberId: newMember._id,
-        name: newMember.name,
+        memberName: newMember.memberName,
         accessToken: newMember.accessToken
       },
       success: true
     });
   } catch (error) {
+    console.log('could not create member, tråkigt');
+    console.log(error);
     res
       .status(400)
       .json({ response: 'Could not create member', success: false });
@@ -69,23 +72,24 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/signin', async (req, res) => {
-  const { name, password } = req.body;
+  console.log('anslutning till /signin');
+  const { memberName, password } = req.body;
 
   try {
-    const member = await Member.findOne({ name });
+    const member = await Member.findOne({ memberName });
 
-    if (member && bcrypt.compareSync(password, member.password)) {
+    if (member && bcrypt.compareSync(password, memberName.password)) {
       res.status(200).json({
         response: {
-          memberId: member._id,
-          name: member.name,
-          accessToken: member.accessToken
+          memberId: memberName._id,
+          memberName: memberName.memberName,
+          accessToken: memberName.accessToken
         },
         success: true
       });
     } else {
       res
-        .status(404)
+        .status(401)
         .json({ response: 'Name and password dont match', success: false });
     }
   } catch (error) {
