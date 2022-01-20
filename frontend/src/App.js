@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import styled from 'styled-components';
+/* import styled from 'styled-components'; */
 import { Provider } from 'react-redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { Header } from './components/Header';
+/* import { Header } from './components/Header'; */
 import { Login } from './components/Login';
-import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
-import { MyTunes } from './components/MyTunes';
-import { Footer } from './components/Footer';
+/* import { ProfileScreenTwo } from './Screens/ProfileScreenTwo'; */
+import { SearchScreen } from './Screens/SearchScreen';
+
+/* import { MyTunes } from './components/MyTunes'; */
+/* import { Footer } from './components/Footer'; */
 import { NotFound } from './components/NotFound';
 import member from './reducers/member';
 
@@ -26,7 +28,7 @@ const App = () => {
           {/* <Header /> */}
           <div>
             <Routes>
-              <Route path="/" element={<ProfileScreenTwo />} />
+              <Route path="/" element={<SearchScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

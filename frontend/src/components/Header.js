@@ -11,7 +11,8 @@ export const Header = () => {
         <h3>🎻My tunes</h3>
       </Ic>
       <Ic>
-        <SearchMembers />
+        <h3>🔍 Search</h3>
+        {/* länka till SearchScreen */}
       </Ic>
 
       <Ic>

@@ -1,5 +1,11 @@
 import React from 'react';
 
 export const SearchMembers = () => {
-  return <h3>🔍 Members</h3>;
+  return (
+    <>
+      <button>Tune</button>
+      <h1>|</h1>
+      <button>Member</button>
+    </>
+  );
 };
