@@ -82,12 +82,15 @@ const Icons = styled.div`
 const StyledFooter = styled.footer`
   background-color: var(--main-color);
   text-align: center;
-  margin-top: 20px;
+  /*   margin-top: 20px; */
   @media (min-width: 0px) and (max-width: 991px) {
     margin-top: auto;
     h1 {
       font-size: 1em;
       padding: 10px;
+    }
+    h3 {
+      margin-top: 0px;
     }
   }
   @media (min-width: 992px) {

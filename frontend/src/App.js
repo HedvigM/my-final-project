@@ -7,7 +7,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
 import { Login } from './components/Login';
-import { Profile } from './components/Profile';
+import { ProfileScreen } from './Screens/ProfileScreen';
+import { MyTunes } from './components/MyTunes';
 import { Footer } from './components/Footer';
 import { NotFound } from './components/NotFound';
 import member from './reducers/member';
@@ -21,17 +22,17 @@ const App = () => {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <Container>
-          <Header />
-          <InnerContainer>
+        <div>
+          {/* <Header /> */}
+          <div>
             <Routes>
-              <Route path="/" element={<Profile />} />
+              <Route path="/" element={<ProfileScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-          </InnerContainer>
-          <Footer />
-        </Container>
+          </div>
+          {/* <Footer /> */}
+        </div>
       </BrowserRouter>
     </Provider>
   );
@@ -39,7 +40,7 @@ const App = () => {
 
 export default App;
 
-const Container = styled.div`
+/* const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -50,11 +51,11 @@ const InnerContainer = styled.div`
   min-width: 334px;
   max-width: 500px;
   margin: 0 auto;
-  height: 100%;
-  /* background-color: #ff885e; */
-  border: 3px solid red;
+  height: 100%; */
+/* background-color: #ff885e; */
+/* border: 3px solid red;
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
   }
-`;
+`; */

@@ -8,7 +8,7 @@ export const Header = () => {
   return (
     <Container>
       <Ic>
-        <MyTunes />
+        <h3>🎻My tunes</h3>
       </Ic>
       <Ic>
         <SearchMembers />
