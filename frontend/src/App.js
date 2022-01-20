@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Header } from './components/Header';
 import { Login } from './components/Login';
-import { ProfileScreen } from './Screens/ProfileScreen';
+import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
 import { MyTunes } from './components/MyTunes';
 import { Footer } from './components/Footer';
 import { NotFound } from './components/NotFound';
@@ -26,7 +26,7 @@ const App = () => {
           {/* <Header /> */}
           <div>
             <Routes>
-              <Route path="/" element={<ProfileScreen />} />
+              <Route path="/" element={<ProfileScreenTwo />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
