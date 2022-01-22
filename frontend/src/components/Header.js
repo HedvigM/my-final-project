@@ -1,22 +1,29 @@
 import React from 'react';
-import { MyTunes } from './MyTunes';
-import { SearchMembers } from './SearchMembers';
 import { SearchTunes } from './SearchTunes';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Header = () => {
   return (
     <Container>
       <Ic>
-        <h3>🎻My tunes</h3>
+        <Link to={'/'}>
+          {' '}
+          <h3>🎻My tunes</h3>
+        </Link>
       </Ic>
       <Ic>
-        <h3>🔍 Search</h3>
-        {/* länka till SearchScreen */}
+        <Link to={'/search-members'}>
+          {' '}
+          <h3>🔍 Search Member</h3>
+        </Link>
       </Ic>
 
       <Ic>
-        <SearchTunes />
+        <Link to={'/search-tunes'}>
+          {' '}
+          <h3>🔍 Search Tune</h3>
+        </Link>
       </Ic>
     </Container>
   );

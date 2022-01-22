@@ -3,11 +3,13 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from '@reduxjs/toolkit';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import member from './reducers/member';
 
 import { Login } from './components/Login';
 import { NotFound } from './components/NotFound';
-import member from './reducers/member';
 import { ProfileScreen } from './Screens/ProfileScreen';
+import { SearchMemberScreen } from './Screens/SearchMemberScreen';
+import { SearchTuneScreen } from './Screens/SearchTuneScreen';
 
 const reducer = combineReducers({
   member: member.reducer
@@ -42,6 +44,8 @@ const App = () => {
             <Routes>
               <Route path="/" element={<ProfileScreen />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/search-members" element={<SearchMemberScreen />} />
+              <Route path="/search-tunes" element={<SearchTuneScreen />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>

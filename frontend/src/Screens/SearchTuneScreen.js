@@ -1,13 +1,13 @@
 import React from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { SearchMembers } from '../components/SearchMembers';
+import { SearchTunes } from '../components/SearchTunes';
 
-export const SearchScreen = () => {
+export const SearchTuneScreen = () => {
   return (
     <>
       <Header />
-      <SearchMembers />
+      <SearchTunes />
       <Footer />
     </>
   );
