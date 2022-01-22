@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+<<<<<<< Updated upstream
 import styled from 'styled-components';
 
 import { Header } from './components/Header';
@@ -17,10 +18,43 @@ const App = () => {
         <Footer />
       </Container>
     </>
+=======
+import { Provider } from 'react-redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { Login } from './components/Login';
+import { SearchScreen } from './Screens/SearchScreen';
+
+import { NotFound } from './components/NotFound';
+import member from './reducers/member';
+
+const reducer = combineReducers({
+  member: member.reducer
+});
+
+const store = configureStore({ reducer });
+const App = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <div>
+            <Routes>
+              <Route path="/" element={<SearchScreen />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </div>
+      </BrowserRouter>
+    </Provider>
+>>>>>>> Stashed changes
   );
 };
 
 export default App;
+<<<<<<< Updated upstream
 
 const Container = styled.div`
   display: flex;
@@ -42,3 +76,5 @@ const InnerContainer = styled.div`
     max-width: 300px;
   }
 `;
+=======
+>>>>>>> Stashed changes
