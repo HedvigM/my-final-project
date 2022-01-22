@@ -8,7 +8,7 @@ export const Header = () => {
       <Ic>
         <Link to={'/'}>
           {' '}
-          <h3>🎻My tunes</h3>
+          <h3>🎻 My tunes</h3>
         </Link>
       </Ic>
       <Ic>
