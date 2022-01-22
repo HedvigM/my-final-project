@@ -5,9 +5,9 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { Login } from './components/Login';
-import { SearchScreen } from './Screens/SearchScreen';
 import { NotFound } from './components/NotFound';
 import member from './reducers/member';
+import { ProfileScreen } from './Screens/ProfileScreen';
 
 const reducer = combineReducers({
   member: member.reducer
@@ -21,7 +21,7 @@ const App = () => {
         <div>
           <div>
             <Routes>
-              <Route path="/" element={<SearchScreen />} />
+              <Route path="/" element={<ProfileScreen />} />
               <Route path="/login" element={<Login />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

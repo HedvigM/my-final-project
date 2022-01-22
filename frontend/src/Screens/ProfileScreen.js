@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Profile } from '../components/Profile';
 import { MyTunes } from '../components/MyTunes';
@@ -6,6 +8,17 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
 export const ProfileScreen = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const accessToken = useSelector((store) => store.member.accessToken);
+
+  useEffect(() => {
+    if (!accessToken) {
+      navigate('/login');
+    }
+  }, [accessToken, navigate]);
+
   return (
     <Container>
       <Header />
