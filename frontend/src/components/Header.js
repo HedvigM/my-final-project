@@ -39,4 +39,16 @@ const Container = styled.div`
 
 const Ic = styled.div`
   padding: 10px;
+
+  a {
+    color: white;
+    text-decoration: none;
+  }
+  a:hover {
+    /* color taken from the picture on the site */
+    color: #2a6d38;
+  }
+  a:active {
+    color: var(--main-color);
+  }
 `;
