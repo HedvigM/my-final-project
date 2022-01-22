@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import listEndpoints from 'express-list-endpoints';
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 
@@ -40,6 +41,10 @@ app.use((req, res, next) => {
   } else {
     res.status(503).json({ error: 'Service unavailable' });
   }
+});
+
+app.get('/endpoints', (req, res) => {
+  res.send(listEndpoints(app));
 });
 
 app.get('/', (req, res) => {
