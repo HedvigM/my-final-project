@@ -30,7 +30,6 @@ const Member = mongoose.model('Member', MemberSchema);
 const port = process.env.PORT || 8080;
 const app = express();
 
-// add the middleware damien shows...
 app.use(cors());
 app.use(express.json());
 
@@ -52,7 +51,10 @@ app.get('/', (req, res) => {
 });
 
 // authenticateUser function is needed...
-app.get('/members', (req, res) => {});
+app.get('/members', async (req, res) => {
+  const members = await Member.find({}).limit(20).exec();
+  res.status(200).json({ response: members, success: true });
+});
 
 app.post('/signup', async (req, res) => {
   console.log('anslutning till /signup');
