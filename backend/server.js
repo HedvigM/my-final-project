@@ -22,6 +22,9 @@ const MemberSchema = new mongoose.Schema({
   accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString('hex')
+  },
+  friends: {
+    type: String,
   }
 });
 
@@ -55,6 +58,46 @@ app.get('/members', async (req, res) => {
   const members = await Member.find({}).limit(20).exec();
   res.status(200).json({ response: members, success: true });
 });
+
+// figure out how to do this... 
+app.post('/friends', async (req, res) => {
+  const { memberId } req.params;
+   try {
+     const updatedFriends = await Member.findById(
+       memberId,
+       friends: 
+       {
+
+       }
+     )
+
+   } catch (error) {
+
+   }
+})
+
+/* app.post('/friends', async (req, res) => {
+  const { memberName, friends } = req.body;
+
+  try {
+    const queriedMember = await Member.findById(memberName);
+    const NewFriend = await new Friends({
+      memberName,
+      friends: queriedMember
+    }).save();
+
+    res.status(201).json({ response: NewFriend, success: true });
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
+app.get('/member/:memberId', async (req, res) => {
+  const { memberId } = req.params;
+
+  const member = await Member.findById(memberId).populate('friends');
+  res.status(200).json({ response: member, success: true });
+}); */
 
 app.post('/signup', async (req, res) => {
   console.log('anslutning till /signup');
