@@ -33,9 +33,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//Check if the connection to the server is ok.
+app.use((req, res, next) => {
+  if (mongoose.connection.readyState === 1) {
+    next();
+  } else {
+    res.status(503).json({ error: 'Service unavailable' });
+  }
+});
+
 app.get('/', (req, res) => {
   res.send('Hello Music Lovers!');
 });
+
+// authenticateUser function is needed...
+app.get('/members', (req, res) => {});
 
 app.post('/signup', async (req, res) => {
   console.log('anslutning till /signup');
