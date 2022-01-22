@@ -7,8 +7,11 @@ import member from './reducers/member';
 
 import { Login } from './components/Login';
 import { NotFound } from './components/NotFound';
+
 import { ProfileScreen } from './Screens/ProfileScreen';
+import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
 import { SearchMemberScreen } from './Screens/SearchMemberScreen';
+import { SearchMemberScreenTwo } from './Screens/SearchMemberScreenTwo';
 import { SearchTuneScreen } from './Screens/SearchTuneScreen';
 
 const reducer = combineReducers({
@@ -43,8 +46,16 @@ const App = () => {
           <div>
             <Routes>
               <Route path="/" element={<ProfileScreen />} />
+              <Route path="/two" element={<ProfileScreenTwo />} />
+
               <Route path="/login" element={<Login />} />
+
               <Route path="/search-members" element={<SearchMemberScreen />} />
+              <Route
+                path="/search-members-two"
+                element={<SearchMemberScreenTwo />}
+              />
+
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

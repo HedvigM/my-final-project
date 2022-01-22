@@ -3,19 +3,19 @@ import styled from 'styled-components';
 
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { DetailTune } from '../components/DetailTune';
+import { Profile } from '../components/Profile';
 import { TunesIncommon } from '../components/TunesIncommon';
 
-export const ProfileScreenTwo = () => {
+export const SearchMemberScreenTwo = () => {
   return (
     <Container>
       <Header />
       <InnerContainer>
-        <TunesIncommon />
+        <Profile />
       </InnerContainer>
       <Img>
         <InnerContainer>
-          <DetailTune />
+          <TunesIncommon />
         </InnerContainer>
       </Img>
 
