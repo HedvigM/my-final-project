@@ -37,6 +37,7 @@ export const Login = () => {
     fetch(API_URL(mode), options)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.success) {
           batch(() => {
             dispatch(member.actions.setMemberId(data.response.memberId));
