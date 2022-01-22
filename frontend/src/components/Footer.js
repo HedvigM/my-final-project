@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -13,8 +14,14 @@ library.add(fab);
 export const Footer = () => {
   return (
     <StyledFooter>
-      <About />
-      <Settings />
+      <Link to={'/about'}>
+        {' '}
+        <h3>About</h3>
+      </Link>
+      <Link to={'/settings'}>
+        {' '}
+        <h3>Settings</h3>
+      </Link>
       <h1>
         Hedvig Mejstedt
         <br />
@@ -57,6 +64,10 @@ export const Footer = () => {
   );
 };
 
+/* const Ic = styled.div`
+  padding: 10px;
+`; */
+
 const Icon = styled.a`
   margin: 5px 5px;
   color: black;
@@ -80,6 +91,18 @@ const Icons = styled.div`
 `;
 
 const StyledFooter = styled.footer`
+  a {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    /* color taken from the picture on the site */
+    color: #2a6d38;
+  }
+  a:active {
+    color: var(--secondary-color);
+  }
+
   background-color: var(--main-color);
   text-align: center;
   /*   margin-top: 20px; */

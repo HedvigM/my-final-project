@@ -14,6 +14,9 @@ import { SearchMemberScreen } from './Screens/SearchMemberScreen';
 import { SearchMemberScreenTwo } from './Screens/SearchMemberScreenTwo';
 import { SearchTuneScreen } from './Screens/SearchTuneScreen';
 
+import { About } from './components/About';
+import { Settings } from './components/Settings';
+
 const reducer = combineReducers({
   member: member.reducer
 });
@@ -58,6 +61,8 @@ const App = () => {
 
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
               <Route path="*" element={<NotFound />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
           </div>
         </div>
