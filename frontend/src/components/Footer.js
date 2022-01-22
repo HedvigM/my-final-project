@@ -64,10 +64,6 @@ export const Footer = () => {
   );
 };
 
-/* const Ic = styled.div`
-  padding: 10px;
-`; */
-
 const Icon = styled.a`
   margin: 5px 5px;
   color: black;
