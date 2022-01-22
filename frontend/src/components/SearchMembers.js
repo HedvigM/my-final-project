@@ -3,6 +3,7 @@ import { API_URL } from '../utils/url';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
+  const [value, setValue] = useState('');
 
   useEffect(() => {
     fetch(API_URL('members'))
@@ -11,15 +12,27 @@ export const SearchMembers = () => {
         setList(data.response);
       });
   }, []);
-  console.log(list);
+
   return (
-    <>
-      <h1>Search for a member</h1>
-      {list.map((item) => (
-        <div key={item._id}>
-          <p>{item.memberName}</p>
-        </div>
-      ))}
-    </>
+    <div>
+      <input
+        type="text"
+        value={value}
+        onChange={(event) => setValue(event.target.value)}
+      />
+
+      {list
+        .filter((item) => {
+          if (!value) return true;
+          if (item.memberName.toLowerCase().includes(value)) {
+            return true;
+          }
+        })
+        .map((item) => (
+          <div>
+            <p>{item.memberName}</p>
+          </div>
+        ))}
+    </div>
   );
 };
