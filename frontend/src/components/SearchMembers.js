@@ -18,6 +18,7 @@ export const SearchMembers = () => {
       <input
         type="text"
         value={value}
+        placeholder="Search"
         onChange={(event) => setValue(event.target.value)}
       />
 
