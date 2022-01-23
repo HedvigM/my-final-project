@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
-import { API_URL } from '../utils/url';
+import { POPULAR_URL } from '../utils/url';
 
-export const SearchMembers = () => {
+export const SearchTunes = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
 
   useEffect(() => {
-    fetch(API_URL('members'))
+    fetch(POPULAR_URL('3'))
       .then((res) => res.json())
       .then((data) => {
-        setList(data.response);
-        console.log('Data', data);
+        setList(data.tunes);
+        console.log(data);
       });
   }, []);
+
+  /*   const nextPage = () => {
+    onPageChange(currentPage + 1);
+  };
+
+  const previousPage = () => {
+    onPageChange(currentPage - 1);
+  }; */
 
   return (
     <div>
       <Div>
         <Container>
-          <label>Search for a member</label>
+          <label>Search for a Tune</label>
           <input
             type="text"
             value={value}
@@ -29,21 +39,15 @@ export const SearchMembers = () => {
         </Container>
       </Div>
 
-      {list
-        .filter((item) => {
-          if (!value) return true;
-          if (item.memberName.toLowerCase().includes(value.toLowerCase())) {
-            return true;
-          }
-        })
-        .map((item) => (
-          <div>
-            <p>{item.memberName}</p>
-            <button onClick={() => console.log('add a friend')}>
-              🎻 add {item.memberName} as a friend!{' '}
-            </button>
-          </div>
-        ))}
+      {list.map((item) => (
+        <div>
+          <p>
+            {item.name}, ({item.type})
+          </p>
+        </div>
+      ))}
+      {/*  <button onClick={nextPage}>Next page</button>
+      <button onClick={previousPage}>Previous page</button> */}
     </div>
   );
 };
