@@ -6,9 +6,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
 
-import { About } from './About';
-import { Settings } from './Settings';
-
 library.add(fab);
 
 export const Footer = () => {
