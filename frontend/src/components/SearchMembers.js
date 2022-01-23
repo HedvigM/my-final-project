@@ -38,7 +38,9 @@ export const SearchMembers = () => {
         .map((item) => (
           <div>
             <p>{item.memberName}</p>
-            <p>🎻 </p>
+            <button onClick={() => console.log('add a friend')}>
+              🎻 add {item.memberName} as a friend!{' '}
+            </button>
           </div>
         ))}
     </div>

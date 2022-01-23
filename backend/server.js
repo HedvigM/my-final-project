@@ -24,7 +24,7 @@ const MemberSchema = new mongoose.Schema({
     default: () => crypto.randomBytes(128).toString('hex')
   },
   friends: {
-    type: String,
+    type: String
   }
 });
 
@@ -59,8 +59,8 @@ app.get('/members', async (req, res) => {
   res.status(200).json({ response: members, success: true });
 });
 
-// figure out how to do this... 
-app.post('/friends', async (req, res) => {
+// figure out how to do this...
+/* app.post('/friends', async (req, res) => {
   const { memberId } req.params;
    try {
      const updatedFriends = await Member.findById(
@@ -74,7 +74,7 @@ app.post('/friends', async (req, res) => {
    } catch (error) {
 
    }
-})
+}) */
 
 /* app.post('/friends', async (req, res) => {
   const { memberName, friends } = req.body;
