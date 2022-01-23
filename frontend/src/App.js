@@ -5,9 +5,9 @@ import { createStore, combineReducers } from '@reduxjs/toolkit';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import member from './reducers/member';
 
-import { Login } from './components/Login';
 import { NotFound } from './components/NotFound';
 
+import { LoginScreen } from './Screens/LoginScreen';
 import { ProfileScreen } from './Screens/ProfileScreen';
 import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
 import { SearchMemberScreen } from './Screens/SearchMemberScreen';
@@ -51,7 +51,7 @@ const App = () => {
               <Route path="/" element={<ProfileScreen />} />
               <Route path="/two" element={<ProfileScreenTwo />} />
 
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<LoginScreen />} />
 
               <Route path="/search-members" element={<SearchMemberScreen />} />
               <Route
