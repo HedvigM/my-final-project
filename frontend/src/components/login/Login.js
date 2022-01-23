@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { API_URL } from '../utils/url';
-import member from '../reducers/member';
+import { API_URL } from '../../utils/url';
+import member from '../../reducers/member';
+import styled from 'styled-components';
 
 export const Login = () => {
   const [memberName, setMemberName] = useState('');
@@ -70,17 +71,16 @@ export const Login = () => {
         type="radio"
         checked={mode === 'signup'}
         onChange={() => setMode('signup')}></input>
+      <Div>
+        <form onSubmit={onFormSubmit}>
+          <input
+            id="name"
+            type="text"
+            placeholder="Name"
+            value={memberName}
+            onChange={(event) => setMemberName(event.target.value)}></input>
 
-      <form onSubmit={onFormSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          id="name"
-          type="text"
-          placeholder="Name"
-          value={memberName}
-          onChange={(event) => setMemberName(event.target.value)}></input>
-
-        {/* <label htmlFor="email">Email:</label>
+          {/* <label htmlFor="email">Email:</label>
       <input
         id="email"
         type="email"
@@ -88,15 +88,44 @@ export const Login = () => {
         value={memberEmail}
         onChange={(event) => setMemberEmail(event.target.value)}></input> */}
 
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}></input>
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}></input>
 
-        <button type="submit">Login</button>
-      </form>
+          <button type="submit">Login</button>
+        </form>
+      </Div>
     </>
   );
 };
+
+const Div = styled.div`
+input {
+  background-color: var(--main-color);
+  border: none;
+  border-bottom: 1px solid black;
+
+  margin: 15px;
+  padding: 5px;
+  width: 300px;
+
+  text-align: center;
+
+
+
+  ::placeholder {
+    color: black;
+    opacity: 1;
+    /* font-family: var(--font); Aktuellt först när det finns ett typsnitt*/
+
+
+  /*   @media (min-width: 0px) and (max-width: 767px) {
+      max-width: 200px;
+      h1 {
+        font-size: 2em;
+      }
+    } */
+}`;
