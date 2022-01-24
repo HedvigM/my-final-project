@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
-import ReactPaginate from 'react-paginate';
 import styled from 'styled-components';
 import { POPULAR_URL } from '../utils/url';
 
