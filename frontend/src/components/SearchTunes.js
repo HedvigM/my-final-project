@@ -1,73 +1,118 @@
-import ReactPaginate from 'react-paginate';
 import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
+import styled from 'styled-components';
+import { POPULAR_URL } from '../utils/url';
 
-const items = [...Array(55).keys()];
-
-function Items({ currentItems }) {
-  return (
-    <div className="items">
-      {currentItems &&
-        currentItems.map((item) => (
-          <div>
-            <h3>Item #{item}</h3>
-          </div>
-        ))}
-    </div>
-  );
-}
-
-function PaginatedItems({ itemsPerPage }) {
-  // We start with an empty list of items.
-  const [currentItems, setCurrentItems] = useState(null);
-  const [pageCount, setPageCount] = useState(0);
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0);
+export const SearchTunes = () => {
+  const [list, setList] = useState([]);
+  const [value, setValue] = useState('');
+  const [pageCount, setPageCount] = useState(1);
 
   useEffect(() => {
-    // Fetch items from another resources.
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(items.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(items.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage]);
+    fetch(POPULAR_URL(pageCount))
+      .then((res) => res.json())
+      .then((data) => {
+        setList(data.tunes);
+        console.log(data);
+      });
+  }, [pageCount]);
 
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
+  const nextPage = () => {
+    setPageCount(pageCount + 1);
+  };
+
+  const previousPage = () => {
+    setPageCount(pageCount - 1);
   };
 
   return (
-    <>
-      <Items currentItems={currentItems} />
-      <ReactPaginate
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
-        marginPagesDisplayed={2}
-        pageCount={pageCount}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakLabel="..."
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination"
-        activeClassName="active"
-        renderOnZeroPageCount={null}
-      />
-    </>
-  );
-}
+    <div>
+      <Div>
+        <Container>
+          <label>Search for a Tune</label>
+          <input
+            type="text"
+            value={value}
+            placeholder="Search 👇"
+            onChange={(event) => setValue(event.target.value)}
+          />
+        </Container>
+      </Div>
 
-export const SearchTunes = () => {
-  return <PaginatedItems itemsPerPage={5} />;
+      {list.map((item) => (
+        <div>
+          <p>
+            {item.name}, ({item.type})
+          </p>
+        </div>
+      ))}
+      <button onClick={previousPage}>Previous page</button>
+      {pageCount}
+      <button onClick={nextPage}>Next page</button>
+    </div>
+  );
 };
+const Div = styled.div`
+  background-color: var(--main-color);
+
+  input {
+    background-color: var(--main-color);
+    border: none;
+    border-bottom: 1px solid black;
+
+    margin: 15px;
+    padding: 5px;
+    width: 300px;
+
+    /* align-self: center; */
+    text-align: center;
+    /* text-transform: uppercase; */
+
+
+    ::placeholder {
+      color: black;
+      opacity: 1;
+      /* font-family: var(--font); Aktuellt först när det finns ett typsnitt*/
+
+
+    /*   @media (min-width: 0px) and (max-width: 767px) {
+        max-width: 200px;
+        h1 {
+          font-size: 2em;
+        }
+      } */
+  }
+`;
+
+const Container = styled.div`
+/* a {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  /* color taken from the picture on the site */
+  color: #2a6d38;
+}
+a:active {
+  color: var(--secondary-color);
+} */
+
+background-color: var(--main-color);
+text-align: center;
+/*   margin-top: 20px; */
+@media (min-width: 0px) and (max-width: 991px) {
+  margin-top: auto;
+  h1 {
+    font-size: 1em;
+    padding: 10px;
+  }
+  h3 {
+    margin-top: 0px;
+  }
+}
+@media (min-width: 992px) {
+  padding: 30px;
+  margin-top: 50px;
+}
+`;
