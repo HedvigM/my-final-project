@@ -6,13 +6,15 @@ export const SearchTunes = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
   const [pageCount, setPageCount] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     fetch(POPULAR_URL(pageCount))
       .then((res) => res.json())
       .then((data) => {
         setList(data.tunes);
-        console.log(data);
+        setLoading(false);
       });
   }, [pageCount]);
 
@@ -27,6 +29,7 @@ export const SearchTunes = () => {
   return (
     <div>
       <Div>
+        {loading ? <h1>Laddar!!</h1> : <h1>laddat</h1>}
         <Container>
           <label>Search for a Tune</label>
           <input
