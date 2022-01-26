@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { POPULAR_URL } from '../utils/url';
+import { POPULAR_URL, KNOW_TUNE_URL, LEARN_TUNE_URL } from '../utils/url';
 
 export const SearchTunes = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
   const [pageCount, setPageCount] = useState(1);
   const [loading, setLoading] = useState(false);
+  const [tuneId, setTuneId] = useState([]);
+
+  const memberId = useSelector((store) => store.member.memberId);
 
   useEffect(() => {
     setLoading(true);
@@ -15,7 +19,6 @@ export const SearchTunes = () => {
       .then((data) => {
         setList(data.tunes);
         setLoading(false);
-        console.log('DATA', data);
       });
   }, [pageCount]);
 
@@ -25,6 +28,23 @@ export const SearchTunes = () => {
 
   const previousPage = () => {
     setPageCount(pageCount - 1);
+  };
+
+  const options = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ memberId, tuneId })
+  };
+
+  const AddKnowTune = async (tuneId) => {
+    fetch(KNOW_TUNE_URL(memberId, tuneId), options)
+      .then((res) => res.json())
+      .then((data) => console.log('patch', data));
+  };
+  const AddLearnTune = async (tuneId) => {
+    fetch(LEARN_TUNE_URL(memberId, tuneId), options)
+      .then((res) => res.json())
+      .then((data) => console.log('patch', data));
   };
 
   return (
@@ -47,6 +67,12 @@ export const SearchTunes = () => {
           <p>
             {item.name}, ({item.type})
           </p>
+          <button onClick={() => AddKnowTune(item.id)}>
+            I know this tune!
+          </button>
+          <button onClick={() => AddLearnTune(item.id)}>
+            I want to learn this tune!
+          </button>
         </div>
       ))}
       <button onClick={previousPage}>Previous page</button>
