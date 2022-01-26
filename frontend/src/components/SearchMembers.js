@@ -16,7 +16,6 @@ export const SearchMembers = () => {
       .then((res) => res.json())
       .then((data) => {
         setList(data.response);
-        console.log('Data', data.response);
       });
   }, []);
 
@@ -26,11 +25,9 @@ export const SearchMembers = () => {
     body: JSON.stringify({ memberId, followingId })
   };
   const AddFollowHandel = async (followingId) => {
-    console.log('Ny vän');
-    console.log(followingId);
-    fetch(FOLLOW_URL(memberId, followingId), options)
-      .then((res) => res.json())
-      .then((data) => console.log('patch', data));
+    fetch(FOLLOW_URL(memberId, followingId), options);
+    /* .then((res) => res.json())
+      .then((data) => console.log('patch', data)); maybe set this so we can se the friends icon change?*/
   };
 
   // skicka memberId och follow persons id in a patch request.
