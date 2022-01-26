@@ -35,7 +35,7 @@ const MemberSchema = new mongoose.Schema({
   ],
   learnTunes: [
     {
-      type: mongoose.Schema.Types.ObjectId
+      type: String
     }
   ]
 });
@@ -117,6 +117,32 @@ app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
         {
           $push: {
             knowTunes: tuneId
+          }
+        },
+        { new: true }
+      );
+
+      res.status(200).json({ response: updatedMember, success: true });
+    } else {
+      res.status(404).json({ response: 'Member not found', success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
+/* Gör så att man bara kan lägga till en låt en gång... */
+app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
+  const { memberId, tuneId } = req.params;
+  try {
+    const queriedMember = await Member.findById(memberId);
+
+    if (queriedMember) {
+      const updatedMember = await Member.findByIdAndUpdate(
+        memberId,
+        {
+          $push: {
+            learnTunes: tuneId
           }
         },
         { new: true }
