@@ -23,9 +23,11 @@ const MemberSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString('hex')
   },
-  friends: {
-    type: String
-  }
+  follows: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+    }
+  ]
 });
 
 const Member = mongoose.model('Member', MemberSchema);
@@ -58,6 +60,79 @@ app.get('/members', async (req, res) => {
   const members = await Member.find({}).limit(20).exec();
   res.status(200).json({ response: members, success: true });
 });
+
+app.patch('/member/:memberId/following/:followingId', async (req, res) => {
+  const { memberId, followingId } = req.params;
+  try {
+    const queriedMember = await Member.findById(memberId);
+
+    if (queriedMember) {
+      const queriedFollow = await Member.findById(followingId);
+
+      if (queriedFollow) {
+        const updatedMember = await Member.findByIdAndUpdate(
+          memberId,
+          {
+            $push: {
+              follows: queriedFollow
+            }
+          },
+          { new: true }
+        );
+
+        res.status(200).json({ response: updatedMember, success: true });
+      } else {
+        res
+          .status(404)
+          .json({ response: 'Followed Member not found', success: false });
+      }
+    } else {
+      res.status(404).json({ response: 'Member not found', success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
+/* ______________________________________________ */
+// we are updating the array in the database, thats why patch is a great alternative.
+/* app.patch('/member/:memberId/following/:followingId', async (req, res) => {
+  const { memberId, followingId } = req.params;
+
+  try {
+    const queriedMember = await Member.findById(memberId);
+
+    if (queriedMember) {
+      const updateFollower = await Member.findByIdAndUpdate(
+        memberId,
+        {
+          $push: {
+            follows: followingId
+          }
+        },
+        { new: true },
+        console.log('updateFollower', updateFollower)
+      );
+
+      res.status(200).json({ response: updateFollower, success: true });
+    } else {
+      res
+        .status(404)
+        .json({ response: 'could not update follower', success: false });
+    }
+  } catch (error) {
+    res.status(418).json({ response: error, success: false });
+  } */
+/* _____________________________________________ */
+
+/*  try {
+    const newFollower = await new Member.findByIdAndUpdate(memberId)
+    ({ follower }).save();
+    res.status(201).json({ response: newFollower, success: true });
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  } */
+/* }); */
 
 // figure out how to do this...
 /* app.post('/friends', async (req, res) => {
@@ -100,7 +175,6 @@ app.get('/member/:memberId', async (req, res) => {
 }); */
 
 app.post('/signup', async (req, res) => {
-  console.log('anslutning till /signup');
   const { memberName, password } = req.body;
 
   // I will need to explain this more to my future self.
@@ -125,8 +199,6 @@ app.post('/signup', async (req, res) => {
       success: true
     });
   } catch (error) {
-    console.log('could not create member, tråkigt');
-    console.log(error);
     res
       .status(400)
       .json({ response: 'Could not create member', success: false });
@@ -134,11 +206,8 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/signin', async (req, res) => {
-  console.log('anslutning till /signin');
   //  const { memberName, password } = req.body;
-
   const loginMember = req.body;
-  console.log(loginMember);
 
   try {
     const databaseMember = await Member.findOne({
@@ -163,7 +232,6 @@ app.post('/signin', async (req, res) => {
         .json({ response: 'Name and password dont match', success: false });
     }
   } catch (error) {
-    console.log(error);
     res.status(400).json({ response: error, success: false });
   }
 });
