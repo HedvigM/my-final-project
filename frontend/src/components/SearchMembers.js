@@ -1,19 +1,39 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
+import { FOLLOW_URL } from '../utils/url';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
+  const [followingId, setFollowingId] = useState([]);
+
+  const memberId = useSelector((store) => store.member.memberId);
 
   useEffect(() => {
     fetch(API_URL('members'))
       .then((res) => res.json())
       .then((data) => {
         setList(data.response);
-        console.log('Data', data);
+        console.log('Data', data.response);
       });
   }, []);
+
+  const options = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ memberId, followingId })
+  };
+  const AddFollowHandel = async (followingId) => {
+    console.log('Ny vän');
+    console.log(followingId);
+    fetch(FOLLOW_URL(memberId, followingId), options)
+      .then((res) => res.json())
+      .then((data) => console.log('patch', data));
+  };
+
+  // skicka memberId och follow persons id in a patch request.
 
   return (
     <div>
@@ -37,10 +57,11 @@ export const SearchMembers = () => {
           }
         })
         .map((item) => (
-          <div>
+          <div key={item._id}>
             <p>{item.memberName}</p>
-            <button onClick={() => console.log('add a friend')}>
-              🎻 add {item.memberName} as a friend!{' '}
+            {/* Om man följer - visa det... */}
+            <button onClick={() => AddFollowHandel(item._id)}>
+              🎻 add {item.memberName} as a friend!
             </button>
           </div>
         ))}
