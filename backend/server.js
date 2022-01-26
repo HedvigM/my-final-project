@@ -27,6 +27,16 @@ const MemberSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId
     }
+  ],
+  knowTunes: [
+    {
+      type: String
+    }
+  ],
+  learnTunes: [
+    {
+      type: mongoose.Schema.Types.ObjectId
+    }
   ]
 });
 
@@ -87,6 +97,32 @@ app.patch('/member/:memberId/following/:followingId', async (req, res) => {
           .status(404)
           .json({ response: 'Followed Member not found', success: false });
       }
+    } else {
+      res.status(404).json({ response: 'Member not found', success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
+/* Gör så att man bara kan lägga till en låt en gång... */
+app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
+  const { memberId, tuneId } = req.params;
+  try {
+    const queriedMember = await Member.findById(memberId);
+
+    if (queriedMember) {
+      const updatedMember = await Member.findByIdAndUpdate(
+        memberId,
+        {
+          $push: {
+            knowTunes: tuneId
+          }
+        },
+        { new: true }
+      );
+
+      res.status(200).json({ response: updatedMember, success: true });
     } else {
       res.status(404).json({ response: 'Member not found', success: false });
     }

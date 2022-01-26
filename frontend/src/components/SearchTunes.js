@@ -15,6 +15,7 @@ export const SearchTunes = () => {
       .then((data) => {
         setList(data.tunes);
         setLoading(false);
+        console.log('DATA', data);
       });
   }, [pageCount]);
 
@@ -42,7 +43,7 @@ export const SearchTunes = () => {
       </Div>
 
       {list.map((item) => (
-        <div>
+        <div key={item.id}>
           <p>
             {item.name}, ({item.type})
           </p>
