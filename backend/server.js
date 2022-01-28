@@ -178,7 +178,9 @@ app.post('/signup', async (req, res) => {
       response: {
         memberId: newMember._id,
         memberName: newMember.memberName,
-        accessToken: newMember.accessToken
+        accessToken: newMember.accessToken,
+        knowTunes: newMember.knowTunes,
+        learnTunes: newMember.learnTunes
       },
       success: true
     });
@@ -206,7 +208,9 @@ app.post('/signin', async (req, res) => {
         response: {
           memberId: databaseMember._id,
           memberName: databaseMember.memberName,
-          accessToken: databaseMember.accessToken
+          accessToken: databaseMember.accessToken,
+          knowTunes: databaseMember.knowTunes,
+          learnTunes: databaseMember.learnTunes
         },
         success: true
       });

@@ -43,12 +43,14 @@ export const Login = () => {
             dispatch(member.actions.setMemberId(data.response.memberId));
             dispatch(member.actions.setMemberName(data.response.memberName));
             dispatch(member.actions.setAccessToken(data.response.accessToken));
+            dispatch(member.actions.setMember(data.response));
           });
         } else {
           batch(() => {
             dispatch(member.actions.setMemberId(null));
             dispatch(member.actions.setMemberName(null));
             dispatch(member.actions.setAccessToken(null));
+            dispatch(member.actions.setMember(null));
           });
         }
       });

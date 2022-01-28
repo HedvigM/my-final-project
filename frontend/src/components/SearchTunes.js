@@ -11,6 +11,7 @@ export const SearchTunes = () => {
   const [tuneId, setTuneId] = useState([]);
 
   const memberId = useSelector((store) => store.member.memberId);
+  const member = useSelector((store) => store.member.member);
 
   useEffect(() => {
     setLoading(true);

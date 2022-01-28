@@ -1,43 +1,54 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { API_URL } from '../utils/url';
+import { API_URL, TUNE_URL } from '../utils/url';
 
 export const MyTunes = () => {
-  const [list, setList] = useState([]);
+  const [session, setSession] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  /* För att få fram låtar snarare än siffror får man fetcha populära låtar igen och mappa igenom */
+  const member = useSelector((store) => store.member.member);
+  console.log('MEMBER-ID', member.memberId);
+
   useEffect(() => {
-    fetch(API_URL('members'))
-      .then((res) => res.json())
-      .then((data) => {
-        setList(data.response);
-      });
+    setLoading(true);
+
+    member.knowTunes.map((item) =>
+      fetch(TUNE_URL(item))
+        .then((res) => res.json())
+        .then((data) => {
+          if (data) {
+            setSession([...session, data.name]);
+          } else {
+            console.log('ERROR');
+          }
+          setTimeout(() => setLoading(false), 500);
+        })
+    );
   }, []);
 
-  return (
-    <Container>
-      {list.map((item) => (
-        <div key={item._id}>
-          <p>{item.memberName}</p>
-          <p>{item.knowTunes}</p>
+  // visa inte den användare som är inloggad.
+
+  console.log('SESSION', session);
+
+  if (loading) {
+    return <h1>LOADING</h1>;
+  }
+
+  if (!loading) {
+    return (
+      <Container>
+        <div>
+          {/*   {loading ? <h1>Laddar!!</h1> : <h1>laddat</h1>} */}
+
+          {session.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
         </div>
-      ))}
-      {/*  <List>
-        <h1>My Tunes</h1>
-        <li>One more Tune</li>
-        <li>Another Tune</li>
-        <li>Tune Tune Tune</li>
-        <li>Boys On The Hill</li>
-        <li>One more Tune</li>
-        <li>One Tune</li>
-        <li>One more Tune</li>
-        <li>Another Tune</li>
-        <li>Tune Tune Tune</li>
-        <li>Boys On The Hill</li>
-      </List> */}
-    </Container>
-  );
+      </Container>
+    );
+  }
 };
 
 const List = styled.div``;

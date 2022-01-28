@@ -5,7 +5,7 @@ export const Profile = () => {
   return (
     <>
       <PicNameCity>
-        <Img class="profile-pic" src="./profile-pic.jpg" alt="" />
+        <Img className="profile-pic" src="./profile-pic.jpg" alt="" />
         <div>
           <h1>Hedvig</h1>
           <h2>Uppsala</h2>
