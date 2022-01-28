@@ -71,6 +71,7 @@ app.get('/members', async (req, res) => {
   res.status(200).json({ response: members, success: true });
 });
 
+/* POPULATE */
 /* Gör så att man bara kan följa en användare en gång... */
 app.patch('/member/:memberId/following/:followingId', async (req, res) => {
   const { memberId, followingId } = req.params;

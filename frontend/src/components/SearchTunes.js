@@ -37,14 +37,14 @@ export const SearchTunes = () => {
   };
 
   const AddKnowTune = async (tuneId) => {
-    fetch(KNOW_TUNE_URL(memberId, tuneId), options)
-      .then((res) => res.json())
-      .then((data) => console.log('patch', data));
+    fetch(KNOW_TUNE_URL(memberId, tuneId), options);
+    /*  .then((res) => res.json())
+      .then((data) => console.log('patch', data)); */
   };
   const AddLearnTune = async (tuneId) => {
-    fetch(LEARN_TUNE_URL(memberId, tuneId), options)
-      .then((res) => res.json())
-      .then((data) => console.log('patch', data));
+    fetch(LEARN_TUNE_URL(memberId, tuneId), options);
+    /* .then((res) => res.json())
+      .then((data) => console.log('patch', data)); */
   };
 
   return (
