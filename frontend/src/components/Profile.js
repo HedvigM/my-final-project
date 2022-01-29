@@ -6,10 +6,8 @@ import { API_URL } from '../utils/url';
 
 export const Profile = () => {
   const [following, setFollowing] = useState([]);
-  console.log(following);
 
   const member = useSelector((store) => store.member.member);
-
   useEffect(() => {
     fetch(API_URL('relations'))
       .then((res) => res.json())
@@ -34,6 +32,20 @@ export const Profile = () => {
         cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
       </p>
       <h1>People i'm following:</h1>
+      {following.map((item) =>
+        item.following._id === member.memberId ? (
+          <p key={item.followed._id}>{item.followed.memberName}</p>
+        ) : (
+          <>
+            <p>
+              Nope, skip this one: {item.following.memberName},{' '}
+              {member.memberName}.
+            </p>
+            <p>Item: {item.following._id}</p>
+            <p>Member: {member.memberId}</p>
+          </>
+        )
+      )}
     </>
   );
 };
