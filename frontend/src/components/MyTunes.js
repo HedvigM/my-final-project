@@ -15,18 +15,18 @@ export const MyTunes = () => {
   useEffect(() => {
     setLoading(true);
 
-    member.knowTunes.map((item) =>
-      fetch(TUNE_URL(item))
-        .then((res) => res.json())
-        .then((data) => {
-          if (data) {
-            setSession([...session, data.name]);
-          } else {
-            /*  console.log('ERROR'); */
-          }
-          setTimeout(() => setLoading(false), 500);
-        })
-    );
+    Promise.all(
+      member.knowTunes.map((item) =>
+        fetch(TUNE_URL(item))
+          .then((res) => res.json())
+          .then((data) => {
+            return data.name;
+          })
+      )
+    ).then((values) => {
+      setSession(values);
+      setLoading(false);
+    });
   }, []);
 
   // visa inte den användare som är inloggad.
