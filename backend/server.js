@@ -100,6 +100,15 @@ app.post('/following/:following/followed/:followed', async (req, res) => {
   }
 });
 
+app.get('/relations', async (req, res) => {
+  const relations = await Relations.find({})
+    .populate('following', 'memberName')
+    .populate('followed', 'memberName')
+    .limit(20)
+    .exec();
+  res.status(200).json({ response: relations, success: true });
+});
+
 /* Gör så att man bara kan lägga till en låt en gång... */
 app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
   const { memberId, tuneId } = req.params;
