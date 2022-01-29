@@ -14,6 +14,7 @@ import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
 import { SearchMemberScreen } from './Screens/SearchMemberScreen';
 import { SearchMemberScreenTwo } from './Screens/SearchMemberScreenTwo';
 import { SearchTuneScreen } from './Screens/SearchTuneScreen';
+import { DetailedTunesScreen } from './Screens/DetailedTunesScreen';
 
 import { About } from './components/About';
 import { Settings } from './components/Settings';
@@ -62,6 +63,10 @@ const App = () => {
               />
 
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
+              <Route
+                path="/details/:tune.id"
+                element={<DetailedTunesScreen />}
+              />
               <Route path="*" element={<NotFound />} />
               <Route path="/about" element={<About />} />
               <Route path="/settings" element={<Settings />} />
