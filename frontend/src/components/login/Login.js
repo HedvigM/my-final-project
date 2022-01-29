@@ -3,12 +3,14 @@ import { useSelector, useDispatch, batch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { API_URL } from '../../utils/url';
 import { member } from '../../reducers/member';
+import { relations } from '../../reducers/relations';
 import styled from 'styled-components';
 
 export const Login = () => {
   const [memberName, setMemberName] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState('signin');
+  const relations = useSelector((store) => store.relations.relations);
 
   const accessToken = useSelector((store) => store.member.accessToken);
 
@@ -34,6 +36,7 @@ export const Login = () => {
     body: JSON.stringify({ memberName, password })
   };
 
+  // Fetching all the member info
   const doTheFetch = async () => {
     fetch(API_URL(mode), options)
       .then((res) => res.json())
@@ -55,6 +58,23 @@ export const Login = () => {
         }
       });
   };
+
+  // fetching all the relations
+
+  useEffect(() => {
+    fetch(API_URL('relations'))
+      .then((res) => res.json())
+      .then((data) => {
+        console.log('DATA', data);
+        /* setFollowing(data.response); */
+        if (data.success) {
+          console.log('SUCCESS', data.success);
+          dispatch(relations.actions.setRelations(data.response));
+        } else {
+          dispatch(relations.actions.setRelations(null));
+        }
+      });
+  }, []);
 
   return (
     <>
