@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const relations = createSlice({
   name: 'relations',
   initialState: {
-    relations: []
+    relations: null
   },
   reducers: {
     setRelations: (store, action) => {

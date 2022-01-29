@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, batch } from 'react-redux';
 import { member } from '../reducers/member';
+import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { Profile } from '../components/Profile';
 import { Header } from '../components/Header';
@@ -24,6 +25,8 @@ export const Settings = () => {
       dispatch(member.actions.setMemberId(null));
       dispatch(member.actions.setMemberName(null));
       dispatch(member.actions.setAccessToken(null));
+      dispatch(member.actions.setMember(null));
+      dispatch(relations.actions.setRelations(null));
     });
   };
 

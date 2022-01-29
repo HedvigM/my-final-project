@@ -10,8 +10,8 @@ export const Login = () => {
   const [memberName, setMemberName] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState('signin');
-  const relations = useSelector((store) => store.relations.relations);
-
+  /*   const relations = useSelector((store) => store.relations.relations);
+   */
   const accessToken = useSelector((store) => store.member.accessToken);
 
   const dispatch = useDispatch();
@@ -20,6 +20,8 @@ export const Login = () => {
   const onFormSubmit = (event) => {
     event.preventDefault();
     doTheFetch();
+    console.log('onformsubmit');
+    fetchRelations();
   };
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export const Login = () => {
 
   // fetching all the relations
 
-  useEffect(() => {
+  const fetchRelations = () => {
     fetch(API_URL('relations'))
       .then((res) => res.json())
       .then((data) => {
@@ -74,7 +76,7 @@ export const Login = () => {
           dispatch(relations.actions.setRelations(null));
         }
       });
-  }, []);
+  };
 
   return (
     <>
