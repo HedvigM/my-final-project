@@ -9,7 +9,7 @@ export const MyTunes = () => {
   const [loading, setLoading] = useState(false);
 
   const member = useSelector((store) => store.member.member);
-  console.log('MEMBER-ID', member.knowTunes);
+  /*  console.log('MEMBER-ID', member.knowTunes); */
 
   // the function i'm working with
   useEffect(() => {
@@ -22,7 +22,7 @@ export const MyTunes = () => {
           if (data) {
             setSession([...session, data.name]);
           } else {
-            console.log('ERROR');
+            /*  console.log('ERROR'); */
           }
           setTimeout(() => setLoading(false), 500);
         })
@@ -31,7 +31,7 @@ export const MyTunes = () => {
 
   // visa inte den användare som är inloggad.
 
-  console.log('SESSION', session);
+  /*   console.log('SESSION', session); */
 
   if (loading) {
     return <h1>LOADING</h1>;
