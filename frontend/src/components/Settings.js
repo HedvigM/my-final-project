@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import member from '../reducers/member';
+import { member } from '../reducers/member';
 import styled from 'styled-components';
 import { Profile } from '../components/Profile';
 import { Header } from '../components/Header';

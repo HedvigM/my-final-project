@@ -9,8 +9,9 @@ export const MyTunes = () => {
   const [loading, setLoading] = useState(false);
 
   const member = useSelector((store) => store.member.member);
-  console.log('MEMBER-ID', member.memberId);
+  console.log('MEMBER-ID', member.knowTunes);
 
+  // the function i'm working with
   useEffect(() => {
     setLoading(true);
 

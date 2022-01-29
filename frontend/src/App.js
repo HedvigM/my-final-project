@@ -3,7 +3,7 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from '@reduxjs/toolkit';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import member from './reducers/member';
+import { member } from './reducers/member';
 
 import { NotFound } from './components/NotFound';
 

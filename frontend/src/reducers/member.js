@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { TUNE_URL } from '../utils/url';
 
-const member = createSlice({
+export const member = createSlice({
   name: 'member',
   initialState: {
     member: null,
@@ -23,5 +24,3 @@ const member = createSlice({
     }
   }
 });
-
-export default member;
