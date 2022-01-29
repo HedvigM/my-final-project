@@ -41,13 +41,11 @@ const MemberSchema = new mongoose.Schema({
 });
 
 const RelationsSchema = new mongoose.Schema({
-  following: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: 'Member'
-    }
-  ],
+  following: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Member'
+  },
   followed: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
