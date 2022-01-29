@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector /* , useDispatch */ } from 'react-redux';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
@@ -10,6 +10,11 @@ export const SearchMembers = () => {
   const [followingId, setFollowingId] = useState([]);
 
   const memberId = useSelector((store) => store.member.memberId);
+  /*  const member = useSelector((store) => store.member.member); */
+  /* const relations = useSelector((store) => store.relations.following); */
+
+  /* const dispatch = useDispatch(); */
+  /* console.log('MEMBER', member); */
 
   useEffect(() => {
     fetch(API_URL('members'))
