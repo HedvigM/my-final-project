@@ -5,7 +5,8 @@ import styled from 'styled-components';
 import { API_URL, TUNE_URL } from '../utils/url';
 
 export const MyTunes = () => {
-  const [session, setSession] = useState([]);
+  const [know, setKnow] = useState([]);
+  const [learn, setLearn] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const member = useSelector((store) => store.member.member);
@@ -24,7 +25,24 @@ export const MyTunes = () => {
           })
       )
     ).then((values) => {
-      setSession(values);
+      setKnow(values);
+      setLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+
+    Promise.all(
+      member.learnTunes.map((item) =>
+        fetch(TUNE_URL(item))
+          .then((res) => res.json())
+          .then((data) => {
+            return data.name;
+          })
+      )
+    ).then((values) => {
+      setLearn(values);
       setLoading(false);
     });
   }, []);
@@ -41,9 +59,14 @@ export const MyTunes = () => {
     return (
       <Container>
         <div>
-          {/*   {loading ? <h1>Laddar!!</h1> : <h1>laddat</h1>} */}
-
-          {session.map((item) => (
+          <h1>Tunes I know:</h1>
+          {know.map((item) => (
+            <p key={item}>{item}</p>
+          ))}
+        </div>
+        <div>
+          <h1>Tunes I want to learn:</h1>
+          {learn.map((item) => (
             <p key={item}>{item}</p>
           ))}
         </div>
