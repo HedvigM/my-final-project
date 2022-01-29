@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from '@reduxjs/toolkit';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { member } from './reducers/member';
+import { relations } from './reducers/relations';
 
 import { NotFound } from './components/NotFound';
 
@@ -18,7 +19,8 @@ import { About } from './components/About';
 import { Settings } from './components/Settings';
 
 const reducer = combineReducers({
-  member: member.reducer
+  member: member.reducer,
+  relations: relations.reducer
 });
 
 // local storage as initial state
