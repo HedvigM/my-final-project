@@ -12,8 +12,8 @@ export const Cards = () => {
 
   return (
     <CardContainer>
-      {text.map((item) => (
-        <Card>
+      {text.map((item, index) => (
+        <Card key={index}>
           <Emoji>🎻</Emoji>
           <p>{item}</p>
         </Card>
@@ -26,7 +26,7 @@ export const About = () => {
   const text = [
     'Jag som gjort webbsidan heter Hedvig Mejstedt och är själv musiker. Jag drabbas ofta av nervositet på en session när någon frågar mig om jag vill starta en låt. Nervositeten gör ofta det svårt att komma på en låt att dra igång. Jag har många gånger önskat att det fanns en app som denna, det är därför jag nu har skapat den. Jag antar att det finns fler som jag - som vill ha alla sina låtar samlade på ett ställe med noter.'
   ];
-  return text.map((item) => <p>{item}</p>);
+  return text.map((item, index) => <p key={index}>{item}</p>);
 };
 
 const CardContainer = styled.div`
