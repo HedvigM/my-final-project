@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 export const Profile = () => {
+  const member = useSelector((store) => store.member.member);
   return (
     <>
       <PicNameCity>
@@ -17,6 +19,7 @@ export const Profile = () => {
         sweet roll liquorice. Gingerbread liquorice oat cake muffin fruitcake.
         cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
       </p>
+      <h1>People i'm following:</h1>
     </>
   );
 };

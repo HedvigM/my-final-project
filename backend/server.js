@@ -40,7 +40,23 @@ const MemberSchema = new mongoose.Schema({
   ]
 });
 
+const RelationsSchema = new mongoose.Schema({
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'Member'
+    }
+  ],
+  followed: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'Member'
+  }
+});
+
 const Member = mongoose.model('Member', MemberSchema);
+const Relations = mongoose.model('Relations', RelationsSchema);
 
 const port = process.env.PORT || 8080;
 const app = express();
@@ -73,34 +89,12 @@ app.get('/members', async (req, res) => {
 
 /* POPULATE */
 /* Gör så att man bara kan följa en användare en gång... */
-app.patch('/member/:memberId/following/:followingId', async (req, res) => {
-  const { memberId, followingId } = req.params;
+app.post('/following/:following/followed/:followed', async (req, res) => {
+  const { following, followed } = req.params;
+
   try {
-    const queriedMember = await Member.findById(memberId);
-
-    if (queriedMember) {
-      const queriedFollow = await Member.findById(followingId);
-
-      if (queriedFollow) {
-        const updatedMember = await Member.findByIdAndUpdate(
-          memberId,
-          {
-            $push: {
-              follows: queriedFollow
-            }
-          },
-          { new: true }
-        );
-
-        res.status(200).json({ response: updatedMember, success: true });
-      } else {
-        res
-          .status(404)
-          .json({ response: 'Followed Member not found', success: false });
-      }
-    } else {
-      res.status(404).json({ response: 'Member not found', success: false });
-    }
+    const newRelation = await new Relations({ following, followed }).save();
+    res.status(201).json({ response: newRelation, success: true });
   } catch (error) {
     res.status(400).json({ response: error, success: false });
   }
