@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { API_URL } from '../utils/url';
 
 export const Profile = () => {
+  const [following, setFollowing] = useState([]);
+  console.log(following);
+
   const member = useSelector((store) => store.member.member);
+
+  useEffect(() => {
+    fetch(API_URL('relations'))
+      .then((res) => res.json())
+      .then((data) => {
+        setFollowing(data.response);
+      });
+  }, []);
+
   return (
     <>
       <PicNameCity>
