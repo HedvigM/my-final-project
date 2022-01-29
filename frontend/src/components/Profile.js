@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 
 export const Profile = () => {
   const [following, setFollowing] = useState([]);
-
+  const relations = useSelector((store) => store.relations.following);
   const member = useSelector((store) => store.member.member);
   useEffect(() => {
     fetch(API_URL('relations'))
@@ -32,18 +32,18 @@ export const Profile = () => {
         cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
       </p>
       <h1>People i'm following:</h1>
-      {following.map((item) =>
+      {following.map((item, index) =>
         item.following._id === member.memberId ? (
-          <p key={item.followed._id}>{item.followed.memberName}</p>
+          <p key={index}>{item.followed.memberName}</p>
         ) : (
-          <>
-            <p>
+          <p key={index}>
+            <span>
               Nope, skip this one: {item.following.memberName},{' '}
               {member.memberName}.
-            </p>
-            <p>Item: {item.following._id}</p>
-            <p>Member: {member.memberId}</p>
-          </>
+            </span>
+            <span>Item: {item.following._id}</span>
+            <span>Member: {member.memberId}</span>
+          </p>
         )
       )}
     </>
