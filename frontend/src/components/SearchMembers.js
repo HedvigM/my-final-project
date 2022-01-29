@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector /* , useDispatch */ } from 'react-redux';
+import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
+import { member } from '../reducers/member';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
@@ -11,7 +13,7 @@ export const SearchMembers = () => {
 
   const memberId = useSelector((store) => store.member.memberId);
   /*  const member = useSelector((store) => store.member.member); */
-  /* const relations = useSelector((store) => store.relations.following); */
+  const following = useSelector((store) => store.relations.relations);
 
   /* const dispatch = useDispatch(); */
   /* console.log('MEMBER', member); */
@@ -35,7 +37,8 @@ export const SearchMembers = () => {
       .then((data) => console.log('patch', data)); maybe set this so we can se the friends icon change?*/
   };
 
-  // skicka memberId och follow persons id in a patch request.
+  console.log('MEMBERS', list);
+  console.log('The ones im following', following);
 
   return (
     <div>
@@ -50,7 +53,11 @@ export const SearchMembers = () => {
           />
         </Container>
       </Div>
-
+      {/*  {following.map((item) => {
+        if (list.memberName.includes(item.followed.memberName)) {
+          <h1>Hej</h1>;
+        }
+      })} */}
       {list
         .filter((item) => {
           if (!value) return true;
@@ -61,15 +68,22 @@ export const SearchMembers = () => {
         .map((item) => (
           <div key={item._id}>
             <p>{item.memberName}</p>
-            {/* Om man följer - visa det... */}
-            <button onClick={() => AddFollowHandel(item._id)}>
-              🎻 add {item.memberName} as a friend!
-            </button>
           </div>
         ))}
     </div>
   );
 };
+
+/* <Follow key={item._id}>
+<p>{item.memberName}</p>
+<button onClick={() => AddFollowHandel(item._id)}>
+  🎻 follow {item.memberName}
+</button>
+</Follow>
+const Follow = styled.div`
+  border: 2px solid lime;
+`; */
+
 const Div = styled.div`
   background-color: var(--main-color);
 
