@@ -6,11 +6,12 @@ import { DetailTune } from '../components/DetailTune';
 import { Header } from '../components/Header';
 
 export const DetailedTunesScreen = () => {
-  const { tuneId } = useParams();
+  const { tune } = useParams();
+  console.log('DetailedTunesScreen', tune);
   return (
     <>
       <Header />
-      <DetailTune />
+      <DetailTune tune={tune} />
       <Footer />
     </>
   );

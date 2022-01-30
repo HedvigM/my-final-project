@@ -63,10 +63,7 @@ const App = () => {
               />
 
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
-              <Route
-                path="/details/:tune.id"
-                element={<DetailedTunesScreen />}
-              />
+              <Route path="/details/:tune" element={<DetailedTunesScreen />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/about" element={<About />} />
               <Route path="/settings" element={<Settings />} />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { POPULAR_URL, KNOW_TUNE_URL, LEARN_TUNE_URL } from '../utils/url';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export const SearchTunes = () => {
   const [list, setList] = useState([]);
@@ -13,6 +13,8 @@ export const SearchTunes = () => {
 
   const memberId = useSelector((store) => store.member.memberId);
   const member = useSelector((store) => store.member.member);
+
+  const { tune } = useParams();
 
   useEffect(() => {
     setLoading(true);
@@ -64,23 +66,21 @@ export const SearchTunes = () => {
         </Container>
       </Div>
 
-      {list.map((item) => (
-        <>
-          <div key={item.id}>
-            <Link to={`/details/${tune.id}`}>
-              <p>
-                {item.name}, ({item.type})
-              </p>
-            </Link>
+      {list.map((item, index) => (
+        <div key={index}>
+          <Link to={`/details/${item.id}`}>
+            <p>
+              {item.name}, ({item.type})
+            </p>
+          </Link>
 
-            <button onClick={() => AddKnowTune(item.id)}>
-              I know this tune!
-            </button>
-            <button onClick={() => AddLearnTune(item.id)}>
-              I want to learn this tune!
-            </button>
-          </div>
-        </>
+          <button onClick={() => AddKnowTune(item.id)}>
+            I know this tune!
+          </button>
+          <button onClick={() => AddLearnTune(item.id)}>
+            I want to learn this tune!
+          </button>
+        </div>
       ))}
       <button onClick={previousPage}>Previous page</button>
       {pageCount}
