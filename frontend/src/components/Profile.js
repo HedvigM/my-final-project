@@ -8,6 +8,7 @@ export const Profile = () => {
   const [following, setFollowing] = useState([]);
   const relations = useSelector((store) => store.relations.following);
   const member = useSelector((store) => store.member.member);
+
   useEffect(() => {
     fetch(API_URL('relations'))
       .then((res) => res.json())
