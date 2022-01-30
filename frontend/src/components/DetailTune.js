@@ -8,7 +8,7 @@ export const DetailTune = (tune) => {
   const detailedTune = tune.tune;
   const [details, setDetails] = useState([]);
   const [abc, setAbc] = useState(
-    '|:E2BE dEBE|E2BE AFDF|E2BE dEBE|BABc dAFD:|!\nd2fd c2ec|defg afge|d2fd c2ec|BABc dAFA|!\nd2fd c2ec|defg afge|afge fdec|BABc dAFD|'
+    '|:E2BE dEBE|E2BE AFDF|E2BE dEBE|BABc dAFD:|!d2fd c2ec|defg afge|d2fd c2ec|BABc dAFA|!d2fd c2ec|defg afge|afge fdec|BABc dAFD|'
   );
   const [key, setKey] = useState('');
 
@@ -28,16 +28,14 @@ export const DetailTune = (tune) => {
     );
   }, []);
 
-  let lineBreak = function (abc) {
-    return abc.replace(/\!/, '\n');
+  let lineBreak = function (string) {
+    return string.replaceAll('!', '\n');
   };
   console.log('lineBreak', lineBreak);
   console.log('TYPE OF', typeof lineBreak);
   console.log('TYPE OF ABC', typeof abc);
 
-  abcjs.renderAbc('sheetMusic', abc, {
-    wrap: { minSpacing: 1.8, maxSpacing: 2.7, preferredMeasuresPerLine: 4 }
-  });
+  abcjs.renderAbc('sheetMusic', lineBreak(abc));
 
   return (
     <Container>
@@ -45,7 +43,7 @@ export const DetailTune = (tune) => {
         <h1>{details.name}</h1>
         <h2>Type: {details.type}</h2>
         <p>Key: {key}</p>
-        {<p>abc: {lineBreak}</p>}
+        <p>abc: {lineBreak(abc)}</p>
         <div id="sheetMusic">(laddar)</div>
       </>
     </Container>
