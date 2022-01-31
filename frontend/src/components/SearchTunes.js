@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { POPULAR_URL, KNOW_TUNE_URL, LEARN_TUNE_URL } from '../utils/url';
 import { Link, useParams } from 'react-router-dom';
@@ -13,8 +13,10 @@ export const SearchTunes = () => {
 
   const memberId = useSelector((store) => store.member.memberId);
   const member = useSelector((store) => store.member.member);
+  const learnTunes = useSelector((store) => store.member.member.learnTunes);
 
   const { tune } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setLoading(true);
@@ -41,14 +43,18 @@ export const SearchTunes = () => {
   };
 
   const AddKnowTune = async (tuneId) => {
-    fetch(KNOW_TUNE_URL(memberId, tuneId), options);
-    /*  .then((res) => res.json())
-      .then((data) => console.log('patch', data)); */
+    fetch(KNOW_TUNE_URL(memberId, tuneId), options)
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch(member.actions.setKnowTunes(data.response.knowTunes))
+      );
   };
   const AddLearnTune = async (tuneId) => {
-    fetch(LEARN_TUNE_URL(memberId, tuneId), options);
-    /* .then((res) => res.json())
-      .then((data) => console.log('patch', data)); */
+    fetch(LEARN_TUNE_URL(memberId, tuneId), options)
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch(member.actions.setLearnTunes(data.response.learnTunes));
+      });
   };
 
   return (
