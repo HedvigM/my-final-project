@@ -26,6 +26,8 @@ export const Settings = () => {
       dispatch(member.actions.setMemberName(null));
       dispatch(member.actions.setAccessToken(null));
       dispatch(member.actions.setMember(null));
+      dispatch(member.actions.setKnowTunes(null));
+      dispatch(member.actions.setLearnTunes(null));
       dispatch(relations.actions.setRelations(null));
     });
   };
