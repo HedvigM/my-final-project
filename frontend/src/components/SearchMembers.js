@@ -12,12 +12,28 @@ export const SearchMembers = () => {
   const [followingId, setFollowingId] = useState([]);
 
   const memberId = useSelector((store) => store.member.memberId);
-  /*  const member = useSelector((store) => store.member.member); */
+  const member = useSelector((store) => store.member.member);
   const following = useSelector((store) => store.relations.relations);
 
-  /* const dispatch = useDispatch(); */
-  /* console.log('MEMBER', member); */
+  // the ones that are following me.
+  let actualFollowing = [];
+  let actualFollowed = [];
 
+  following.map((item) => {
+    // if the logged in user is followed -> push the on that is following.
+    if (item.followed._id === member.memberId) {
+      return actualFollowing.push(item.following._id);
+    }
+
+    // if the logged in user is following -> push the one that the user is following.
+    if (item.following._id === member.memberId) {
+      return actualFollowed.push(item.followed._id);
+    }
+  });
+
+  /* const dispatch = useDispatch(); */
+
+  // fetching all the members from the database.
   useEffect(() => {
     fetch(API_URL('members'))
       .then((res) => res.json())
@@ -26,19 +42,18 @@ export const SearchMembers = () => {
       });
   }, []);
 
+  // update the store value with the new relations..!
   const options = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ memberId, followingId })
   };
+
   const AddFollowHandel = async (followingId) => {
     fetch(FOLLOW_URL(memberId, followingId), options);
     /* .then((res) => res.json())
       .then((data) => console.log('patch', data)); maybe set this so we can se the friends icon change?*/
   };
-
-  console.log('MEMBERS', list);
-  console.log('The ones im following', following);
 
   return (
     <div>
@@ -53,11 +68,8 @@ export const SearchMembers = () => {
           />
         </Container>
       </Div>
-      {/*  {following.map((item) => {
-        if (list.memberName.includes(item.followed.memberName)) {
-          <h1>Hej</h1>;
-        }
-      })} */}
+
+      <h1>Members</h1>
       {list
         .filter((item) => {
           if (!value) return true;
@@ -66,23 +78,47 @@ export const SearchMembers = () => {
           }
         })
         .map((item) => (
-          <div key={item._id}>
-            <p>{item.memberName}</p>
-          </div>
+          <>
+            <Relations key={item._id}>
+              <p>{item.memberName}</p>
+              {actualFollowed.includes(item._id) ? (
+                <>
+                  <p>following {item.memberName}</p>
+                  <Remove>
+                    <button onClick={() => AddFollowHandel(item._id)}>
+                      🎻 remove
+                    </button>
+                  </Remove>
+                </>
+              ) : (
+                <Follow>
+                  <button onClick={() => AddFollowHandel(item._id)}>
+                    🎻 follow
+                  </button>
+                </Follow>
+              )}
+              {actualFollowing.includes(item._id) ? (
+                <p>followed by: {item.memberName}</p>
+              ) : (
+                <p>not followed by: {item.memberName}</p>
+              )}
+            </Relations>
+          </>
         ))}
+      <div></div>
     </div>
   );
 };
+const Relations = styled.div`
+  border-bottom: 1px solid black;
+`;
 
-/* <Follow key={item._id}>
-<p>{item.memberName}</p>
-<button onClick={() => AddFollowHandel(item._id)}>
-  🎻 follow {item.memberName}
-</button>
-</Follow>
-const Follow = styled.div`
-  border: 2px solid lime;
-`; */
+const Follow = styled.div``;
+const Remove = styled.div`
+  button {
+    color: red;
+  }
+`;
 
 const Div = styled.div`
   background-color: var(--main-color);
