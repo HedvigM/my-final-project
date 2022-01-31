@@ -31,9 +31,6 @@ export const DetailTune = (tune) => {
   let lineBreak = function (string) {
     return string.replaceAll('!', '\n');
   };
-  console.log('lineBreak', lineBreak);
-  console.log('TYPE OF', typeof lineBreak);
-  console.log('TYPE OF ABC', typeof abc);
 
   abcjs.renderAbc('sheetMusic', lineBreak(abc));
 
