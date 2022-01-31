@@ -48,6 +48,8 @@ export const Login = () => {
             dispatch(member.actions.setMemberId(data.response.memberId));
             dispatch(member.actions.setMemberName(data.response.memberName));
             dispatch(member.actions.setAccessToken(data.response.accessToken));
+            dispatch(member.actions.setKnowTunes(data.response.knowTunes));
+            dispatch(member.actions.setLearnTunes(data.response.learnTunes));
             dispatch(member.actions.setMember(data.response));
           });
         } else {
@@ -55,6 +57,8 @@ export const Login = () => {
             dispatch(member.actions.setMemberId(null));
             dispatch(member.actions.setMemberName(null));
             dispatch(member.actions.setAccessToken(null));
+            dispatch(member.actions.setKnowTunes(null));
+            dispatch(member.actions.setLearnTunes(null));
             dispatch(member.actions.setMember(null));
           });
         }
@@ -62,7 +66,6 @@ export const Login = () => {
   };
 
   // fetching all the relations
-
   const fetchRelations = () => {
     fetch(API_URL('relations'))
       .then((res) => res.json())
