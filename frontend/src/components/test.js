@@ -51,6 +51,29 @@ export const SearchTunes = () => {
     </div>
   );
 };
+
+/* .map((item) => (
+  <>
+    <Follow key={item._id}>
+      <p>{member.memberName} is logged in</p>
+      <p>{item.memberName} is the member</p>
+
+      <button onClick={() => AddFollowHandel(item._id)}>
+        🎻 follow {item.memberName}
+      </button>
+
+      <p>
+        {following.map((item) => (
+          <p>
+            {item.following.memberName} is following{' '}
+            {item.followed.memberName}
+          </p>
+        ))}
+      </p>
+    </Follow>
+  </>
+))} */
+
 const Div = styled.div`
   background-color: var(--main-color);
 
