@@ -6,6 +6,8 @@ export const member = createSlice({
     member: null,
     memberId: null,
     memberName: null,
+    knowTunes: null,
+    learnTunes: null,
     accessToken: null
   },
   reducers: {
@@ -17,6 +19,12 @@ export const member = createSlice({
     },
     setMemberName: (store, action) => {
       store.memberName = action.payload;
+    },
+    setKnowTunes: (store, action) => {
+      store.knowTunes = action.payload;
+    },
+    setLearnTunes: (store, action) => {
+      store.learnTunes = action.payload;
     },
     setAccessToken: (store, action) => {
       store.accessToken = action.payload;
