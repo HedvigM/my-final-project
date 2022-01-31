@@ -9,6 +9,8 @@ export const Profile = () => {
   const relations = useSelector((store) => store.relations.following);
   const member = useSelector((store) => store.member.member);
 
+  // detta fetchas i login och behöver inte fetchas två ggr...
+  // use the store insead!
   useEffect(() => {
     fetch(API_URL('relations'))
       .then((res) => res.json())
