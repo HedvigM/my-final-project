@@ -70,8 +70,6 @@ export const Login = () => {
     fetch(API_URL('relations'))
       .then((res) => res.json())
       .then((data) => {
-        console.log('DATA', data);
-        /* setFollowing(data.response); */
         if (data.success) {
           console.log('SUCCESS', data.success);
           dispatch(relations.actions.setRelations(data.response));
