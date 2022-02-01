@@ -30,12 +30,12 @@ const MemberSchema = new mongoose.Schema({
   ],
   knowTunes: [
     {
-      type: String
+      type: Number
     }
   ],
   learnTunes: [
     {
-      type: String
+      type: Number
     }
   ]
 });
