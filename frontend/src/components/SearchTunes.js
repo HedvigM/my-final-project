@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { member } from '../reducers/member';
 import styled from 'styled-components';
 import { POPULAR_URL, KNOW_TUNE_URL, LEARN_TUNE_URL } from '../utils/url';
 import { Link, useParams } from 'react-router-dom';
@@ -14,6 +15,7 @@ export const SearchTunes = () => {
   const memberId = useSelector((store) => store.member.memberId);
   const member = useSelector((store) => store.member.member);
   const learnTunes = useSelector((store) => store.member.member.learnTunes);
+  const knowTunes = useSelector((store) => store.member.member.knowTunes);
 
   const { tune } = useParams();
   const dispatch = useDispatch();
@@ -42,12 +44,14 @@ export const SearchTunes = () => {
     body: JSON.stringify({ memberId, tuneId })
   };
 
+  // Det här loggen körs inte.
   const AddKnowTune = async (tuneId) => {
     fetch(KNOW_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
-      .then((data) =>
-        dispatch(member.actions.setKnowTunes(data.response.knowTunes))
-      );
+      .then((data) => {
+        dispatch(member.actions.setKnowTunes(data.response.knowTunes));
+        console.log('Vi är här nu!');
+      });
   };
   const AddLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)
@@ -73,20 +77,29 @@ export const SearchTunes = () => {
       </Div>
 
       {list.map((item, index) => (
-        <div key={index}>
+        <Tune key={index}>
+          {/* The link is a part of the route, not a class name */}
           <Link to={`/details/${item.id}`}>
             <p>
               {item.name}, ({item.type})
             </p>
           </Link>
 
-          <button onClick={() => AddKnowTune(item.id)}>
-            I know this tune!
-          </button>
-          <button onClick={() => AddLearnTune(item.id)}>
-            I want to learn this tune!
-          </button>
-        </div>
+          {learnTunes.includes(item.id) ? (
+            <p>I have this tune in my "want to learn pile"</p>
+          ) : (
+            <button onClick={() => AddLearnTune(item.id)}>
+              I want to learn this tune!
+            </button>
+          )}
+          {knowTunes.includes(item.id) ? (
+            <p>I have this tune in my "tunes i know pile"</p>
+          ) : (
+            <button onClick={() => AddKnowTune(item.id)}>
+              I want to learn this tune!
+            </button>
+          )}
+        </Tune>
       ))}
       <button onClick={previousPage}>Previous page</button>
       {pageCount}
@@ -94,6 +107,10 @@ export const SearchTunes = () => {
     </div>
   );
 };
+
+const Tune = styled.div`
+  border-bottom: 2px solid black;
+`;
 const Div = styled.div`
   background-color: var(--main-color);
 
