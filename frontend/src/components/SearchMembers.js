@@ -81,10 +81,10 @@ export const SearchMembers = () => {
         .map((item) => (
           <>
             <Relations key={item._id}>
+              {/* {item.memberName !== member.member.memberName &&} */}
               <Link to={`/member/${item._id}`}>
                 <p>{item.memberName}</p>
               </Link>
-              <p>{item.memberName}</p>
               {actualFollowed.includes(item._id) ? (
                 <>
                   <p>following {item.memberName}</p>
@@ -101,10 +101,8 @@ export const SearchMembers = () => {
                   </button>
                 </Follow>
               )}
-              {actualFollowing.includes(item._id) ? (
+              {actualFollowing.includes(item._id) && (
                 <p>followed by: {item.memberName}</p>
-              ) : (
-                <p>not followed by: {item.memberName}</p>
               )}
             </Relations>
           </>

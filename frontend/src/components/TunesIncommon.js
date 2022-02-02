@@ -8,52 +8,63 @@ import { API_URL } from '../utils/url';
 export const TunesIncommon = (member) => {
   const [list, setList] = useState([]);
   const detailedMember = member.member;
+  /*  const [loading, setLoading] = useState(false); */
   /* console.log('detailedMember', typeof detailedMember); */
   /* console.log('detailedMember', detailedMember); */
-  /* console.log('LIST', list); */
-  /*  console.log('JOb låtar', list[2].knowTunes); */
-  /* console.log('JOB TYPE OF', typeof list.memberName); */
-  /* console.log('detailedMember TYPE OF', typeof detailedMember); */
+  console.log('LIST', list);
+  console.log('LIST TYPE OF', typeof list.knowTunes);
 
   const LoggedInMember = useSelector((store) => store.member.member);
-  /* console.log('LOGGED IN', LoggedInMember); */
-  /* console.log('NAME', typeof LoggedInMember.memberName); */
+  console.log('LOGGED IN MEMBER', LoggedInMember);
+  console.log('LOGGED IN MEMBER TYPE OF', typeof LoggedInMember.knowTunes);
   /* console.log('KNOW TUNES', LoggedInMember.knowTunes); */
 
+  // async?
   useEffect(() => {
-    fetch(API_URL('members'))
+    /* setLoading(true); */
+
+    fetch(API_URL(`member/${detailedMember}`))
       .then((res) => res.json())
       .then((data) => {
         setList(data.response);
+        /*  setLoading(false); */
       });
-  }, []);
+  }, [detailedMember]);
+
+  /*   let commonTunes = [];
+  console.log('Common tunes', commonTunes);
+
+  LoggedInMember.map((item) => {
+    if (item.knowTunes === list.knowTunes) {
+      return commonTunes.push(item.knowTunes);
+    }
+  }); */
 
   // inloggad och detailed member -> gemensamma låtar
 
-  const TheDetailedMembersTunes = (detailedMember) => {
-    const includes = list.memberName.includes(detailedMember);
-    return;
-  };
+  /*   if (loading) {
+    return <h1>LOADING</h1>;
+  } */
 
-  /* console.log('THE', TheDetailedMember(detailedMember)); */
+  /* if (!loading) { */
 
   return (
     <Container>
       <List>
-        <h1>Me and {detailedMember} have this tunes in common: </h1>
-        {/*   {list.map(
-          (item) =>
-            item.memberName.includes(detailedMember) && (
-              <>
-                <p key={item._id}>{item.memberName}</p>
-                <p>Jobs låtar: {item.knowTunes}</p>
-                <p>Loged ins låtar: {LoggedInMember.knowTunes}</p>
-              </>
-            )
+        <h1>Me and {list.memberName} have this tunes in common: </h1>
+        {LoggedInMember.knowTunes}
+        {list.knowTunes}
+        {/*    {list.map((item) =>
+          LoggedInMember.knowTunes.includes(item.knowTunes) ? (
+            <h1>Hej</h1>
+          ) : (
+            <h1>hej då</h1>
+          )
         )} */}
       </List>
     </Container>
   );
+  /* } */
 };
 
 const List = styled.div``;
