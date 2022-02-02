@@ -81,7 +81,7 @@ export const SearchMembers = () => {
         .map((item) => (
           <>
             <Relations key={item._id}>
-              <Link to={`/member/${item.memberName}`}>
+              <Link to={`/member/${item._id}`}>
                 <p>{item.memberName}</p>
               </Link>
               <p>{item.memberName}</p>
