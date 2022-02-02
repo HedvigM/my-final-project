@@ -6,8 +6,8 @@ export const member = createSlice({
     member: null,
     memberId: null,
     memberName: null,
-    knowTunes: null,
-    learnTunes: null,
+    knowTunes: [],
+    learnTunes: [],
     accessToken: null
   },
   reducers: {
