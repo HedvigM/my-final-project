@@ -85,6 +85,21 @@ app.get('/members', async (req, res) => {
   res.status(200).json({ response: members, success: true });
 });
 
+// searching for a single member for the "TunesIncommon" Page.
+app.get('/member/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const memberById = await Member.findById(id).exec();
+    if (memberById) {
+      res.status(200).json({ response: memberById, success: true });
+    } else {
+      res.status(404).json({ response: error, success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
 /* POPULATE */
 /* Gör så att man bara kan följa en användare en gång... */
 app.post('/following/:following/followed/:followed', async (req, res) => {
