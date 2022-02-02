@@ -49,10 +49,12 @@ export const SearchTunes = () => {
     fetch(KNOW_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
       .then((data) => {
+        console.log('DATA:', data);
         dispatch(member.actions.setKnowTunes(data.response.knowTunes));
         console.log('Vi är här nu!');
       });
   };
+
   const AddLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
@@ -96,7 +98,7 @@ export const SearchTunes = () => {
             <p>I have this tune in my "tunes i know pile"</p>
           ) : (
             <button onClick={() => AddKnowTune(item.id)}>
-              I want to learn this tune!
+              I know this tune!
             </button>
           )}
         </Tune>
