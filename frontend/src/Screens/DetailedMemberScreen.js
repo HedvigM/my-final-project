@@ -10,8 +10,8 @@ import { Footer } from '../components/Footer';
 import { TunesIncommon } from '../components/TunesIncommon';
 
 export const DetailedMemberScreen = () => {
-  const navigate = useNavigate();
   const { member } = useParams();
+  const navigate = useNavigate();
 
   const accessToken = useSelector((store) => store.member.accessToken);
 
@@ -29,10 +29,10 @@ export const DetailedMemberScreen = () => {
       </InnerContainer>
       <Img>
         <InnerContainer>
-          <TunesIncommon />
+          <TunesIncommon member={member} />
         </InnerContainer>
       </Img>
-      <DetailMember tune={member} />
+      <DetailMember member={member} />
       <Footer />
     </Container>
   );
