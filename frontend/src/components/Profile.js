@@ -35,19 +35,11 @@ export const Profile = () => {
         cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
       </p>
       <h1>People i'm following:</h1>
-      {following.map((item, index) =>
-        item.following._id === member.memberId ? (
-          <p key={index}>{item.followed.memberName}</p>
-        ) : (
-          <p key={index}>
-            <span>
-              Nope, skip this one: {item.following.memberName},{' '}
-              {member.memberName}.
-            </span>
-            <span>Item: {item.following._id}</span>
-            <span>Member: {member.memberId}</span>
-          </p>
-        )
+      {following.map(
+        (item, index) =>
+          item.following._id === member.memberId && (
+            <p key={index}>{item.followed.memberName}</p>
+          )
       )}
     </>
   );
