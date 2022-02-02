@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector /* , useDispatch */ } from 'react-redux';
+import { Link /* , useParams */ } from 'react-router-dom';
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
@@ -80,6 +81,9 @@ export const SearchMembers = () => {
         .map((item) => (
           <>
             <Relations key={item._id}>
+              <Link to={`/member/${item.memberName}`}>
+                <p>{item.memberName}</p>
+              </Link>
               <p>{item.memberName}</p>
               {actualFollowed.includes(item._id) ? (
                 <>
