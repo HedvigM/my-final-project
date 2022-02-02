@@ -49,8 +49,6 @@ export const MyTunes = () => {
 
   // visa inte den användare som är inloggad.
 
-  /*   console.log('SESSION', session); */
-
   if (loading) {
     return <h1>LOADING</h1>;
   }
