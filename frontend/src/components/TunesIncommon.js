@@ -1,25 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { API_URL } from '../utils/url';
-
-// NY ENDPOINT SOM RETURNERAR DEN VARS ID MAN STOPPAR IN.
+import { API_URL, TUNE_URL } from '../utils/url';
 
 export const TunesIncommon = (member) => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState({});
+  const [commonTunes, setCommonTunes] = useState([]);
+  const [tuneNames, setTuneNames] = useState({});
   const detailedMember = member.member;
-  /*  const [loading, setLoading] = useState(false); */
-  /* console.log('detailedMember', typeof detailedMember); */
-  /* console.log('detailedMember', detailedMember); */
-  console.log('LIST', list);
-  console.log('LIST TYPE OF', typeof list.knowTunes);
 
   const LoggedInMember = useSelector((store) => store.member.member);
-  console.log('LOGGED IN MEMBER', LoggedInMember);
-  console.log('LOGGED IN MEMBER TYPE OF', typeof LoggedInMember.knowTunes);
-  /* console.log('KNOW TUNES', LoggedInMember.knowTunes); */
 
-  // async?
   useEffect(() => {
     /* setLoading(true); */
 
@@ -27,20 +18,36 @@ export const TunesIncommon = (member) => {
       .then((res) => res.json())
       .then((data) => {
         setList(data.response);
+
         /*  setLoading(false); */
       });
   }, [detailedMember]);
 
-  /*   let commonTunes = [];
   console.log('Common tunes', commonTunes);
 
-  LoggedInMember.map((item) => {
-    if (item.knowTunes === list.knowTunes) {
-      return commonTunes.push(item.knowTunes);
+  useEffect(() => {
+    if (LoggedInMember.knowTunes && list.knowTunes) {
+      console.log(JSON.stringify(LoggedInMember, null, 2));
+      console.log(JSON.stringify(list, null, 2));
+      const commonTunes = [];
+      LoggedInMember.knowTunes.forEach((tuneId) => {
+        if (list.knowTunes.includes(tuneId)) {
+          commonTunes.push(tuneId);
+        }
+      });
+      setCommonTunes(commonTunes);
     }
-  }); */
+  }, [LoggedInMember, list]);
 
-  // inloggad och detailed member -> gemensamma låtar
+  useEffect(() => {
+    Promise.all(
+      commonTunes.map((item) =>
+        fetch(TUNE_URL(item))
+          .then((res) => res.json())
+          .then((data) => data.name)
+      )
+    ).then((tuneNames) => setTuneNames(tuneNames));
+  }, [commonTunes]);
 
   /*   if (loading) {
     return <h1>LOADING</h1>;
@@ -52,15 +59,9 @@ export const TunesIncommon = (member) => {
     <Container>
       <List>
         <h1>Me and {list.memberName} have this tunes in common: </h1>
-        {LoggedInMember.knowTunes}
-        {list.knowTunes}
-        {/*    {list.map((item) =>
-          LoggedInMember.knowTunes.includes(item.knowTunes) ? (
-            <h1>Hej</h1>
-          ) : (
-            <h1>hej då</h1>
-          )
-        )} */}
+        {tuneNames.map((item) => (
+          <p>{item}</p>
+        ))}
       </List>
     </Container>
   );
