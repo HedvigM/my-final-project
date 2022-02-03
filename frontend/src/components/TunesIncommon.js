@@ -23,12 +23,8 @@ export const TunesIncommon = (member) => {
       });
   }, [detailedMember]);
 
-  console.log('Common tunes', commonTunes);
-
   useEffect(() => {
     if (LoggedInMember.knowTunes && list.knowTunes) {
-      console.log(JSON.stringify(LoggedInMember, null, 2));
-      console.log(JSON.stringify(list, null, 2));
       const commonTunes = [];
       LoggedInMember.knowTunes.forEach((tuneId) => {
         if (list.knowTunes.includes(tuneId)) {
