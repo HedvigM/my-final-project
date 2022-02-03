@@ -39,6 +39,7 @@ const MemberSchema = new mongoose.Schema({
     }
   ]
 });
+/* Update with town and a description (like a profile text). */
 
 const RelationsSchema = new mongoose.Schema({
   following: {
