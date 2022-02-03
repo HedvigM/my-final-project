@@ -59,6 +59,8 @@ const store = createStore(
   composedEnhancers(applyMiddleware(thunkMiddleware))
 );
 
+console.log(store.getState());
+
 // store the state in local storage on Redux state change
 store.subscribe(() => {
   localStorage.setItem('loginReduxState', JSON.stringify(store.getState()));
@@ -83,7 +85,7 @@ const App = () => {
               />
 
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
-              <Route path="/details/:tune" element={<DetailedMemberScreen />} />
+              <Route path="/details/:tune" element={<DetailedTunesScreen />} />
               <Route
                 path="/member/:member"
                 element={<DetailedMemberScreen />}
