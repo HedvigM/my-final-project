@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Profile } from '../components/Profile';
+import { Following } from '../components/Following';
 import { MyTunes } from '../components/MyTunes';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -24,6 +25,7 @@ export const ProfileScreen = () => {
       <Header />
       <InnerContainer>
         <Profile />
+        <Following />
       </InnerContainer>
       <Img>
         <InnerContainer>

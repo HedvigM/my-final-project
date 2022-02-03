@@ -1,30 +1,16 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { API_URL } from '../utils/url';
 
 export const Profile = () => {
-  const [following, setFollowing] = useState([]);
-  const relations = useSelector((store) => store.relations.following);
   const member = useSelector((store) => store.member.member);
-
-  // detta fetchas i login och behöver inte fetchas två ggr...
-  // use the store insead!
-  useEffect(() => {
-    fetch(API_URL('relations'))
-      .then((res) => res.json())
-      .then((data) => {
-        setFollowing(data.response);
-      });
-  }, []);
 
   return (
     <>
       <PicNameCity>
         <Img className="profile-pic" src="./profile-pic.jpg" alt="" />
         <div>
-          <h1>Hedvig</h1>
+          <h1>{member.memberName}</h1>
           <h2>Uppsala</h2>
         </div>
       </PicNameCity>
@@ -34,13 +20,6 @@ export const Profile = () => {
         sweet roll liquorice. Gingerbread liquorice oat cake muffin fruitcake.
         cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
       </p>
-      <h1>People i'm following:</h1>
-      {following.map(
-        (item, index) =>
-          item.following._id === member.memberId && (
-            <p key={index}>{item.followed.memberName}</p>
-          )
-      )}
     </>
   );
 };
