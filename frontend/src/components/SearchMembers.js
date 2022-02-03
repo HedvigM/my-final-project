@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector /* , useDispatch */ } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link /* , useParams */ } from 'react-router-dom';
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
@@ -15,6 +15,9 @@ export const SearchMembers = () => {
   const memberId = useSelector((store) => store.member.memberId);
   const member = useSelector((store) => store.member.member);
   const following = useSelector((store) => store.relations.relations);
+
+  console.log('following', following);
+  console.log('following', following[0].following._id);
 
   // the ones that are following me.
   let actualFollowing = [];
@@ -32,7 +35,7 @@ export const SearchMembers = () => {
     }
   });
 
-  /* const dispatch = useDispatch(); */
+  const dispatch = useDispatch();
 
   // fetching all the members from the database.
   useEffect(() => {
@@ -49,11 +52,12 @@ export const SearchMembers = () => {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ memberId, followingId })
   };
-
+// jobbar på detta
   const AddFollowHandel = async (followingId) => {
     fetch(FOLLOW_URL(memberId, followingId), options);
     /* .then((res) => res.json())
-      .then((data) => console.log('patch', data)); maybe set this so we can se the friends icon change?*/
+      .then((data) => console.log('patch', data)); */
+    console.log('dispatch', memberId, following;
   };
 
   return (

@@ -18,4 +18,4 @@ export const LEARN_TUNE_URL = (memberId, slug) =>
   `${BASE_URL}/member/${memberId}/tune/learn/${slug}`;
 
 export const FOLLOW_URL = (memberId, slug) =>
-  `${BASE_URL}/member/${memberId}/following/${slug}`;
+  `${BASE_URL}/following/${memberId}/followed/${slug}`;
