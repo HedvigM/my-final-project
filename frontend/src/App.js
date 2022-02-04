@@ -34,7 +34,6 @@ const reducer = combineReducers({
 // local storage as initial state
 const persistedStateJSON = localStorage.getItem('loginReduxState');
 const persistedState = persistedStateJSON ? JSON.parse(persistedStateJSON) : {};
-/* let persistedState = {}; */
 
 const composedEnhancers =
   (process.env.NODE_ENV !== 'production' &&
@@ -42,24 +41,11 @@ const composedEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
   compose;
 
-/* if (persistedStateJSON) {
-  persistedState = JSON.parse(persistedStateJSON);
-} */
-
-// create store with initial state
-/* const store = createStore(
-  reducer,
-  persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-); */
-
 const store = createStore(
   reducer,
   persistedState,
   composedEnhancers(applyMiddleware(thunkMiddleware))
 );
-
-console.log(store.getState());
 
 // store the state in local storage on Redux state change
 store.subscribe(() => {

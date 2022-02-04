@@ -7,7 +7,6 @@ import { Header } from '../components/Header';
 
 export const DetailedTunesScreen = () => {
   const { tune } = useParams();
-  console.log('DetailedTunesScreen', tune);
   return (
     <>
       <Header />
