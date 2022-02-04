@@ -121,29 +121,10 @@ app.post('/following/:following/followed/:followed', async (req, res) => {
   }
 });
 
-/* response: {
-  memberId: newMember._id,
-  memberName: newMember.memberName,
-  accessToken: newMember.accessToken,
-  knowTunes: newMember.knowTunes,
-  learnTunes: newMember.learnTunes
-}, */
-
 app.get('/relations', async (req, res) => {
   const relations = await Relations.find({}).select('-__v').exec();
   res.status(200).json({ response: relations, success: true });
 });
-
-/* app.post('/following/:following/followed/:followed', async (req, res) => {
-  const { following, followed } = req.params;
-
-  try {
-    const newRelation = await new Relations({ following, followed }).save();
-    res.status(201).json({ response: newRelation, success: true });
-  } catch (error) {
-    res.status(400).json({ response: error, success: false });
-  }
-}); */
 
 /* Gör så att man bara kan lägga till en låt en gång... */
 app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
@@ -162,7 +143,12 @@ app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
         { new: true }
       );
 
-      res.status(200).json({ response: updatedMember, success: true });
+      res.status(200).json({
+        response: {
+          knowTunes: updatedMember.knowTunes
+        },
+        success: true
+      });
     } else {
       res.status(404).json({ response: 'Member not found', success: false });
     }
@@ -170,6 +156,14 @@ app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
     res.status(400).json({ response: error, success: false });
   }
 });
+
+/* response: {
+  memberId: newMember._id,
+  memberName: newMember.memberName,
+  accessToken: newMember.accessToken,
+  knowTunes: newMember.knowTunes,
+  learnTunes: newMember.learnTunes
+}, */
 
 /* Gör så att man bara kan lägga till en låt en gång... */
 app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
