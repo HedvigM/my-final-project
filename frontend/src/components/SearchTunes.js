@@ -10,10 +10,11 @@ export const SearchTunes = () => {
   const [value, setValue] = useState('');
   const [pageCount, setPageCount] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [tuneId, setTuneId] = useState([]);
 
+  /* const [tuneId, setTuneId] = useState([]);
+   */
   const memberId = useSelector((store) => store.member.memberId);
-  const member = useSelector((store) => store.member.member);
+  /*  const member = useSelector((store) => store.member.member); */
   const learnTunes = useSelector((store) => store.member.member.learnTunes);
   const knowTunes = useSelector((store) => store.member.member.knowTunes);
 
@@ -40,20 +41,25 @@ export const SearchTunes = () => {
 
   const options = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ memberId, tuneId })
+    headers: { 'Content-Type': 'application/json' }
+    /* body: JSON.stringify({ memberId, tuneId }) */
   };
 
-  // Det här loggen körs inte.
   const AddKnowTune = async (tuneId) => {
     fetch(KNOW_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
       .then((data) => {
         console.log('DATA:', data);
-        dispatch(member.actions.setKnowTunes(data.response.knowTunes));
+        dispatch(
+          member.actions.setKnowTunes([
+            ...knowTunes,
+            ...data.response.knowTunes
+          ])
+        );
         console.log('Vi är här nu!');
       });
   };
+  console.log(knowTunes);
 
   const AddLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)
