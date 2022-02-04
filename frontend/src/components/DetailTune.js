@@ -35,7 +35,6 @@ export const DetailTune = (tune) => {
       fetch(TUNE_URL(detailedTune))
         .then((res) => res.json())
         .then((data) => {
-          console.log('DATA', data);
           setDetails(data);
           setAbc(data.settings[0].abc);
           setKey(data.settings[0].key);
@@ -60,7 +59,7 @@ export const DetailTune = (tune) => {
         {list.map(
           (item) =>
             item.knowTunes.includes(detailedTuneAsNumber) && (
-              <p>{item.memberName}</p>
+              <p key={item._id}>{item.memberName}</p>
             )
         )}
       </Members>
