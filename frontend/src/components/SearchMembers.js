@@ -16,9 +16,6 @@ export const SearchMembers = () => {
   const member = useSelector((store) => store.member.member);
   const following = useSelector((store) => store.relations.relations);
 
-  console.log('following', following);
-  console.log('following', following[0].following._id);
-
   // the ones that are following me.
   let actualFollowing = [];
   let actualFollowed = [];
@@ -38,6 +35,7 @@ export const SearchMembers = () => {
   const dispatch = useDispatch();
 
   // fetching all the members from the database.
+  // fetch again when i follow someone new.
   useEffect(() => {
     fetch(API_URL('members'))
       .then((res) => res.json())
@@ -48,16 +46,16 @@ export const SearchMembers = () => {
 
   // update the store value with the new relations..!
   const options = {
-    method: 'PATCH',
+    method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ memberId, followingId })
   };
-// jobbar på detta
+  // jobbar på detta
   const AddFollowHandel = async (followingId) => {
     fetch(FOLLOW_URL(memberId, followingId), options);
     /* .then((res) => res.json())
       .then((data) => console.log('patch', data)); */
-    console.log('dispatch', memberId, following;
+    /* console.log('dispatch', memberId, following); */
   };
 
   return (
@@ -82,36 +80,33 @@ export const SearchMembers = () => {
             return true;
           }
         })
-        .map((item) => (
-          <>
-            <Relations key={item._id}>
-              {/* {item.memberName !== member.member.memberName &&} */}
-              <Link to={`/member/${item._id}`}>
-                <p>{item.memberName}</p>
-              </Link>
-              {actualFollowed.includes(item._id) ? (
-                <>
-                  <p>following {item.memberName}</p>
-                  <Remove>
-                    <button onClick={() => AddFollowHandel(item._id)}>
-                      🎻 remove
-                    </button>
-                  </Remove>
-                </>
-              ) : (
-                <Follow>
+        .map((item, index) => (
+          <Relations key={index}>
+            {/* {item.memberName !== member.member.memberName &&} */}
+            <Link to={`/member/${item._id}`}>
+              <p>{item.memberName}</p>
+            </Link>
+            {actualFollowed.includes(item._id) ? (
+              <>
+                <p>following {item.memberName}</p>
+                <Remove>
                   <button onClick={() => AddFollowHandel(item._id)}>
-                    🎻 follow
+                    🎻 remove
                   </button>
-                </Follow>
-              )}
-              {actualFollowing.includes(item._id) && (
-                <p>followed by: {item.memberName}</p>
-              )}
-            </Relations>
-          </>
+                </Remove>
+              </>
+            ) : (
+              <Follow>
+                <button onClick={() => AddFollowHandel(item._id)}>
+                  🎻 follow
+                </button>
+              </Follow>
+            )}
+            {actualFollowing.includes(item._id) && (
+              <p>followed by: {item.memberName}</p>
+            )}
+          </Relations>
         ))}
-      <div></div>
     </div>
   );
 };
