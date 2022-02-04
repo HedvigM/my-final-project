@@ -10,25 +10,32 @@ import { member } from '../reducers/member';
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
-  const [followingId, setFollowingId] = useState([]);
+  //  const [followingId, setFollowingId] = useState([]);
+  /*  const [followingMember, setFollowingMember] = useState([]); */
 
   const memberId = useSelector((store) => store.member.memberId);
   const member = useSelector((store) => store.member.member);
   const following = useSelector((store) => store.relations.relations);
 
+  /* console.log('member id', memberId); */
+
   // the ones that are following me.
   let actualFollowing = [];
   let actualFollowed = [];
 
+  console.log(typeof following);
+  console.log('following', following);
+  /* console.log(JSON.stringify(following, null, 2)); */
+
   following.map((item) => {
     // if the logged in user is followed -> push the on that is following.
-    if (item.followed._id === member.memberId) {
-      return actualFollowing.push(item.following._id);
+    if (item.followed === member.memberId) {
+      return actualFollowing.push(item.following);
     }
 
     // if the logged in user is following -> push the one that the user is following.
-    if (item.following._id === member.memberId) {
-      return actualFollowed.push(item.followed._id);
+    if (item.following === member.memberId) {
+      return actualFollowed.push(item.followed);
     }
   });
 
@@ -47,15 +54,16 @@ export const SearchMembers = () => {
   // update the store value with the new relations..!
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ memberId, followingId })
+    headers: { 'Content-Type': 'application/json' }
+    //  body: JSON.stringify({ memberId, followingId })
   };
-  // jobbar på detta
+
   const AddFollowHandel = async (followingId) => {
-    fetch(FOLLOW_URL(memberId, followingId), options);
-    /* .then((res) => res.json())
-      .then((data) => console.log('patch', data)); */
-    /* console.log('dispatch', memberId, following); */
+    fetch(FOLLOW_URL(memberId, followingId), options)
+      .then((res) => res.json())
+      .then((data) =>
+        dispatch(relations.actions.setRelations([...following, data.response]))
+      );
   };
 
   return (
