@@ -10,22 +10,14 @@ import { member } from '../reducers/member';
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
-  //  const [followingId, setFollowingId] = useState([]);
-  /*  const [followingMember, setFollowingMember] = useState([]); */
 
   const memberId = useSelector((store) => store.member.memberId);
   const member = useSelector((store) => store.member.member);
   const following = useSelector((store) => store.relations.relations);
 
-  /* console.log('member id', memberId); */
-
   // the ones that are following me.
   let actualFollowing = [];
   let actualFollowed = [];
-
-  console.log(typeof following);
-  console.log('following', following);
-  /* console.log(JSON.stringify(following, null, 2)); */
 
   following.map((item) => {
     // if the logged in user is followed -> push the on that is following.
@@ -42,7 +34,6 @@ export const SearchMembers = () => {
   const dispatch = useDispatch();
 
   // fetching all the members from the database.
-  // fetch again when i follow someone new.
   useEffect(() => {
     fetch(API_URL('members'))
       .then((res) => res.json())
@@ -55,7 +46,6 @@ export const SearchMembers = () => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' }
-    //  body: JSON.stringify({ memberId, followingId })
   };
 
   const AddFollowHandel = async (followingId) => {
