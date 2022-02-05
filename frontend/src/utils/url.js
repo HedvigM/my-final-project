@@ -8,6 +8,10 @@ export const API_URL = (slug) => `${BASE_URL}/${slug}`;
 const SESSION_URL = 'https://thesession.org/tunes/popular?format=json&page=';
 export const POPULAR_URL = (slug) => `${SESSION_URL}${slug}`;
 
+// the sessions api for search
+export const SEARCH_TUNE = (slug) =>
+  `https://thesession.org/tunes/search?q=${slug}&format=json`;
+
 export const TUNE_URL = (slug) =>
   `https://thesession.org/tunes/${slug}?format=json`;
 

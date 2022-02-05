@@ -2,31 +2,46 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
 import { member } from '../reducers/member';
 import styled from 'styled-components';
-import { POPULAR_URL, KNOW_TUNE_URL, LEARN_TUNE_URL } from '../utils/url';
+import {
+  POPULAR_URL,
+  KNOW_TUNE_URL,
+  LEARN_TUNE_URL,
+  SEARCH_TUNE
+} from '../utils/url';
 import { Link, useParams } from 'react-router-dom';
 
 export const SearchTunes = () => {
-  const [list, setList] = useState([]);
+  const [popularList, setPopularList] = useState([]);
+  const [searchList, setSearchList] = useState([]);
   const [value, setValue] = useState('');
   const [pageCount, setPageCount] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  /* const [tuneId, setTuneId] = useState([]);
-   */
   const memberId = useSelector((store) => store.member.memberId);
-  /*  const member = useSelector((store) => store.member.member); */
   const learnTunes = useSelector((store) => store.member.learnTunes);
   const knowTunes = useSelector((store) => store.member.knowTunes);
 
   const { tune } = useParams();
   const dispatch = useDispatch();
 
+  console.log(typeof toString(value));
+
+  const OnSearchHandle = async () => {
+    fetch(SEARCH_TUNE(value))
+      .then((res) => res.json())
+      .then((data) => {
+        setSearchList(data.tunes);
+        setLoading(false);
+      });
+  };
+  console.log('searchlist', searchList);
+
   useEffect(() => {
     setLoading(true);
     fetch(POPULAR_URL(pageCount))
       .then((res) => res.json())
       .then((data) => {
-        setList(data.tunes);
+        setPopularList(data.tunes);
         setLoading(false);
       });
   }, [pageCount]);
@@ -82,10 +97,18 @@ export const SearchTunes = () => {
             placeholder="Search 👇"
             onChange={(event) => setValue(event.target.value)}
           />
+          <button onClick={OnSearchHandle}>Search!</button>
         </Container>
       </Div>
 
-      {list.map((item, index) => (
+      {searchList &&
+        searchList.map((item) => (
+          <>
+            <p key={item.id}>{item.name}</p>
+          </>
+        ))}
+
+      {popularList.map((item, index) => (
         <Tune key={index}>
           {/* The link is a part of the route, not a class name */}
           <Link to={`/details/${item.id}`}>
