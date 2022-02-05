@@ -157,14 +157,6 @@ app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
   }
 });
 
-/* response: {
-  memberId: newMember._id,
-  memberName: newMember.memberName,
-  accessToken: newMember.accessToken,
-  knowTunes: newMember.knowTunes,
-  learnTunes: newMember.learnTunes
-}, */
-
 /* Gör så att man bara kan lägga till en låt en gång... */
 app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
   const { memberId, tuneId } = req.params;
@@ -182,7 +174,12 @@ app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
         { new: true }
       );
 
-      res.status(200).json({ response: updatedMember, success: true });
+      res.status(200).json({
+        response: {
+          learnTunes: updatedMember.learnTunes
+        },
+        success: true
+      });
     } else {
       res.status(404).json({ response: 'Member not found', success: false });
     }

@@ -57,16 +57,18 @@ export const SearchTunes = () => {
         )
       );
   };
-  console.log(learnTunes);
+  console.log('learn tunes', learnTunes);
 
   const AddLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
       .then((data) =>
-        member.actions.setLearnTunes([
-          ...learnTunes,
-          ...data.response.learnTunes
-        ])
+        dispatch(
+          member.actions.setLearnTunes([
+            ...learnTunes,
+            ...data.response.learnTunes
+          ])
+        )
       );
   };
 
