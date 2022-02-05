@@ -6,7 +6,7 @@ import { API_URL } from '../utils/url';
 export const Following = () => {
   const [followingMember, setFollowingMember] = useState([]);
   const relations = useSelector((store) => store.relations.following);
-  const member = useSelector((store) => store.member.member);
+  const memberId = useSelector((store) => store.member.memberId);
 
   useEffect(() => {
     fetch(API_URL('relations'))
@@ -21,7 +21,7 @@ export const Following = () => {
       <h1>People i'm following:</h1>
       {followingMember.map(
         (item, index) =>
-          item.following._id === member.memberId && (
+          item.following._id === memberId && (
             <p key={index}>{item.followed.memberName}</p>
           )
       )}

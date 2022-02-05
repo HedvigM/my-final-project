@@ -10,8 +10,7 @@ export const Login = () => {
   const [memberName, setMemberName] = useState('');
   const [password, setPassword] = useState('');
   const [mode, setMode] = useState('signin');
-  /*   const relations = useSelector((store) => store.relations.relations);
-   */
+
   const accessToken = useSelector((store) => store.member.accessToken);
 
   const dispatch = useDispatch();
@@ -20,7 +19,6 @@ export const Login = () => {
   const onFormSubmit = (event) => {
     event.preventDefault();
     doTheFetch();
-    console.log('onformsubmit');
     fetchRelations();
   };
 
@@ -50,7 +48,7 @@ export const Login = () => {
             dispatch(member.actions.setAccessToken(data.response.accessToken));
             dispatch(member.actions.setKnowTunes(data.response.knowTunes));
             dispatch(member.actions.setLearnTunes(data.response.learnTunes));
-            dispatch(member.actions.setMember(data.response));
+            /* dispatch(member.actions.setMember(data.response)); */
           });
         } else {
           batch(() => {
@@ -59,7 +57,7 @@ export const Login = () => {
             dispatch(member.actions.setAccessToken(null));
             dispatch(member.actions.setKnowTunes(null));
             dispatch(member.actions.setLearnTunes(null));
-            dispatch(member.actions.setMember(null));
+            /* dispatch(member.actions.setMember(null)); */
           });
         }
       });
@@ -71,7 +69,6 @@ export const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          console.log('SUCCESS', data.success);
           dispatch(relations.actions.setRelations(data.response));
         } else {
           dispatch(relations.actions.setRelations(null));

@@ -12,7 +12,6 @@ export const SearchMembers = () => {
   const [value, setValue] = useState('');
 
   const memberId = useSelector((store) => store.member.memberId);
-  const member = useSelector((store) => store.member.member);
   const following = useSelector((store) => store.relations.relations);
 
   // the ones that are following me.
@@ -21,12 +20,12 @@ export const SearchMembers = () => {
 
   following.map((item) => {
     // if the logged in user is followed -> push the on that is following.
-    if (item.followed === member.memberId) {
+    if (item.followed === memberId) {
       return actualFollowing.push(item.following);
     }
 
     // if the logged in user is following -> push the one that the user is following.
-    if (item.following === member.memberId) {
+    if (item.following === memberId) {
       return actualFollowed.push(item.followed);
     }
   });

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, batch } from 'react-redux';
 import { member } from '../reducers/member';
 import styled from 'styled-components';
 import { POPULAR_URL, KNOW_TUNE_URL, LEARN_TUNE_URL } from '../utils/url';
@@ -42,7 +42,6 @@ export const SearchTunes = () => {
   const options = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' }
-    /* body: JSON.stringify({ memberId, tuneId }) */
   };
 
   const AddKnowTune = async (tuneId) => {
@@ -57,7 +56,6 @@ export const SearchTunes = () => {
         )
       );
   };
-  console.log('learn tunes', learnTunes);
 
   const AddLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)

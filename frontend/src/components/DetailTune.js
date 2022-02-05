@@ -17,7 +17,7 @@ export const DetailTune = (tune) => {
     '|:E2BE dEBE|E2BE AFDF|E2BE dEBE|BABc dAFD:|!d2fd c2ec|defg afge|d2fd c2ec|BABc dAFA|!d2fd c2ec|defg afge|afge fdec|BABc dAFD|'
   );
 
-  const knowTunes = useSelector((store) => store.member.member.knowTunes);
+  const knowTunes = useSelector((store) => store.member.knowTunes);
 
   // fetching all the members from the database.
   useEffect(() => {

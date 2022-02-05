@@ -13,6 +13,13 @@ export const Settings = () => {
   const navigate = useNavigate();
 
   const accessToken = useSelector((store) => store.member.accessToken);
+  /*
+  const memberId = useSelector((store) => store.member.memberId);
+  const memberName = useSelector((store) => store.member.memberName);
+  const knowTunes = useSelector((store) => store.member.knowTunes);
+  const learnTunes = useSelector((store) => store.member.learnTunes);
+  const relations = useSelector((store) => store.relations.relations);
+*/
 
   useEffect(() => {
     if (!accessToken) {
@@ -26,8 +33,9 @@ export const Settings = () => {
       dispatch(member.actions.setMemberName(null));
       dispatch(member.actions.setAccessToken(null));
       dispatch(member.actions.setMember(null));
-      dispatch(member.actions.setKnowTunes(null));
-      dispatch(member.actions.setLearnTunes(null));
+      dispatch(member.actions.setKnowTunes([]));
+      dispatch(member.actions.setLearnTunes([]));
+      dispatch(member.actions.setMember(null));
       dispatch(relations.actions.setRelations(null));
     });
   };

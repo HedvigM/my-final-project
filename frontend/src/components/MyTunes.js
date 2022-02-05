@@ -9,43 +9,54 @@ export const MyTunes = () => {
   const [learn, setLearn] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const member = useSelector((store) => store.member.member);
+  const knowTunes = useSelector((store) => store.member.knowTunes);
+  const learnTunes = useSelector((store) => store.member.knowTunes);
   /*  console.log('MEMBER-ID', member.knowTunes); */
 
   // the function i'm working with
-  useEffect(() => {
-    setLoading(true);
+  useEffect(
+    () => {
+      setLoading(true);
 
-    Promise.all(
-      member.knowTunes.map((item) =>
-        fetch(TUNE_URL(item))
-          .then((res) => res.json())
-          .then((data) => {
-            return data.name;
-          })
-      )
-    ).then((values) => {
-      setKnow(values);
-      setLoading(false);
-    });
-  }, []);
+      Promise.all(
+        knowTunes.map((item) =>
+          fetch(TUNE_URL(item))
+            .then((res) => res.json())
+            .then((data) => {
+              return data.name;
+            })
+        )
+      ).then((values) => {
+        setKnow(values);
+        setLoading(false);
+      });
+    },
+    [
+      /* knowTunes */
+    ]
+  );
 
-  useEffect(() => {
-    setLoading(true);
+  useEffect(
+    () => {
+      setLoading(true);
 
-    Promise.all(
-      member.learnTunes.map((item) =>
-        fetch(TUNE_URL(item))
-          .then((res) => res.json())
-          .then((data) => {
-            return data.name;
-          })
-      )
-    ).then((values) => {
-      setLearn(values);
-      setLoading(false);
-    });
-  }, []);
+      Promise.all(
+        learnTunes.map((item) =>
+          fetch(TUNE_URL(item))
+            .then((res) => res.json())
+            .then((data) => {
+              return data.name;
+            })
+        )
+      ).then((values) => {
+        setLearn(values);
+        setLoading(false);
+      });
+    },
+    [
+      /* learnTunes */
+    ]
+  );
 
   // visa inte den användare som är inloggad.
 

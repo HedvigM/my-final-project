@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 export const Profile = () => {
-  const member = useSelector((store) => store.member.member);
+  const memberName = useSelector((store) => store.member.memberName);
 
   return (
     <>
       <PicNameCity>
         <Img className="profile-pic" src="./profile-pic.jpg" alt="" />
         <div>
-          <h1>{member.memberName}</h1>
+          <h1>{memberName}</h1>
           <h2>Uppsala</h2>
         </div>
       </PicNameCity>
