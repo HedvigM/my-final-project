@@ -6,14 +6,21 @@ import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import { DELETE } from '../utils/url';
+import md5 from 'md5';
 
 export const Profile = () => {
   const memberName = useSelector((store) => store.member.memberName);
   const memberId = useSelector((store) => store.member.memberId);
   const accessToken = useSelector((store) => store.member.accessToken);
+  const email = useSelector((store) => store.member.email);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  // It said to write this line in the documentation, but it looks like it overwrites the import.
+  var md5 = require('md5');
+
+  const hashedEmail = md5(email);
 
   /*
   useEffect(() => {
@@ -78,7 +85,7 @@ export const Profile = () => {
   return (
     <>
       <PicNameCity>
-        <Img className="profile-pic" src="./profile-pic.jpg" alt="" />
+        <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
         <div>
           <h1>{memberName}</h1>
           <h2>Uppsala</h2>
