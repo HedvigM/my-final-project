@@ -15,6 +15,12 @@ const MemberSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  town: {
+    type: String
+  },
+  profileText: {
+    type: String
+  },
   password: {
     type: String,
     required: true
@@ -23,11 +29,6 @@ const MemberSchema = new mongoose.Schema({
     type: String,
     default: () => crypto.randomBytes(128).toString('hex')
   },
-  follows: [
-    {
-      type: mongoose.Schema.Types.ObjectId
-    }
-  ],
   knowTunes: [
     {
       type: Number
@@ -95,6 +96,36 @@ app.get('/member/:id', async (req, res) => {
       res.status(200).json({ response: memberById, success: true });
     } else {
       res.status(404).json({ response: error, success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
+app.patch('/member/:memberId/town/:town', async (req, res) => {
+  const { memberId, town } = req.params;
+  try {
+    const queriedMember = await Member.findById(memberId);
+
+    if (queriedMember) {
+      const updatedMember = await Member.findByIdAndUpdate(
+        memberId,
+        {
+          $push: {
+            town: town
+          }
+        },
+        { new: true }
+      );
+
+      res.status(200).json({
+        response: {
+          town: updatedMember.town
+        },
+        success: true
+      });
+    } else {
+      res.status(404).json({ response: 'Member not found', success: false });
     }
   } catch (error) {
     res.status(400).json({ response: error, success: false });
@@ -208,6 +239,8 @@ app.post('/signup', async (req, res) => {
       response: {
         memberId: newMember._id,
         memberName: newMember.memberName,
+        town: newMember.town,
+        profileText: newMember.profileText,
         accessToken: newMember.accessToken,
         knowTunes: newMember.knowTunes,
         learnTunes: newMember.learnTunes
@@ -238,6 +271,8 @@ app.post('/signin', async (req, res) => {
         response: {
           memberId: databaseMember._id,
           memberName: databaseMember.memberName,
+          town: databaseMember.town,
+          profileText: databaseMember.profileText,
           accessToken: databaseMember.accessToken,
           knowTunes: databaseMember.knowTunes,
           learnTunes: databaseMember.learnTunes
