@@ -9,6 +9,9 @@ import styled from 'styled-components';
 export const Login = () => {
   const [memberName, setMemberName] = useState('');
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [town, setTown] = useState('');
+
   const [mode, setMode] = useState('signin');
 
   const accessToken = useSelector((store) => store.member.accessToken);
@@ -33,7 +36,7 @@ export const Login = () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ memberName, password })
+    body: JSON.stringify({ memberName, password, email, town })
   };
 
   // Fetching all the member info
@@ -48,7 +51,8 @@ export const Login = () => {
             dispatch(member.actions.setAccessToken(data.response.accessToken));
             dispatch(member.actions.setKnowTunes(data.response.knowTunes));
             dispatch(member.actions.setLearnTunes(data.response.learnTunes));
-            dispatch(member.actions.setMember(data.response));
+            dispatch(member.actions.setEmail(data.response.email));
+            dispatch(member.actions.setTown(data.response.town));
           });
         } else {
           batch(() => {
@@ -57,7 +61,8 @@ export const Login = () => {
             dispatch(member.actions.setAccessToken(null));
             dispatch(member.actions.setKnowTunes(null));
             dispatch(member.actions.setLearnTunes(null));
-            /* dispatch(member.actions.setMember(null)); */
+            dispatch(member.actions.setEmail(null));
+            dispatch(member.actions.setTown(null));
           });
         }
       });
@@ -93,31 +98,59 @@ export const Login = () => {
         checked={mode === 'signup'}
         onChange={() => setMode('signup')}></input>
       <Div>
-        <form onSubmit={onFormSubmit}>
-          <input
-            id="name"
-            type="text"
-            placeholder="Name"
-            value={memberName}
-            onChange={(event) => setMemberName(event.target.value)}></input>
+        {mode === 'signup' && (
+          <form onSubmit={onFormSubmit}>
+            <input
+              id="name"
+              type="text"
+              placeholder="Name"
+              value={memberName}
+              onChange={(event) => setMemberName(event.target.value)}></input>
 
-          {/* <label htmlFor="email">Email:</label>
-      <input
-        id="email"
-        type="email"
-        placeholder="Email"
-        value={memberEmail}
-        onChange={(event) => setMemberEmail(event.target.value)}></input> */}
+            <input
+              id="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}></input>
 
-          <input
-            id="password"
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}></input>
+            <input
+              id="town"
+              type="text"
+              placeholder="In which town do you live?"
+              value={town}
+              onChange={(event) => setTown(event.target.value)}></input>
 
-          <button type="submit">Login</button>
-        </form>
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}></input>
+
+            <button type="submit">Sign Up!</button>
+          </form>
+        )}
+
+        {mode === 'signin' && (
+          <form onSubmit={onFormSubmit}>
+            <input
+              id="name"
+              type="text"
+              placeholder="Name"
+              value={memberName}
+              onChange={(event) => setMemberName(event.target.value)}></input>
+
+            <input
+              id="password"
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}></input>
+
+            <button type="submit">Login</button>
+          </form>
+        )}
       </Div>
     </>
   );
