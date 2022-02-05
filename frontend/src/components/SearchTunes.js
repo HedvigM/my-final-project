@@ -15,8 +15,8 @@ export const SearchTunes = () => {
    */
   const memberId = useSelector((store) => store.member.memberId);
   /*  const member = useSelector((store) => store.member.member); */
-  const learnTunes = useSelector((store) => store.member.member.learnTunes);
-  const knowTunes = useSelector((store) => store.member.member.knowTunes);
+  const learnTunes = useSelector((store) => store.member.learnTunes);
+  const knowTunes = useSelector((store) => store.member.knowTunes);
 
   const { tune } = useParams();
   const dispatch = useDispatch();
@@ -48,25 +48,26 @@ export const SearchTunes = () => {
   const AddKnowTune = async (tuneId) => {
     fetch(KNOW_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
-      .then((data) => {
-        console.log('DATA:', data);
+      .then((data) =>
         dispatch(
           member.actions.setKnowTunes([
             ...knowTunes,
             ...data.response.knowTunes
           ])
-        );
-        console.log('Vi är här nu!');
-      });
+        )
+      );
   };
-  console.log(knowTunes);
+  console.log(learnTunes);
 
   const AddLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
-      .then((data) => {
-        dispatch(member.actions.setLearnTunes(data.response.learnTunes));
-      });
+      .then((data) =>
+        member.actions.setLearnTunes([
+          ...learnTunes,
+          ...data.response.learnTunes
+        ])
+      );
   };
 
   return (
