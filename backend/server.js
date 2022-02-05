@@ -10,16 +10,13 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const MemberSchema = new mongoose.Schema({
+  email: {
+    type: String
+  },
   memberName: {
     type: String,
     unique: true,
     required: true
-  },
-  town: {
-    type: String
-  },
-  profileText: {
-    type: String
   },
   password: {
     type: String,
@@ -38,7 +35,13 @@ const MemberSchema = new mongoose.Schema({
     {
       type: Number
     }
-  ]
+  ],
+  town: {
+    type: String
+  },
+  profileText: {
+    type: String
+  }
 });
 /* Update with town and a description (like a profile text). */
 
@@ -73,6 +76,22 @@ app.use((req, res, next) => {
   }
 });
 
+// checking if user is logged in
+const authenticateMember = async (req, res, next) => {
+  const accessToken = req.header('Authorization');
+
+  try {
+    const member = await Member.findOne({ accessToken });
+    if (member) {
+      next();
+    } else {
+      res.status(401).json({ response: 'Please, log in', success: false });
+    }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+};
+
 app.get('/endpoints', (req, res) => {
   res.send(listEndpoints(app));
 });
@@ -82,6 +101,7 @@ app.get('/', (req, res) => {
 });
 
 // authenticateUser function is needed...
+
 app.get('/members', async (req, res) => {
   const members = await Member.find({}).limit(20).exec();
   res.status(200).json({ response: members, success: true });
@@ -102,8 +122,9 @@ app.get('/member/:id', async (req, res) => {
   }
 });
 
-app.patch('/member/:memberId/town/:town', async (req, res) => {
+/* app.patch('/member/:memberId/town/:town', async (req, res) => {
   const { memberId, town } = req.params;
+  const { memberName, password } = req.body;
   try {
     const queriedMember = await Member.findById(memberId);
 
@@ -130,7 +151,7 @@ app.patch('/member/:memberId/town/:town', async (req, res) => {
   } catch (error) {
     res.status(400).json({ response: error, success: false });
   }
-});
+}); */
 
 /* POPULATE */
 /* Gör så att man bara kan följa en användare en gång... */
@@ -284,6 +305,16 @@ app.post('/signin', async (req, res) => {
         .status(401)
         .json({ response: 'Name and password dont match', success: false });
     }
+  } catch (error) {
+    res.status(400).json({ response: error, success: false });
+  }
+});
+
+app.delete('/delete/member/:memberId', async (req, res) => {
+  const { memberId } = req.params;
+  try {
+    await Member.findByIdAndDelete(memberId);
+    res.status(200).json({ success: true });
   } catch (error) {
     res.status(400).json({ response: error, success: false });
   }
