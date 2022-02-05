@@ -19,3 +19,5 @@ export const LEARN_TUNE_URL = (memberId, slug) =>
 
 export const FOLLOW_URL = (memberId, slug) =>
   `${BASE_URL}/following/${memberId}/followed/${slug}`;
+
+export const DELETE = (memberId) => `${BASE_URL}/delete/member/${memberId}`;
