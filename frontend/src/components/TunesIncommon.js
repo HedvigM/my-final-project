@@ -6,10 +6,10 @@ import { API_URL, TUNE_URL } from '../utils/url';
 export const TunesIncommon = (member) => {
   const [list, setList] = useState({});
   const [commonTunes, setCommonTunes] = useState([]);
-  const [tuneNames, setTuneNames] = useState({});
+  const [tuneNames, setTuneNames] = useState([]);
   const detailedMember = member.member;
 
-  const LoggedInMember = useSelector((store) => store.member.member);
+  const LoggedInMember = useSelector((store) => store.member.knowTunes);
 
   useEffect(() => {
     /* setLoading(true); */
@@ -24,9 +24,9 @@ export const TunesIncommon = (member) => {
   }, [detailedMember]);
 
   useEffect(() => {
-    if (LoggedInMember.knowTunes && list.knowTunes) {
+    if (LoggedInMember && list.knowTunes) {
       const commonTunes = [];
-      LoggedInMember.knowTunes.forEach((tuneId) => {
+      LoggedInMember.forEach((tuneId) => {
         if (list.knowTunes.includes(tuneId)) {
           commonTunes.push(tuneId);
         }
@@ -50,13 +50,12 @@ export const TunesIncommon = (member) => {
   } */
 
   /* if (!loading) { */
-
   return (
     <Container>
       <List>
         <h1>Me and {list.memberName} have this tunes in common: </h1>
-        {tuneNames.map((item) => (
-          <p>{item}</p>
+        {tuneNames.map((item, index) => (
+          <p key={index}>{item}</p>
         ))}
       </List>
     </Container>

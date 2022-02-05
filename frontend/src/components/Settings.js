@@ -13,15 +13,10 @@ export const Settings = () => {
   const navigate = useNavigate();
 
   const accessToken = useSelector((store) => store.member.accessToken);
-  /*
-  const memberId = useSelector((store) => store.member.memberId);
-  const memberName = useSelector((store) => store.member.memberName);
-  const knowTunes = useSelector((store) => store.member.knowTunes);
-  const learnTunes = useSelector((store) => store.member.learnTunes);
-  const relations = useSelector((store) => store.relations.relations);
-*/
+  console.log('accessToken', accessToken);
 
   useEffect(() => {
+    console.log('useeffect settings');
     if (!accessToken) {
       navigate('/login');
     }
@@ -35,6 +30,8 @@ export const Settings = () => {
       dispatch(member.actions.setMember(null));
       dispatch(member.actions.setKnowTunes([]));
       dispatch(member.actions.setLearnTunes([]));
+      dispatch(member.actions.setMember(null));
+      dispatch(member.actions.setRelations(null));
       dispatch(member.actions.setMember(null));
       dispatch(relations.actions.setRelations(null));
     });

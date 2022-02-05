@@ -48,7 +48,7 @@ export const Login = () => {
             dispatch(member.actions.setAccessToken(data.response.accessToken));
             dispatch(member.actions.setKnowTunes(data.response.knowTunes));
             dispatch(member.actions.setLearnTunes(data.response.learnTunes));
-            /* dispatch(member.actions.setMember(data.response)); */
+            dispatch(member.actions.setMember(data.response));
           });
         } else {
           batch(() => {
