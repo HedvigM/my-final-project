@@ -6,6 +6,9 @@ export const member = createSlice({
     member: null,
     memberId: null,
     memberName: null,
+    email: null,
+    town: null,
+    profileText: null,
     knowTunes: [],
     learnTunes: [],
     accessToken: null
@@ -19,6 +22,15 @@ export const member = createSlice({
     },
     setMemberName: (store, action) => {
       store.memberName = action.payload;
+    },
+    setEmail: (store, action) => {
+      store.email = action.payload;
+    },
+    setTown: (store, action) => {
+      store.town = action.payload;
+    },
+    setProfileText: (store, action) => {
+      store.memberId = action.payload;
     },
     setKnowTunes: (store, action) => {
       store.knowTunes = action.payload;
