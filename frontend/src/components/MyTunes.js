@@ -69,14 +69,14 @@ export const MyTunes = () => {
       <Container>
         <div>
           <h1>Tunes I know:</h1>
-          {know.map((item) => (
-            <p key={item}>{item}</p>
+          {know.map((item, index) => (
+            <p key={index}>{item}</p>
           ))}
         </div>
         <div>
           <h1>Tunes I want to learn:</h1>
-          {learn.map((item) => (
-            <p key={item}>{item}</p>
+          {learn.map((item, index) => (
+            <p key={index}>{item}</p>
           ))}
         </div>
       </Container>
