@@ -65,10 +65,10 @@ const App = () => {
               <Route path="/login" element={<LoginScreen />} />
 
               <Route path="/search-members" element={<SearchMemberScreen />} />
-              <Route
+              {/* <Route
                 path="/search-members-two"
                 element={<SearchMemberScreenTwo />}
-              />
+              /> */}
 
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
               <Route path="/details/:tune" element={<DetailedTunesScreen />} />
