@@ -241,7 +241,7 @@ app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
-  const { memberName, password } = req.body;
+  const { memberName, password, email, town } = req.body;
 
   // I will need to explain this more to my future self.
   try {
@@ -253,13 +253,16 @@ app.post('/signup', async (req, res) => {
 
     const newMember = await new Member({
       memberName,
-      password: bcrypt.hashSync(password, salt)
+      password: bcrypt.hashSync(password, salt),
+      email,
+      town
     }).save();
 
     res.status(201).json({
       response: {
         memberId: newMember._id,
         memberName: newMember.memberName,
+        email: newMember.email,
         town: newMember.town,
         profileText: newMember.profileText,
         accessToken: newMember.accessToken,
@@ -292,6 +295,7 @@ app.post('/signin', async (req, res) => {
         response: {
           memberId: databaseMember._id,
           memberName: databaseMember.memberName,
+          email: databaseMember.email,
           town: databaseMember.town,
           profileText: databaseMember.profileText,
           accessToken: databaseMember.accessToken,
