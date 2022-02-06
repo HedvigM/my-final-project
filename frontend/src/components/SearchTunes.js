@@ -84,6 +84,59 @@ export const SearchTunes = () => {
         )
       );
   };
+  const searchedTunes = () =>
+    searchList.map((item, index) => (
+      <Tune key={index}>
+        <Link to={`/details/${item.id}`}>
+          <p>
+            {item.name}, ({item.type})
+          </p>
+        </Link>
+
+        {learnTunes.includes(item.id) ? (
+          <p>I have this tune in my "want to learn pile"</p>
+        ) : (
+          <button onClick={() => AddLearnTune(item.id)}>
+            I want to learn this tune!
+          </button>
+        )}
+
+        {knowTunes.includes(item.id) ? (
+          <p>I have this tune in my "tunes i know pile"</p>
+        ) : (
+          <button onClick={() => AddKnowTune(item.id)}>
+            I know this tune!
+          </button>
+        )}
+      </Tune>
+    ));
+
+  const popularTunes = () =>
+    popularList.map((item, index) => (
+      <Tune key={index}>
+        {/* The link is a part of the route, not a class name */}
+        <Link to={`/details/${item.id}`}>
+          <p>
+            {item.name}, ({item.type})
+          </p>
+        </Link>
+
+        {learnTunes.includes(item.id) ? (
+          <p>I have this tune in my "want to learn pile"</p>
+        ) : (
+          <button onClick={() => AddLearnTune(item.id)}>
+            I want to learn this tune!
+          </button>
+        )}
+        {knowTunes.includes(item.id) ? (
+          <p>I have this tune in my "tunes i know pile"</p>
+        ) : (
+          <button onClick={() => AddKnowTune(item.id)}>
+            I know this tune!
+          </button>
+        )}
+      </Tune>
+    ));
 
   return (
     <div>
@@ -100,39 +153,8 @@ export const SearchTunes = () => {
           <button onClick={OnSearchHandle}>Search!</button>
         </Container>
       </Div>
+      {value ? searchedTunes() : popularTunes()}
 
-      {searchList &&
-        searchList.map((item) => (
-          <>
-            <p key={item.id}>{item.name}</p>
-          </>
-        ))}
-
-      {popularList.map((item, index) => (
-        <Tune key={index}>
-          {/* The link is a part of the route, not a class name */}
-          <Link to={`/details/${item.id}`}>
-            <p>
-              {item.name}, ({item.type})
-            </p>
-          </Link>
-
-          {learnTunes.includes(item.id) ? (
-            <p>I have this tune in my "want to learn pile"</p>
-          ) : (
-            <button onClick={() => AddLearnTune(item.id)}>
-              I want to learn this tune!
-            </button>
-          )}
-          {knowTunes.includes(item.id) ? (
-            <p>I have this tune in my "tunes i know pile"</p>
-          ) : (
-            <button onClick={() => AddKnowTune(item.id)}>
-              I know this tune!
-            </button>
-          )}
-        </Tune>
-      ))}
       <button onClick={previousPage}>Previous page</button>
       {pageCount}
       <button onClick={nextPage}>Next page</button>
