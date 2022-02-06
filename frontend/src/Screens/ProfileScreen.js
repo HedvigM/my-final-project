@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { Profile } from '../components/Profile';
 import { Following } from '../components/Following';
 import { MyTunes } from '../components/MyTunes';
@@ -63,14 +63,12 @@ const InnerContainer = styled.div`
   margin: 0 auto;
   height: 100%;
   /* background-color: #ff885e; */
-  /* border: 3px solid red;*/
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 200px;
-    max-width: 300px;
-  }
+  border: 1px solid blue;
 
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {
+    min-width: 200px;
+    max-width: 300px;
   }
 
   /* Liten Dator - */
