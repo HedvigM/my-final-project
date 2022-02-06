@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, batch } from 'react-redux';
+import { DELETE } from '../utils/url';
 import { member } from '../reducers/member';
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
-import { Profile } from '../components/Profile';
-import { Header } from '../components/Header';
-import { Footer } from '../components/Footer';
+import swal from 'sweetalert';
 
 export const Settings = () => {
   const dispatch = useDispatch();
@@ -14,6 +13,11 @@ export const Settings = () => {
 
   const accessToken = useSelector((store) => store.member.accessToken);
   console.log('accessToken', accessToken);
+  const memberName = useSelector((store) => store.member.memberName);
+  const email = useSelector((store) => store.member.email);
+  const town = useSelector((store) => store.member.town);
+  const profileText = useSelector((store) => store.member.profileText);
+  const memberId = useSelector((store) => store.member.memberId);
 
   useEffect(() => {
     console.log('useeffect settings');
@@ -37,40 +41,79 @@ export const Settings = () => {
     });
   };
 
+  const onDelete = (memberId) => {
+    swal({
+      title: 'Are you sure?',
+      text: 'Once deleted, you will not be able to recover this imaginary file!',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal('Poof! Your profile file has been deleted!', {
+          icon: 'success'
+        });
+        deleteFetch(memberId);
+      } else {
+        swal('Your profile is safe!');
+      }
+    });
+  };
+
+  const options = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  };
+
+  const deleteFetch = async (memberId) => {
+    fetch(DELETE(memberId), options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          batch(() => {
+            dispatch(member.actions.setMemberId(null));
+            dispatch(member.actions.setMemberName(null));
+            dispatch(member.actions.setAccessToken(null));
+            dispatch(member.actions.setKnowTunes(null));
+            dispatch(member.actions.setLearnTunes(null));
+            dispatch(member.actions.setMember(null));
+            dispatch(relations.actions.setRelations(null));
+          });
+        }
+      });
+  };
+
   return (
-    <Container>
-      <Header />
-      <InnerContainer>
-        <Profile />
-      </InnerContainer>
-      <Img>
-        <button onClick={logout}>Log out</button>
-      </Img>
-      <Footer />
-    </Container>
+    <>
+      <h1>{memberName}</h1>
+      <h2>{town}</h2>
+      <input
+        id="town"
+        type="text"
+        placeholder="In which town do you live?"
+        value={town}
+        /* onChange={(event) => setTown(event.target.value)} */
+      ></input>
+      <h2>{email}</h2>
+      <input
+        id="email"
+        type="email"
+        placeholder="Email"
+        value={email}
+        /* onChange={(event) => setEmail(event.target.value)} */
+      ></input>
+      <p>{profileText}</p>
+      <button onClick={logout}>Log out</button>
+      <Delete
+        onClick={() => {
+          onDelete(memberId);
+        }}>
+        Delete account
+      </Delete>
+    </>
   );
 };
-const Img = styled.div`
-  background-image: url('./yan-ming.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-`;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-`;
-const InnerContainer = styled.div`
-  min-width: 334px;
-  max-width: 500px;
-  margin: 0 auto;
-  height: 100%;
-  /* background-color: #ff885e; */
-  /* border: 3px solid red;*/
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 200px;
-    max-width: 300px;
-  }
+const Delete = styled.button`
+  color: red;
 `;

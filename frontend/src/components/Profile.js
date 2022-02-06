@@ -1,68 +1,15 @@
 import React from 'react';
-import { useSelector, useDispatch, batch } from 'react-redux';
-import { member } from '../reducers/member';
-import { relations } from '../reducers/relations';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import swal from 'sweetalert';
-import { DELETE } from '../utils/url';
 import md5 from 'md5';
 
 export const Profile = () => {
   const memberName = useSelector((store) => store.member.memberName);
-  const memberId = useSelector((store) => store.member.memberId);
-  const email = useSelector((store) => store.member.email);
 
-  const dispatch = useDispatch();
+  const email = useSelector((store) => store.member.email);
+  const town = useSelector((store) => store.member.town);
 
   const hashedEmail = md5(email);
-
-  const onDelete = (memberId) => {
-    swal({
-      title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this imaginary file!',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true
-    }).then((willDelete) => {
-      if (willDelete) {
-        swal('Poof! Your profile file has been deleted!', {
-          icon: 'success'
-        });
-        deleteFetch(memberId);
-      } else {
-        swal('Your profile is safe!');
-      }
-    });
-  };
-  const options = {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' }
-  };
-
-  const deleteFetch = async (memberId) => {
-    fetch(DELETE(memberId), options)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          batch(() => {
-            dispatch(member.actions.setMemberId(null));
-            dispatch(member.actions.setMemberName(null));
-            dispatch(member.actions.setAccessToken(null));
-            dispatch(member.actions.setKnowTunes(null));
-            dispatch(member.actions.setLearnTunes(null));
-            dispatch(member.actions.setMember(null));
-            dispatch(relations.actions.setRelations(null));
-          });
-        }
-      });
-  };
-
-  /*
-  const options = {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' }
-  };
-  */
 
   const onSettingClick = (memberId) => {
     console.log('hej');
@@ -74,8 +21,7 @@ export const Profile = () => {
         <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
         <div>
           <h1>{memberName}</h1>
-          <h2>Uppsala</h2>
-          <Settings onClick={onSettingClick}>Change the town</Settings>
+          <h2>{town}</h2>
         </div>
       </PicNameCity>
 
@@ -86,21 +32,9 @@ export const Profile = () => {
         cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
       </p>
       <button>Change the text</button>
-      <Delete
-        onClick={() => {
-          onDelete(memberId);
-        }}>
-        Delete account
-      </Delete>
     </>
   );
 };
-
-const Settings = styled.button``;
-
-const Delete = styled.button`
-  color: red;
-`;
 
 const Img = styled.img`
   height: 150px;
