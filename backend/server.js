@@ -173,6 +173,10 @@ app.post('/following/:following/followed/:followed', async (req, res) => {
   }
 });
 
+// It would be nice to implement this.
+/* .populate('following', 'memberName')
+.populate('followed', 'memberName') */
+
 app.get('/relations', async (req, res) => {
   const relations = await Relations.find({}).select('-__v').exec();
   res.status(200).json({ response: relations, success: true });
