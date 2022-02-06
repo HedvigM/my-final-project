@@ -17,15 +17,15 @@ export const SearchMembers = () => {
   let actualFollowing = [];
   let actualFollowed = [];
 
-  following.map((item) => {
+  following.forEach((item) => {
     // if the logged in user is followed -> push the on that is following.
     if (item.followed === memberId) {
-      return actualFollowing.push(item.following);
+      actualFollowing.push(item.following);
     }
 
     // if the logged in user is following -> push the one that the user is following.
     if (item.following === memberId) {
-      return actualFollowed.push(item.followed);
+      actualFollowed.push(item.followed);
     }
   });
 
@@ -54,6 +54,11 @@ export const SearchMembers = () => {
       );
   };
 
+  list.filter(
+    (item) =>
+      !value || item.memberName.toLowerCase().includes(value.toLowerCase())
+  );
+
   return (
     <div>
       <Div>
@@ -70,12 +75,11 @@ export const SearchMembers = () => {
 
       <h1>Members</h1>
       {list
-        .filter((item) => {
-          if (!value) return true;
-          if (item.memberName.toLowerCase().includes(value.toLowerCase())) {
-            return true;
-          }
-        })
+        .filter(
+          (item) =>
+            !value ||
+            item.memberName.toLowerCase().includes(value.toLowerCase())
+        )
         .map((item, index) => (
           <Relations key={index}>
             {/* {item.memberName !== member.member.memberName &&} */}
