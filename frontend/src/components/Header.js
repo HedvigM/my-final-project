@@ -54,7 +54,7 @@ const Ic = styled.div`
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {
     .item-1 {
-      grid-column: 2/5;
+      grid-column: 2/1;
     }
     .item-2 {
       grid-column: 3/5;
