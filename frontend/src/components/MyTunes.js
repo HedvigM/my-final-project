@@ -53,23 +53,30 @@ export const MyTunes = () => {
   if (!loading) {
     return (
       <Container>
-        <div>
-          <h1>Tunes I know:</h1>
-          {know.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
-        </div>
-        <div>
-          <h1>Tunes I want to learn:</h1>
-          {learn.map((item, index) => (
-            <p key={index}>{item}</p>
-          ))}
-        </div>
+        <h1>Tunes I know:</h1>
+        {know.map((item, index) => (
+          <p key={index}>{item}</p>
+        ))}
+
+        <h1>Tunes I want to learn:</h1>
+        {learn.map((item, index) => (
+          <p key={index}>{item}</p>
+        ))}
       </Container>
     );
   }
 };
 
-const Container = styled.ol`
+const Container = styled.div`
   color: white;
+  padding: 16px 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+  h1 {
+    font-size: 1.17em;
+    margin: 0px;
+  }
+  p {
+  }
 `;

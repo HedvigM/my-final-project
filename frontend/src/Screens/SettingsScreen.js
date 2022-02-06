@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Settings } from '../components/Settings';
-import { MyTunes } from '../components/MyTunes';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 

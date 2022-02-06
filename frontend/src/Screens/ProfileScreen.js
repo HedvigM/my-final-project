@@ -27,9 +27,11 @@ export const ProfileScreen = () => {
         <Following />
       </InnerContainer>
       <Img>
-        <InnerContainer>
-          <MyTunes />
-        </InnerContainer>
+        <div className="overlay">
+          <InnerContainer>
+            <MyTunes />
+          </InnerContainer>
+        </div>
       </Img>
       <Footer />
     </Container>
@@ -40,6 +42,13 @@ const Img = styled.div`
   background-image: url('./yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+
+  .overlay {
+    background-color: #04040469;
+
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Container = styled.div`

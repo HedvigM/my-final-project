@@ -11,37 +11,59 @@ export const Profile = () => {
 
   const hashedEmail = md5(email);
 
-  const onSettingClick = (memberId) => {
-    console.log('hej');
-  };
-
   return (
     <>
       <PicNameCity>
         <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
-        <div>
+        <NameCity>
           <h1>{memberName}</h1>
           <h2>{town}</h2>
-        </div>
+        </NameCity>
       </PicNameCity>
-
-      <p>
-        Soufflé gingerbread topping jujubes lemon drops tart jelly-o lollipop
-        sugar plum. Muffin sweet roll croissant fruitcake candy canes tart oat
-        sweet roll liquorice. Gingerbread liquorice oat cake muffin fruitcake.
-        cake powder. Icing soufflé biscuit chupa chups sweet fruitcake donut
-      </p>
-      <button>Change the text</button>
+      <Text>
+        <h3>Profile Text</h3>
+        <p>
+          Soufflé gingerbread topping jujubes lemon drops tart jelly-o lollipop
+          sugar plum. Muffin sweet roll croissant fruitcake candy canes tart
+          oat.
+        </p>
+      </Text>
     </>
   );
 };
 
+const Text = styled.div`
+  h3 {
+    margin-bottom: 0px;
+    margin-top: 40px;
+  }
+  p {
+    margin-top: 5px;
+  }
+`;
+
+const NameCity = styled.div`
+  margin: 5px;
+
+  h1 {
+    margin-bottom: 5px;
+  }
+
+  h2 {
+    margin-top: 5px;
+  }
+`;
+
 const Img = styled.img`
-  height: 150px;
+  height: 100px;
   border: 1px solid black;
   border-radius: 50%;
+  align-self: center;
 `;
 
 const PicNameCity = styled.div`
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
 `;
