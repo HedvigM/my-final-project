@@ -18,7 +18,6 @@ import { LoginScreen } from './Screens/LoginScreen';
 import { ProfileScreen } from './Screens/ProfileScreen';
 import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
 import { SearchMemberScreen } from './Screens/SearchMemberScreen';
-import { SearchMemberScreenTwo } from './Screens/SearchMemberScreenTwo';
 import { SearchTuneScreen } from './Screens/SearchTuneScreen';
 import { DetailedTunesScreen } from './Screens/DetailedTunesScreen';
 import { DetailedMemberScreen } from './Screens/DetailedMemberScreen';

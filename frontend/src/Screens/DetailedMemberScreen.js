@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Profile } from '../components/Profile';
-import { DetailMember } from '../components/DetailMember';
+
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { TunesIncommon } from '../components/TunesIncommon';
@@ -32,7 +32,7 @@ export const DetailedMemberScreen = () => {
           <TunesIncommon member={member} />
         </InnerContainer>
       </Img>
-      <DetailMember member={member} />
+
       <Footer />
     </Container>
   );

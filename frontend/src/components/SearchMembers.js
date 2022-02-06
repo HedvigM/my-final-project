@@ -5,7 +5,6 @@ import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
-import { member } from '../reducers/member';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);

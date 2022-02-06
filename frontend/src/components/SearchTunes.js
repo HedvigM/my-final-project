@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch, batch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { member } from '../reducers/member';
 import styled from 'styled-components';
 import {
@@ -21,10 +21,7 @@ export const SearchTunes = () => {
   const learnTunes = useSelector((store) => store.member.learnTunes);
   const knowTunes = useSelector((store) => store.member.knowTunes);
 
-  const { tune } = useParams();
   const dispatch = useDispatch();
-
-  console.log(typeof toString(value));
 
   const OnSearchHandle = async () => {
     fetch(SEARCH_TUNE(value))

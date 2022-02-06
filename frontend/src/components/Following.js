@@ -5,7 +5,6 @@ import { API_URL } from '../utils/url';
 
 export const Following = () => {
   const [followingMember, setFollowingMember] = useState([]);
-  const relations = useSelector((store) => store.relations.following);
   const memberId = useSelector((store) => store.member.memberId);
 
   useEffect(() => {

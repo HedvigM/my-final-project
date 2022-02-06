@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector, useDispatch, batch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { member } from '../reducers/member';
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
@@ -11,24 +10,11 @@ import md5 from 'md5';
 export const Profile = () => {
   const memberName = useSelector((store) => store.member.memberName);
   const memberId = useSelector((store) => store.member.memberId);
-  const accessToken = useSelector((store) => store.member.accessToken);
   const email = useSelector((store) => store.member.email);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  // It said to write this line in the documentation, but it looks like it overwrites the import.
-  var md5 = require('md5');
 
   const hashedEmail = md5(email);
-
-  /*
-  useEffect(() => {
-    if (accessToken) {
-      navigate('/');
-    }
-  }, [accessToken, navigate]);
-*/
 
   const onDelete = (memberId) => {
     swal({

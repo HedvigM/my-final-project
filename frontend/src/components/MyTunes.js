@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { API_URL, TUNE_URL } from '../utils/url';
+import { TUNE_URL } from '../utils/url';
 
 export const MyTunes = () => {
   const [know, setKnow] = useState([]);
@@ -69,8 +69,6 @@ export const MyTunes = () => {
     );
   }
 };
-
-const List = styled.div``;
 
 const Container = styled.ol`
   color: white;

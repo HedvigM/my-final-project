@@ -7,7 +7,6 @@ import { API_URL } from '../utils/url';
 import { useSelector } from 'react-redux';
 
 export const DetailTune = (tune) => {
-  const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const detailedTune = tune.tune;
   const [detailedTuneAsNumber, setDetailedTuneAsNumber] = useState([]);
@@ -16,8 +15,6 @@ export const DetailTune = (tune) => {
   const [abc, setAbc] = useState(
     '|:E2BE dEBE|E2BE AFDF|E2BE dEBE|BABc dAFD:|!d2fd c2ec|defg afge|d2fd c2ec|BABc dAFA|!d2fd c2ec|defg afge|afge fdec|BABc dAFD|'
   );
-
-  const knowTunes = useSelector((store) => store.member.knowTunes);
 
   // fetching all the members from the database.
   useEffect(() => {
@@ -29,8 +26,6 @@ export const DetailTune = (tune) => {
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-
     Promise.all(
       fetch(TUNE_URL(detailedTune))
         .then((res) => res.json())
@@ -39,7 +34,6 @@ export const DetailTune = (tune) => {
           setAbc(data.settings[0].abc);
           setKey(data.settings[0].key);
           setDetailedTuneAsNumber(data.id);
-          setLoading(false);
         })
     );
   }, [detailedTune]);
