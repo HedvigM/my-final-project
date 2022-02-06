@@ -16,7 +16,6 @@ import { NotFound } from './components/NotFound';
 
 import { LoginScreen } from './Screens/LoginScreen';
 import { ProfileScreen } from './Screens/ProfileScreen';
-import { ProfileScreenTwo } from './Screens/ProfileScreenTwo';
 import { SearchMemberScreen } from './Screens/SearchMemberScreen';
 import { SearchTuneScreen } from './Screens/SearchTuneScreen';
 import { DetailedTunesScreen } from './Screens/DetailedTunesScreen';
@@ -59,15 +58,10 @@ const App = () => {
           <div>
             <Routes>
               <Route path="/" element={<ProfileScreen />} />
-              <Route path="/two" element={<ProfileScreenTwo />} />
 
               <Route path="/login" element={<LoginScreen />} />
 
               <Route path="/search-members" element={<SearchMemberScreen />} />
-              {/* <Route
-                path="/search-members-two"
-                element={<SearchMemberScreenTwo />}
-              /> */}
 
               <Route path="/search-tunes" element={<SearchTuneScreen />} />
               <Route path="/details/:tune" element={<DetailedTunesScreen />} />
