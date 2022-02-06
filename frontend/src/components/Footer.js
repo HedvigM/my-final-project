@@ -11,17 +11,18 @@ library.add(fab);
 export const Footer = () => {
   return (
     <StyledFooter>
-      <Link to={'/about'}>
-        {' '}
-        <h3>About</h3>
-      </Link>
-      <Link to={'/settings'}>
-        {' '}
-        <h3>Settings</h3>
-      </Link>
+      <Text>
+        <Link to={'/about'}>
+          {' '}
+          <h3>About</h3>
+        </Link>
+        <Link to={'/settings'}>
+          {' '}
+          <h3>Settings</h3>
+        </Link>
+      </Text>
+
       <h1>
-        Hedvig Mejstedt
-        <br />
         <Icons>
           <Icon
             href="https://github.com/HedvigM"
@@ -60,6 +61,14 @@ export const Footer = () => {
     </StyledFooter>
   );
 };
+const Text = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  h3 {
+    margin: 5px;
+  }
+`;
 
 const Icon = styled.a`
   margin: 5px 5px;
@@ -84,19 +93,37 @@ const Icons = styled.div`
 `;
 
 const StyledFooter = styled.footer`
-  a {
+a {
+  color: black;
+  font-size: 0.8em;
+  text-decoration: none;
+}
+a:hover {
+  /* color taken from the picture on the site */
+  color: #2a6d38;
+}
+a:active {
+  color: var(--secondary-color);
+}
+
+  /* Mobil */
+  @media (min-width: 0px) and (max-width: 767px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: var(--main-color);
     color: black;
-    text-decoration: none;
-  }
-  a:hover {
-    /* color taken from the picture on the site */
-    color: #2a6d38;
-  }
-  a:active {
-    color: var(--secondary-color);
   }
 
-  background-color: var(--main-color);
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+  }
+
+  /* Stor Dator - */
+  @media (min-width: 1200px) {
+  }
+
+/*   background-color: var(--main-color);
   text-align: center;
   /*   margin-top: 20px; */
   @media (min-width: 0px) and (max-width: 991px) {
@@ -112,5 +139,5 @@ const StyledFooter = styled.footer`
   @media (min-width: 992px) {
     padding: 30px;
     margin-top: 50px;
-  }
+  } */
 `;
