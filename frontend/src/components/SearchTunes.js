@@ -8,7 +8,7 @@ import {
   LEARN_TUNE_URL,
   SEARCH_TUNE
 } from '../utils/url';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const SearchTunes = () => {
   const [popularList, setPopularList] = useState([]);

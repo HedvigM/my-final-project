@@ -4,8 +4,6 @@ import { TUNE_URL } from '../utils/url';
 import abcjs from 'abcjs';
 import { API_URL } from '../utils/url';
 
-import { useSelector } from 'react-redux';
-
 export const DetailTune = (tune) => {
   const [list, setList] = useState([]);
   const detailedTune = tune.tune;
