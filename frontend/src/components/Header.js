@@ -31,22 +31,6 @@ export const Header = () => {
 const Container = styled.div`
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {
-    /*     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-
-    .item-1 {
-      grid-column: 2 / 3;
-      color: red;
-    }
-    .item-2 {
-      grid-column: 3 / 4;
-      color: green;
-    }
-    .item-3 {
-      grid-column: 4 / 5;
-      color: blue;
-    } */
-
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -61,12 +45,6 @@ const Container = styled.div`
   /* Stor Dator - */
   @media (min-width: 1200px) {
   }
-
-  /*   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: var(--secondary-color);
-  color: white; */
 `;
 
 const Ic = styled.div`
