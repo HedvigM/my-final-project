@@ -8,20 +8,20 @@ export const Header = () => {
       <Ic>
         <Link to={'/'}>
           {' '}
-          <h3>🎻 My tunes</h3>
+          <h3 className="item-1">🎻 My Tunes</h3>
         </Link>
       </Ic>
       <Ic>
         <Link to={'/search-members'}>
           {' '}
-          <h3>🔍 Search Member</h3>
+          <h3 className="item-2">🔍 Member</h3>
         </Link>
       </Ic>
 
       <Ic>
         <Link to={'/search-tunes'}>
           {' '}
-          <h3>🔍 Search Tune</h3>
+          <h3 className="item-3">🔍 Tune</h3>
         </Link>
       </Ic>
     </Container>
@@ -29,6 +29,20 @@ export const Header = () => {
 };
 
 const Container = styled.div`
+  /* Mobil */
+  @media (min-width: 0px) and (max-width: 767px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+  }
+
+  /* Stor Dator - */
+  @media (min-width: 1200px) {
+  }
+
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -37,14 +51,24 @@ const Container = styled.div`
 `;
 
 const Ic = styled.div`
+  /* Mobil */
+  @media (min-width: 0px) and (max-width: 767px) {
+    .item-1 {
+      grid-column: 2/5;
+    }
+    .item-2 {
+      grid-column: 3/5;
+    }
+  }
+
   padding: 10px;
+  border: 1px solid lime;
 
   a {
     color: white;
     text-decoration: none;
   }
   a:hover {
-    /* color taken from the picture on the site */
     color: #2a6d38;
   }
   a:active {

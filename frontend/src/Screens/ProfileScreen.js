@@ -35,6 +35,7 @@ export const ProfileScreen = () => {
     </Container>
   );
 };
+
 const Img = styled.div`
   background-image: url('./yan-ming.jpg');
   background-repeat: no-repeat;
@@ -57,5 +58,17 @@ const InnerContainer = styled.div`
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
+  }
+
+  /* Mobil */
+  @media (min-width: 0px) and (max-width: 767px) {
+  }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+  }
+
+  /* Stor Dator - */
+  @media (min-width: 1200px) {
   }
 `;
