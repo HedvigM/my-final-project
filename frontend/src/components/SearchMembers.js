@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link /* , useParams */ } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
-import { faBorderNone } from '@fortawesome/free-solid-svg-icons';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
@@ -64,15 +63,12 @@ export const SearchMembers = () => {
     <>
       <Green>
         <InnerContainer>
-          {/*  <Container> */}
-          <label>Search for a member</label>
           <input
             type="text"
             value={value}
-            placeholder="Search 👇"
+            placeholder="Search for a member 👇"
             onChange={(event) => setValue(event.target.value)}
           />
-          {/*  </Container> */}
         </InnerContainer>
       </Green>
       <div>
@@ -86,7 +82,6 @@ export const SearchMembers = () => {
             )
             .map((item, index) => (
               <Relations key={index}>
-                {/* {item.memberName !== member.member.memberName &&} */}
                 <LinkStyle to={`/member/${item._id}`}>
                   <p>{item.memberName}</p>
                 </LinkStyle>
@@ -153,8 +148,6 @@ const LinkStyle = styled(Link)`
   justify-self: left;
   align-self: center;
 `;
-
-const Follow = styled.div``;
 
 const Right = styled.div`
   display: grid;
