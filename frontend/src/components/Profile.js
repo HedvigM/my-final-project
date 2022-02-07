@@ -3,14 +3,16 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import md5 from 'md5';
 
-export const Profile = () => {
+// skicka in en prop från profile screen också. så kan jag återanvända koden.
+
+export const Profile = (member) => {
   const memberName = useSelector((store) => store.member.memberName);
 
   const email = useSelector((store) => store.member.email);
   const town = useSelector((store) => store.member.town);
-
+  const detailedMember = member.member;
   const hashedEmail = md5(email);
-
+  console.log(detailedMember);
   return (
     <>
       <PicNameCity>

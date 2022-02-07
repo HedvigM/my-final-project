@@ -25,7 +25,7 @@ export const DetailedMemberScreen = () => {
     <Container>
       <Header />
       <InnerContainer>
-        <Profile />
+        <Profile member={member} />
       </InnerContainer>
       <Img>
         <InnerContainer>
