@@ -14,9 +14,27 @@ export const Profile = (member) => {
   const town = useSelector((store) => store.member.town);
   const detailedId = member.member;
 
-  const hashedEmail = md5(email);
+  /* const hashedEmail = md5(email); */
   const detailedEmail = detailedMember.email;
-  const hashedDetailEmail = md5(detailedEmail);
+
+  // den här blir irriterad när det inte finns ett värde i member...
+
+  /*     const hashedDetailEmail = md5(detailedEmail
+   */
+
+  let profileName;
+  let profileTown;
+  let hashedEmail;
+
+  if (detailedMember) {
+    profileName = detailedMember.memberName;
+    profileTown = detailedMember.town;
+    /*  hashedEmail = md5(detailedEmail); */
+  } else {
+    profileName = memberName;
+    profileTown = town;
+    hashedEmail = md5(email);
+  }
 
   useEffect(() => {
     /* setLoading(true); */
@@ -32,29 +50,13 @@ export const Profile = (member) => {
 
   return (
     <>
-      {detailedMember && (
-        <>
-          <PicNameCity>
-            <Img
-              src={`https://www.gravatar.com/avatar/${hashedDetailEmail}?d=retro`}
-            />
-            <NameCity>
-              <h1>{detailedMember.memberName}</h1>
-              <h2>{detailedMember.town}</h2>
-            </NameCity>
-          </PicNameCity>
-        </>
-      )}
-
-      {!detailedMember && (
-        <PicNameCity>
-          <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
-          <NameCity>
-            <h1>{memberName}</h1>
-            <h2>{town}</h2>
-          </NameCity>
-        </PicNameCity>
-      )}
+      <PicNameCity>
+        <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
+        <NameCity>
+          <h1>{profileName}</h1>
+          <h2>{profileTown}</h2>
+        </NameCity>
+      </PicNameCity>
     </>
   );
 };
