@@ -51,18 +51,43 @@ export const TunesIncommon = (member) => {
 
   /* if (!loading) { */
   return (
-    <Container>
-      <List>
-        <h1>Me and {list.memberName} have this tunes in common: </h1>
-        {tuneNames.map((item, index) => (
-          <p key={index}>{item}</p>
-        ))}
-      </List>
-    </Container>
+    <Div>
+      {tuneNames.length === 0 && (
+        <div className="noTunes">
+          <h1>Our common tunes are: </h1>
+          <h2>¯\_(ツ)_/¯</h2>
+          <p>We dont have any tunes in common yet...</p>
+        </div>
+      )}
+      <h1>Our common tunes are: </h1>
+      {tuneNames.map((item, index) => (
+        <>
+          <p key={index}> {item}</p>
+        </>
+      ))}
+    </Div>
   );
   /* } */
 };
 
-const List = styled.div``;
+const Div = styled.div`
+  h1,
+  h2,
+  p {
+    color: white;
+    margin: 0px;
+  }
+  h1 {
+    font-size: 1.17em;
+    margin: 0px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+  }
+  p {
+    padding-bottom: 20px;
+  }
 
-const Container = styled.ol``;
+  .noTunes {
+    text-align: center;
+  }
+`;

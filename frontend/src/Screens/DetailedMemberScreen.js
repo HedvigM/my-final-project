@@ -28,9 +28,11 @@ export const DetailedMemberScreen = () => {
         <Profile member={member} />
       </InnerContainer>
       <Img>
-        <InnerContainer>
-          <TunesIncommon member={member} />
-        </InnerContainer>
+        <div className="overlay">
+          <InnerContainer>
+            <TunesIncommon member={member} />
+          </InnerContainer>
+        </div>
       </Img>
 
       <Footer />
@@ -38,10 +40,24 @@ export const DetailedMemberScreen = () => {
   );
 };
 
+/* const Img = styled.div`
+  background-image: url('./yan-ming.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+`; */
 const Img = styled.div`
   background-image: url('./yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  margin: 0px;
+
+  .overlay {
+    background-color: #04040469;
+
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const Container = styled.div`
