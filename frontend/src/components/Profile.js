@@ -1,48 +1,63 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { API_URL } from '../utils/url';
 import styled from 'styled-components';
 import md5 from 'md5';
 
 // skicka in en prop från profile screen också. så kan jag återanvända koden.
 
 export const Profile = (member) => {
+  const [detailedMember, setDetailedMember] = useState({});
   const memberName = useSelector((store) => store.member.memberName);
 
   const email = useSelector((store) => store.member.email);
   const town = useSelector((store) => store.member.town);
-  const detailedMember = member.member;
+  const detailedId = member.member;
+
   const hashedEmail = md5(email);
-  console.log(detailedMember);
+  const detailedEmail = detailedMember.email;
+  const hashedDetailEmail = md5(detailedEmail);
+
+  useEffect(() => {
+    /* setLoading(true); */
+
+    fetch(API_URL(`member/${detailedId}`))
+      .then((res) => res.json())
+      .then((data) => {
+        setDetailedMember(data.response);
+
+        /*  setLoading(false); */
+      });
+  }, [detailedId]);
+
   return (
     <>
-      <PicNameCity>
-        <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
-        <NameCity>
-          <h1>{memberName}</h1>
-          <h2>{town}</h2>
-        </NameCity>
-      </PicNameCity>
-      <Text>
-        <h3>Profile Text</h3>
-        <p>
-          Soufflé gingerbread topping jujubes lemon drops tart jelly-o lollipop
-          sugar plum. Muffin sweet roll croissant fruitcake candy canes tart
-          oat.
-        </p>
-      </Text>
+      {detailedMember && (
+        <>
+          <PicNameCity>
+            <Img
+              src={`https://www.gravatar.com/avatar/${hashedDetailEmail}?d=retro`}
+            />
+            <NameCity>
+              <h1>{detailedMember.memberName}</h1>
+              <h2>{detailedMember.town}</h2>
+            </NameCity>
+          </PicNameCity>
+        </>
+      )}
+
+      {!detailedMember && (
+        <PicNameCity>
+          <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
+          <NameCity>
+            <h1>{memberName}</h1>
+            <h2>{town}</h2>
+          </NameCity>
+        </PicNameCity>
+      )}
     </>
   );
 };
-
-const Text = styled.div`
-  h3 {
-    margin-bottom: 0px;
-    margin-top: 40px;
-  }
-  p {
-    margin-top: 5px;
-  }
-`;
 
 const NameCity = styled.div`
   margin: 5px;

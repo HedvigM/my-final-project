@@ -25,3 +25,5 @@ export const FOLLOW_URL = (memberId, slug) =>
   `${BASE_URL}/following/${memberId}/followed/${slug}`;
 
 export const DELETE = (memberId) => `${BASE_URL}/delete/member/${memberId}`;
+
+export const ONE_MEMBER_URL = (memberId) => `${BASE_URL}/member/:id`;
