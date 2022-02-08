@@ -79,8 +79,8 @@ export const SearchTunes = () => {
   };
   const searchedTunes = () =>
     searchList.map((item, index) => (
-      <InnerContainer>
-        <Tunes key={index}>
+      <InnerContainer key={index}>
+        <Tunes>
           <LinkStyle to={`/details/${item.id}`}>
             <p>
               {item.name}, ({item.type})
@@ -113,8 +113,8 @@ export const SearchTunes = () => {
 
   const popularTunes = () =>
     popularList.map((item, index) => (
-      <InnerContainer>
-        <Tunes key={index}>
+      <InnerContainer key={index}>
+        <Tunes>
           <LinkStyle to={`/details/${item.id}`}>
             <p>
               {item.name}, ({item.type})
@@ -148,6 +148,7 @@ export const SearchTunes = () => {
       <Green>
         <InnerContainer>
           <input
+            className="input"
             type="text"
             value={value}
             placeholder="Type in a tune 👇"
@@ -249,6 +250,10 @@ const InnerContainer = styled.div`
     background-color: var(--secondary-color);
     color: white;
   }
+  .input {
+    font-size: 16px;
+    maximum-scale = 1
+  }
 
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {
@@ -276,7 +281,7 @@ background-color: var(--main-color);
 
       margin: 15px;
     padding: 5px;
-    width: 300px;  
+    width: 250px;  
 
     text-align: center;
      text-transform: uppercase; 
