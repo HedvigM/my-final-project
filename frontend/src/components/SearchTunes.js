@@ -153,7 +153,7 @@ export const SearchTunes = () => {
             placeholder="Type in a tune 👇"
             onChange={(event) => setValue(event.target.value)}
           />
-          <Btn className="search" onClick={OnSearchHandle}>
+          <Btn className="accent" onClick={OnSearchHandle}>
             Search!
           </Btn>
         </InnerContainer>
@@ -162,9 +162,13 @@ export const SearchTunes = () => {
       {value ? searchedTunes() : popularTunes()}
       <InnerContainer>
         <Pagination>
-          <Btn onClick={previousPage}>Previous</Btn>
+          <Btn className="accent" onClick={previousPage}>
+            Previous
+          </Btn>
           {pageCount}
-          <Btn onClick={nextPage}>Next</Btn>
+          <Btn className="accent" onClick={nextPage}>
+            Next
+          </Btn>
         </Pagination>
       </InnerContainer>
     </div>
@@ -241,7 +245,7 @@ const InnerContainer = styled.div`
   margin: 0 auto;
   height: 100%;
 
-  .search {
+  .accent {
     background-color: var(--secondary-color);
     color: white;
   }
