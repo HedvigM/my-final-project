@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { member } from '../reducers/member';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; */
 import styled from 'styled-components';
 import {
   POPULAR_URL,

@@ -28,11 +28,11 @@ export const SettingsScreen = () => {
   );
 };
 
-const Img = styled.div`
+/* const Img = styled.div`
   background-image: url('./yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-`;
+`; */
 
 const Container = styled.div`
   display: flex;
