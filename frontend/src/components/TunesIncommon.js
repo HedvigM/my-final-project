@@ -6,20 +6,21 @@ import { API_URL, TUNE_URL } from '../utils/url';
 export const TunesIncommon = (member) => {
   const [list, setList] = useState({});
   const [commonTunes, setCommonTunes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [tuneNames, setTuneNames] = useState([]);
   const detailedMember = member.member;
 
   const LoggedInMember = useSelector((store) => store.member.knowTunes);
 
   useEffect(() => {
-    /* setLoading(true); */
+    setLoading(true);
 
     fetch(API_URL(`member/${detailedMember}`))
       .then((res) => res.json())
       .then((data) => {
         setList(data.response);
 
-        /*  setLoading(false); */
+        setLoading(false);
       });
   }, [detailedMember]);
 
@@ -45,12 +46,9 @@ export const TunesIncommon = (member) => {
     ).then((tuneNames) => setTuneNames(tuneNames));
   }, [commonTunes]);
 
-  /*   if (loading) {
-    return <h1>LOADING</h1>;
-  } */
-
-  /* if (!loading) { */
-  return (
+  return loading ? (
+    <h1>Loading</h1>
+  ) : (
     <Div>
       {tuneNames.length === 0 && (
         <div className="noTunes">
@@ -59,7 +57,6 @@ export const TunesIncommon = (member) => {
           <p>We dont have any tunes in common yet...</p>
         </div>
       )}
-      <h1>Our common tunes are: </h1>
       {tuneNames.map((item, index) => (
         <>
           <p key={index}> {item}</p>
@@ -67,10 +64,12 @@ export const TunesIncommon = (member) => {
       ))}
     </Div>
   );
-  /* } */
 };
 
 const Div = styled.div`
+  padding-top: 30px;
+  padding-bottom: 30px;
+
   h1,
   h2,
   p {
