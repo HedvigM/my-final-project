@@ -89,4 +89,22 @@ const Div = styled.div`
   .noTunes {
     text-align: center;
   }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    .noTunes {
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5em;
+      padding-bottom: 40px;
+    }
+    h2 {
+      font-size: 2.3em;
+    }
+    p {
+      padding-top: 40px;
+      font-size: 1.7em;
+    }
+  }
 `;

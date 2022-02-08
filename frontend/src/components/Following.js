@@ -50,4 +50,11 @@ const Text = styled.div`
   h1 {
     font-size: 1.17em;
   }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    h1 {
+      font-size: 2em;
+    }
+  }
 `;

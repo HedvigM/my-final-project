@@ -24,8 +24,14 @@ export const ProfileScreen = () => {
       <Header />
       <InnerContainer>
         <Profile />
-        <Following />
       </InnerContainer>
+
+      <Color>
+        <InnerContainer>
+          <Following />
+        </InnerContainer>
+      </Color>
+
       <Img>
         <div className="overlay">
           <InnerContainer>
@@ -37,6 +43,10 @@ export const ProfileScreen = () => {
     </Container>
   );
 };
+
+const Color = styled.div`
+  background-color: var(--main-color);
+`;
 
 const Img = styled.div`
   background-image: url('./yan-ming.jpg');
@@ -63,7 +73,6 @@ const InnerContainer = styled.div`
   margin: 0 auto;
   height: 100%;
   /* background-color: #ff885e; */
-  border: 1px solid blue;
 
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {

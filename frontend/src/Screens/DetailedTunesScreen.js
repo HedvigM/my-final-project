@@ -32,11 +32,8 @@ export const DetailedTunesScreen = () => {
 };
 
 const InnerContainer = styled.div`
-  min-width: 334px;
-  max-width: 500px;
   margin: 0 auto;
   height: 100%;
-  /* background-color: #ff885e; */
 
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {
@@ -46,6 +43,8 @@ const InnerContainer = styled.div`
 
   /* Liten Dator - */
   @media (min-width: 992px) {
+    min-width: 500px;
+    max-width: 700px;
   }
 
   /* Stor Dator - */

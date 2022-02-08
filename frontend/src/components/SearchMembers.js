@@ -189,6 +189,8 @@ const InnerContainer = styled.div`
 
   /* Liten Dator - */
   @media (min-width: 992px) {
+    min-width: 500px;
+    max-width: 700px;
   }
 
   /* Stor Dator - */
@@ -216,5 +218,10 @@ background-color: var(--main-color);
     ::placeholder {
       color: black;
       opacity: 1;
+  }
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    margin: 100px;
+    padding: 15px;
   }
 `;

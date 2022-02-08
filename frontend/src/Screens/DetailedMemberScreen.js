@@ -53,6 +53,19 @@ const Img = styled.div`
     width: 100%;
     height: 100%;
   }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    .overlay {
+      background-color: #04040469;
+
+      margin: 0px;
+      width: 100%;
+      height: 100%;
+      padding-top: 200px;
+      padding-bottom: 200px;
+    }
+  }
 `;
 
 const Container = styled.div`
@@ -71,5 +84,13 @@ const InnerContainer = styled.div`
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
+  }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+  }
+
+  /* Stor Dator - */
+  @media (min-width: 1200px) {
   }
 `;

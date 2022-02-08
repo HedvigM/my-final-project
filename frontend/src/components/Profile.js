@@ -54,6 +54,22 @@ const NameCity = styled.div`
   h2 {
     margin-top: 5px;
   }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    margin: 5px;
+    margin-left: 40px;
+
+    h1 {
+      margin-bottom: 5px;
+      font-size: 4em;
+    }
+
+    h2 {
+      margin-top: 5px;
+      font-size: 2.5em;
+    }
+  }
 `;
 
 const Img = styled.img`
@@ -61,6 +77,11 @@ const Img = styled.img`
   border: 1px solid black;
   border-radius: 50%;
   align-self: center;
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    height: 200px;
+  }
 `;
 
 const PicNameCity = styled.div`
@@ -68,4 +89,8 @@ const PicNameCity = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    padding: 60px 0px;
+  }
 `;

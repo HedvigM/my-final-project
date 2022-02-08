@@ -84,4 +84,15 @@ const Container = styled.div`
   h2 {
     font-size: 1.17em;
   }
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    h1 {
+      font-size: 3em;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    h2 {
+      font-size: 1.17em;
+    }
+  }
 `;

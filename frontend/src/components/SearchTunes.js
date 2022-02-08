@@ -291,6 +291,11 @@ background-color: var(--main-color);
       color: black;
       opacity: 1;
   }
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    margin: 60px;
+    padding: 15px;
+  }
 `;
 
 /* const Tune = styled.div`

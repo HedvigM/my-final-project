@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMountain } from '@fortawesome/free-solid-svg-icons';
@@ -8,14 +7,6 @@ import { faMountain } from '@fortawesome/free-solid-svg-icons';
 export const Footer = () => {
   return (
     <StyledFooter>
-      <Link to={'/about'}>
-        {' '}
-        <h3>About</h3>
-      </Link>
-      <Link to={'/settings'}>
-        {' '}
-        <h3>Settings</h3>
-      </Link>
       <h1>
         Hedvig Mejstedt
         <br />
