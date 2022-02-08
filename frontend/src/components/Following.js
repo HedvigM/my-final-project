@@ -10,15 +10,15 @@ export const Following = () => {
   const memberId = useSelector((store) => store.member.memberId);
   const relations = useSelector((store) => store.relations.relations);
 
-  let followingId = [];
-
-  relations.forEach((item) => {
-    if (item.following === memberId) {
-      followingId.push(item.followed);
-    }
-  });
-
   useEffect(() => {
+    let followingId = [];
+
+    relations.forEach((item) => {
+      if (item.following === memberId) {
+        followingId.push(item.followed);
+      }
+    });
+
     Promise.all(
       followingId.map((item) =>
         fetch(API_URL(`member/${item}`))
@@ -32,7 +32,7 @@ export const Following = () => {
       setFollowing(values);
       setLoading(false);
     });
-  }, []);
+  }, [memberId, relations]);
 
   return loading ? (
     <h1>Laddar</h1>
