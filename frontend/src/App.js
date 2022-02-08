@@ -22,7 +22,7 @@ import { SearchTuneScreen } from './Screens/SearchTuneScreen';
 import { DetailedTunesScreen } from './Screens/DetailedTunesScreen';
 import { DetailedMemberScreen } from './Screens/DetailedMemberScreen';
 
-import { About } from './components/About';
+import { AboutScreen } from './Screens/AboutScreen';
 
 const reducer = combineReducers({
   member: member.reducer,
@@ -70,7 +70,7 @@ const App = () => {
                 element={<DetailedMemberScreen />}
               />
               <Route path="*" element={<NotFound />} />
-              <Route path="/about" element={<About />} />
+              <Route path="/about" element={<AboutScreen />} />
               <Route path="/settings" element={<SettingsScreen />} />
             </Routes>
           </div>
