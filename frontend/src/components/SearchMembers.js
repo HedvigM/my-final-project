@@ -192,7 +192,7 @@ const InnerContainer = styled.div`
 
 const Green = styled.div`
 background-color: var(--main-color);
-border: 1px solid blue;
+
 
   input {
     background-color: var(--main-color);

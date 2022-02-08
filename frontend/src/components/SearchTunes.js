@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { member } from '../reducers/member';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styled from 'styled-components';
 import {
   POPULAR_URL,
@@ -15,7 +16,6 @@ export const SearchTunes = () => {
   const [searchList, setSearchList] = useState([]);
   const [value, setValue] = useState('');
   const [pageCount, setPageCount] = useState(1);
-  const [loading, setLoading] = useState(false);
 
   const memberId = useSelector((store) => store.member.memberId);
   const learnTunes = useSelector((store) => store.member.learnTunes);
@@ -28,18 +28,14 @@ export const SearchTunes = () => {
       .then((res) => res.json())
       .then((data) => {
         setSearchList(data.tunes);
-        setLoading(false);
       });
   };
-  console.log('searchlist', searchList);
 
   useEffect(() => {
-    setLoading(true);
     fetch(POPULAR_URL(pageCount))
       .then((res) => res.json())
       .then((data) => {
         setPopularList(data.tunes);
-        setLoading(false);
       });
   }, [pageCount]);
 
@@ -83,86 +79,215 @@ export const SearchTunes = () => {
   };
   const searchedTunes = () =>
     searchList.map((item, index) => (
-      <Tune key={index}>
-        <Link to={`/details/${item.id}`}>
-          <p>
-            {item.name}, ({item.type})
-          </p>
-        </Link>
+      <InnerContainer>
+        <Tunes key={index}>
+          <LinkStyle to={`/details/${item.id}`}>
+            <p>
+              {item.name}, ({item.type})
+            </p>
+          </LinkStyle>
+          <Right>
+            {knowTunes.includes(item.id) ? (
+              <R>
+                <p>❤️</p>
+              </R>
+            ) : (
+              <R>
+                <Btn onClick={() => AddKnowTune(item.id)}>Know</Btn>
+              </R>
+            )}
 
-        {learnTunes.includes(item.id) ? (
-          <p>I have this tune in my "want to learn pile"</p>
-        ) : (
-          <button onClick={() => AddLearnTune(item.id)}>
-            I want to learn this tune!
-          </button>
-        )}
-
-        {knowTunes.includes(item.id) ? (
-          <p>I have this tune in my "tunes i know pile"</p>
-        ) : (
-          <button onClick={() => AddKnowTune(item.id)}>
-            I know this tune!
-          </button>
-        )}
-      </Tune>
+            {learnTunes.includes(item.id) ? (
+              <R>
+                <p>📚</p>
+              </R>
+            ) : (
+              <R>
+                <Btn onClick={() => AddLearnTune(item.id)}>Learn</Btn>
+              </R>
+            )}
+          </Right>
+        </Tunes>
+      </InnerContainer>
     ));
 
   const popularTunes = () =>
     popularList.map((item, index) => (
-      <Tune key={index}>
-        {/* The link is a part of the route, not a class name */}
-        <Link to={`/details/${item.id}`}>
-          <p>
-            {item.name}, ({item.type})
-          </p>
-        </Link>
+      <InnerContainer>
+        <Tunes key={index}>
+          <LinkStyle to={`/details/${item.id}`}>
+            <p>
+              {item.name}, ({item.type})
+            </p>
+          </LinkStyle>
+          <Right>
+            {knowTunes.includes(item.id) ? (
+              <R>
+                <p>❤️</p>
+              </R>
+            ) : (
+              <Btn onClick={() => AddKnowTune(item.id)}>Know</Btn>
+            )}
 
-        {learnTunes.includes(item.id) ? (
-          <p>I have this tune in my "want to learn pile"</p>
-        ) : (
-          <button onClick={() => AddLearnTune(item.id)}>
-            I want to learn this tune!
-          </button>
-        )}
-        {knowTunes.includes(item.id) ? (
-          <p>I have this tune in my "tunes i know pile"</p>
-        ) : (
-          <button onClick={() => AddKnowTune(item.id)}>
-            I know this tune!
-          </button>
-        )}
-      </Tune>
+            {learnTunes.includes(item.id) ? (
+              <R>
+                <p>📚</p>
+              </R>
+            ) : (
+              <R>
+                <Btn onClick={() => AddLearnTune(item.id)}>Learn</Btn>
+              </R>
+            )}
+          </Right>
+        </Tunes>
+      </InnerContainer>
     ));
 
   return (
     <div>
-      <Div>
-        {loading ? <h1>Laddar!!</h1> : <h1>laddat</h1>}
-        <Container>
-          <label>Search for a Tune</label>
+      <Green>
+        <InnerContainer>
           <input
             type="text"
             value={value}
-            placeholder="Search 👇"
+            placeholder="Type in a tune 👇"
             onChange={(event) => setValue(event.target.value)}
           />
-          <button onClick={OnSearchHandle}>Search!</button>
-        </Container>
-      </Div>
-      {value ? searchedTunes() : popularTunes()}
+          <Btn className="search" onClick={OnSearchHandle}>
+            Search!
+          </Btn>
+        </InnerContainer>
+      </Green>
 
-      <button onClick={previousPage}>Previous page</button>
-      {pageCount}
-      <button onClick={nextPage}>Next page</button>
+      {value ? searchedTunes() : popularTunes()}
+      <InnerContainer>
+        <Pagination>
+          <Btn onClick={previousPage}>Previous</Btn>
+          {pageCount}
+          <Btn onClick={nextPage}>Next</Btn>
+        </Pagination>
+      </InnerContainer>
     </div>
   );
 };
 
-const Tune = styled.div`
-  border-bottom: 2px solid black;
+const LinkStyle = styled(Link)`
+  text-decoration: none;
+  color: black;
+  display: grid;
+  justify-self: left;
+  align-self: center;
 `;
-const Div = styled.div`
+
+const Btn = styled.button`
+  /*  background-color: ${(props) =>
+    props.pagination ? 'var(--main-color)' : 'var(--secondary-color)'}; */
+
+  background-color: var(--main-color);
+
+  color: black;
+  margin: 3px;
+  width: 70px;
+  padding: 3px;
+  font-size: 15px;
+  border-radius: 4px;
+  border: none;
+  transition-duration: 0.2s;
+  box-shadow: none;
+  font-family: var(--button-font);
+  white-space: nowrap;
+
+  :hover {
+    background-color: white;
+    color: var(--secondary-color);
+    transition-duration: 0.2s;
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+      0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  }
+`;
+const R = styled.div`
+  display: grid;
+  justify-self: right;
+`;
+
+const Right = styled.div`
+  display: grid;
+  justify-self: right;
+  align-self: center;
+
+  p {
+    margin: 3px;
+    font-size: 12px;
+    font-style: italic;
+  }
+`;
+
+const Tunes = styled.div`
+  border-bottom: 1px solid black;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`;
+
+const Pagination = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+`;
+
+const InnerContainer = styled.div`
+  min-width: 334px;
+  max-width: 500px;
+  margin: 0 auto;
+  height: 100%;
+
+  .search {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  /* Mobil */
+  @media (min-width: 0px) and (max-width: 767px) {
+    min-width: 200px;
+    max-width: 300px;
+  }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+  }
+
+  /* Stor Dator - */
+  @media (min-width: 1200px) {
+  }
+`;
+
+const Green = styled.div`
+background-color: var(--main-color);
+
+
+  input {
+    background-color: var(--main-color);
+    border: none;
+    border-bottom: 1px solid black;
+
+      margin: 15px;
+    padding: 5px;
+    width: 300px;  
+
+    text-align: center;
+     text-transform: uppercase; 
+
+
+    ::placeholder {
+      color: black;
+      opacity: 1;
+  }
+`;
+
+/* const Tune = styled.div`
+  border-bottom: 2px solid black;
+`; */
+/* const Div = styled.div`
   background-color: var(--main-color);
 
   input {
@@ -175,53 +300,51 @@ const Div = styled.div`
     width: 300px;
 
     /* align-self: center; */
-    text-align: center;
-    /* text-transform: uppercase; */
+/*   text-align: center; */
+/* text-transform: uppercase; */
 
-
-    ::placeholder {
+/* ::placeholder {
       color: black;
-      opacity: 1;
-      /* font-family: var(--font); Aktuellt först när det finns ett typsnitt*/
+      opacity: 1; */
+/* font-family: var(--font); Aktuellt först när det finns ett typsnitt*/
 
-
-    /*   @media (min-width: 0px) and (max-width: 767px) {
+/*   @media (min-width: 0px) and (max-width: 767px) {
         max-width: 200px;
         h1 {
           font-size: 2em;
         }
       } */
-  }
-`;
+/*   } */
+/*`; */
 
-const Container = styled.div`
+/* const Container = styled.div` */
 /* a {
   color: black;
   text-decoration: none;
 }
 a:hover {
   /* color taken from the picture on the site */
-  color: #2a6d38;
-}
+/*  color: #2a6d38; */
+/*}
 a:active {
   color: var(--secondary-color);
 } */
 
-background-color: var(--main-color);
-text-align: center;
+/* background-color: var(--main-color);
+text-align: center; */
 /*   margin-top: 20px; */
-@media (min-width: 0px) and (max-width: 991px) {
+/* @media (min-width: 0px) and (max-width: 991px) {
   margin-top: auto;
   h1 {
     font-size: 1em;
     padding: 10px;
-  }
-  h3 {
+  } */
+/*   h3 {
     margin-top: 0px;
   }
 }
 @media (min-width: 992px) {
   padding: 30px;
-  margin-top: 50px;
-}
-`;
+  margin-top: 50px; */
+/* }
+`; */
