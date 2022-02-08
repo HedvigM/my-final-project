@@ -4,60 +4,43 @@ import { API_URL } from '../utils/url';
 import styled from 'styled-components';
 import md5 from 'md5';
 
-// skicka in en prop från profile screen också. så kan jag återanvända koden.
-
 export const Profile = (member) => {
   const [detailedMember, setDetailedMember] = useState({});
-  const memberName = useSelector((store) => store.member.memberName);
+  const [loading, setLoading] = useState(true);
+  const memberId = useSelector((store) => store.member.memberId);
 
-  const email = useSelector((store) => store.member.email);
-  const town = useSelector((store) => store.member.town);
-  const detailedId = member.member;
-
-  /* const hashedEmail = md5(email); */
-  const detailedEmail = detailedMember.email;
-
-  // den här blir irriterad när det inte finns ett värde i member...
-
-  /*     const hashedDetailEmail = md5(detailedEmail
-   */
-
-  let profileName;
-  let profileTown;
-  let hashedEmail;
-
-  if (detailedMember) {
-    profileName = detailedMember.memberName;
-    profileTown = detailedMember.town;
-    /*  hashedEmail = md5(detailedEmail); */
+  let profileId = '';
+  if (member.member) {
+    profileId = member.member;
   } else {
-    profileName = memberName;
-    profileTown = town;
-    hashedEmail = md5(email);
+    profileId = memberId;
   }
 
   useEffect(() => {
-    /* setLoading(true); */
+    setLoading(true);
 
-    fetch(API_URL(`member/${detailedId}`))
+    fetch(API_URL(`member/${profileId}`))
       .then((res) => res.json())
       .then((data) => {
         setDetailedMember(data.response);
-
-        /*  setLoading(false); */
+        setLoading(false);
       });
-  }, [detailedId]);
+  }, [profileId]);
 
-  return (
-    <>
-      <PicNameCity>
-        <Img src={`https://www.gravatar.com/avatar/${hashedEmail}?d=retro`} />
-        <NameCity>
-          <h1>{profileName}</h1>
-          <h2>{profileTown}</h2>
-        </NameCity>
-      </PicNameCity>
-    </>
+  return loading ? (
+    <h1>Laddar</h1>
+  ) : (
+    <PicNameCity>
+      <Img
+        src={`https://www.gravatar.com/avatar/${md5(
+          detailedMember.email
+        )}?d=retro`}
+      />
+      <NameCity>
+        <h1>{detailedMember.memberName}</h1>
+        <h2>{detailedMember.town}</h2>
+      </NameCity>
+    </PicNameCity>
   );
 };
 
