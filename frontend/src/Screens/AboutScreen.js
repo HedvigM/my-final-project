@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Settings } from '../components/Settings';
 import { About } from '../components/About';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
@@ -28,14 +27,6 @@ export const AboutScreen = () => {
     </Container>
   );
 };
-
-const Img = styled.div`
-  background-image: url('./yan-ming.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-top: 100px;
-  padding-bottom: 10px;
-`;
 
 const Container = styled.div`
   display: flex;

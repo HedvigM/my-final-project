@@ -13,9 +13,6 @@ export const Settings = () => {
 
   const accessToken = useSelector((store) => store.member.accessToken);
   console.log('accessToken', accessToken);
-  const memberName = useSelector((store) => store.member.memberName);
-  const email = useSelector((store) => store.member.email);
-  const town = useSelector((store) => store.member.town);
   const profileText = useSelector((store) => store.member.profileText);
   const memberId = useSelector((store) => store.member.memberId);
 
