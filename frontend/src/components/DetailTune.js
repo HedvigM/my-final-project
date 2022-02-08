@@ -40,13 +40,14 @@ export const DetailTune = (tune) => {
     return string.replaceAll('!', '\n');
   };
 
-  abcjs.renderAbc('sheetMusic', lineBreak(abc));
+  abcjs.renderAbc('sheetMusic', lineBreak(abc), { responsive: 'resize' });
 
   return (
     <Container>
       <Members>
         <h1>{details.name}</h1>
-        <h1>Members that knows the tune:</h1>
+
+        <h2>Members that knows the tune:</h2>
         {/* This function prints the members that know this specific tune */}
         {list.map(
           (item) =>
@@ -56,20 +57,31 @@ export const DetailTune = (tune) => {
         )}
       </Members>
 
-      <>
-        <h2>Type: {details.type}</h2>
+      <Tune>
+        <p>Type: {details.type}</p>
         <p>Key: {key}</p>
-        <p>abc: {lineBreak(abc)}</p>
-        <div id="sheetMusic">(laddar)</div>
-      </>
+        <div width="100%" id="sheetMusic">
+          (laddar)
+        </div>
+      </Tune>
     </Container>
   );
 };
+const Tune = styled.div`
+  p {
+  }
+`;
 
 const Members = styled.div`
-  background-color: var(--main-color);
+  margin: 30px 0px;
 `;
 
 const Container = styled.div`
   color: black;
+  h1 {
+    margin: 0px;
+  }
+  h2 {
+    font-size: 1.17em;
+  }
 `;
