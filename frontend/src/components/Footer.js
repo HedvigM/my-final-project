@@ -87,9 +87,6 @@ const Icon = styled.a`
 const Icons = styled.div`
   display: flex;
   justify-content: center;
-  @media (min-width: 992px) {
-    padding: 10px;
-  }
 `;
 
 const StyledFooter = styled.footer`
@@ -107,7 +104,7 @@ a:active {
 }
 
   /* Mobil */
-  @media (min-width: 0px) and (max-width: 767px) {
+  @media (min-width: 0px)  {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -117,6 +114,7 @@ a:active {
 
   /* Liten Dator - */
   @media (min-width: 992px) {
+    font-size: 1.7em;
   }
 
   /* Stor Dator - */

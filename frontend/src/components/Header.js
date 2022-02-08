@@ -30,7 +30,7 @@ export const Header = () => {
 
 const Container = styled.div`
   /* Mobil */
-  @media (min-width: 0px) and (max-width: 767px) {
+  @media (min-width: 0px) {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -49,7 +49,7 @@ const Container = styled.div`
 
 const Ic = styled.div`
   /* Mobil */
-  @media (min-width: 0px) and (max-width: 767px) {
+  @media (min-width: 0px) {
     font-size: 0.8em;
   }
 
@@ -64,5 +64,13 @@ const Ic = styled.div`
   }
   a:active {
     color: var(--main-color);
+  }
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    font-size: 1.7em;
+  }
+
+  /* Stor Dator - */
+  @media (min-width: 1200px) {
   }
 `;

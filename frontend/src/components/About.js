@@ -5,10 +5,13 @@ export const About = () => {
   return (
     <>
       <H1>About</H1>
+      <br />
+      <br />
+
+      <h2>Hey! 👋</h2>
+      <br />
+      <br />
       <p>
-        Hey! 👋
-        <br />
-        <br />
         My name is Hedvig and I made this app. It’s for all of us that some
         times experience difficulties common up with tunes to start at the
         session.
@@ -22,4 +25,8 @@ export const About = () => {
 };
 const H1 = styled.h1`
   text-align: center;
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    font-size: 3em;
+  }
 `;

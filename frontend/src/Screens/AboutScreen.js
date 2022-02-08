@@ -20,9 +20,11 @@ export const AboutScreen = () => {
   return (
     <Container>
       <Header />
+
       <InnerContainer>
         <About />
       </InnerContainer>
+
       <Footer />
     </Container>
   );
