@@ -19,9 +19,7 @@ export const SearchMemberScreen = () => {
   return (
     <Container>
       <Header />
-
       <SearchMembers />
-
       <Footer />
     </Container>
   );
