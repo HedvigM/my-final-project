@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { Settings } from '../components/Settings';
+import { Profile } from '../components/Profile';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 
@@ -21,18 +22,25 @@ export const SettingsScreen = () => {
     <Container>
       <Header />
       <InnerContainer>
-        <Settings />
+        <Profile />
       </InnerContainer>
+      <Img>
+        <InnerContainer>
+          <Settings />
+        </InnerContainer>
+      </Img>
       <Footer />
     </Container>
   );
 };
 
-/* const Img = styled.div`
+const Img = styled.div`
   background-image: url('./yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-`; */
+  padding-top: 100px;
+  padding-bottom: 10px;
+`;
 
 const Container = styled.div`
   display: flex;
