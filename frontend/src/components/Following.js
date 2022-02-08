@@ -5,26 +5,43 @@ import { API_URL } from '../utils/url';
 import styled from 'styled-components';
 
 export const Following = () => {
-  const [followingMember, setFollowingMember] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [following, setFollowing] = useState([]);
   const memberId = useSelector((store) => store.member.memberId);
   const relations = useSelector((store) => store.relations.relations);
-  console.log(relations);
+
+  let followingId = [];
+
+  relations.forEach((item) => {
+    if (item.following === memberId) {
+      followingId.push(item.followed);
+    }
+  });
 
   useEffect(() => {
-    fetch(API_URL('relations'))
-      .then((res) => res.json())
-      .then((data) => {
-        setFollowingMember(data.response);
-      });
+    Promise.all(
+      followingId.map((item) =>
+        fetch(API_URL(`member/${item}`))
+          .then((res) => res.json())
+          .then((data) => {
+            console.log('data', data);
+            return data.response.memberName;
+          })
+      )
+    ).then((values) => {
+      setFollowing(values);
+      setLoading(false);
+    });
   }, []);
 
-  return (
+  return loading ? (
+    <h1>Laddar</h1>
+  ) : (
     <Text>
       <h1>The members i'm following are:</h1>
-      {followingMember.map(
-        (item, index) =>
-          item.following === memberId && <p key={index}>{item.followed}</p>
-      )}
+      {following.map((item, index) => (
+        <p key={index}>{item}</p>
+      ))}
     </Text>
   );
 };
