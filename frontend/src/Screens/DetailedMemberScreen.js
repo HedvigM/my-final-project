@@ -40,13 +40,8 @@ export const DetailedMemberScreen = () => {
   );
 };
 
-/* const Img = styled.div`
-  background-image: url('./yan-ming.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-`; */
 const Img = styled.div`
-  background-image: url('./yan-ming.jpg');
+  background-image: url('/yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0px;
