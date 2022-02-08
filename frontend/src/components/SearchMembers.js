@@ -64,6 +64,7 @@ export const SearchMembers = () => {
       <Green>
         <InnerContainer>
           <input
+            className="input"
             type="text"
             value={value}
             placeholder="Search for a member 👇"
@@ -172,6 +173,11 @@ const InnerContainer = styled.div`
   max-width: 500px;
   margin: 0 auto;
   height: 100%;
+
+  .input {
+    font-size: 16px;
+    maximum-scale = 1
+  }
   /* background-color: #ff885e; */
   /*  border: 1px solid pink; */
 
