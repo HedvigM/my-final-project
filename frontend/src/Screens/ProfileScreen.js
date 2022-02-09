@@ -49,7 +49,7 @@ const Color = styled.div`
 `;
 
 const Img = styled.div`
-  background-image: url('./yan-ming.jpg');
+  background-image: url('/yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 
