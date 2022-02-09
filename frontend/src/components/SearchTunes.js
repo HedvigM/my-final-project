@@ -57,10 +57,7 @@ export const SearchTunes = () => {
       .then((res) => res.json())
       .then((data) =>
         dispatch(
-          member.actions.setKnowTunes([
-            ...knowTunes,
-            ...data.response.knowTunes
-          ])
+          member.actions.setKnowTunes([...new Set(data.response.knowTunes)])
         )
       );
   };
@@ -70,10 +67,7 @@ export const SearchTunes = () => {
       .then((res) => res.json())
       .then((data) =>
         dispatch(
-          member.actions.setLearnTunes([
-            ...learnTunes,
-            ...data.response.learnTunes
-          ])
+          member.actions.setLearnTunes([...new Set(data.response.learnTunes)])
         )
       );
   };

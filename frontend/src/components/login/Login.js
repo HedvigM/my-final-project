@@ -49,8 +49,14 @@ export const Login = () => {
             dispatch(member.actions.setMemberId(data.response.memberId));
             dispatch(member.actions.setMemberName(data.response.memberName));
             dispatch(member.actions.setAccessToken(data.response.accessToken));
-            dispatch(member.actions.setKnowTunes(data.response.knowTunes));
-            dispatch(member.actions.setLearnTunes(data.response.learnTunes));
+            dispatch(
+              member.actions.setKnowTunes([...new Set(data.response.knowTunes)])
+            );
+            dispatch(
+              member.actions.setLearnTunes([
+                ...new Set(data.response.learnTunes)
+              ])
+            );
             dispatch(member.actions.setEmail(data.response.email));
             dispatch(member.actions.setTown(data.response.town));
           });
