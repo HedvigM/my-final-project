@@ -25,9 +25,11 @@ export const SettingsScreen = () => {
         <Profile />
       </InnerContainer>
       <Img>
-        <InnerContainer>
-          <Settings />
-        </InnerContainer>
+        <div className="overlay">
+          <InnerContainer>
+            <Settings />
+          </InnerContainer>
+        </div>
       </Img>
       <Footer />
     </Container>
@@ -38,8 +40,15 @@ const Img = styled.div`
   background-image: url('./yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  padding-top: 100px;
-  padding-bottom: 10px;
+
+  .overlay {
+    background-color: #04040469;
+
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+    padding-bottom: 10px;
+  }
 `;
 
 const Container = styled.div`

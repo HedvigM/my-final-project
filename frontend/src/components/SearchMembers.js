@@ -176,8 +176,8 @@ const InnerContainer = styled.div`
 
   .input {
     font-size: 16px;
-    maximum-scale = 1
   }
+
   /* background-color: #ff885e; */
   /*  border: 1px solid pink; */
 

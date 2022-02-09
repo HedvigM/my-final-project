@@ -252,7 +252,6 @@ const InnerContainer = styled.div`
   }
   .input {
     font-size: 16px;
-    maximum-scale = 1
   }
 
   /* Mobil */

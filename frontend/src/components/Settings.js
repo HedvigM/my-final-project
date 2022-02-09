@@ -1,23 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { DELETE } from '../utils/url';
+import { DELETE, UPDATE_URL } from '../utils/url';
 import { member } from '../reducers/member';
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 
 export const Settings = () => {
+  const [mail, setMail] = useState('');
+  const [city, setCity] = useState('');
+  const [words, setWords] = useState('');
+  const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const accessToken = useSelector((store) => store.member.accessToken);
   console.log('accessToken', accessToken);
   const profileText = useSelector((store) => store.member.profileText);
+  const memberName = useSelector((store) => store.member.memberName);
+  const town = useSelector((store) => store.member.town);
+  const email = useSelector((store) => store.member.email);
   const memberId = useSelector((store) => store.member.memberId);
 
   useEffect(() => {
-    console.log('useeffect settings');
     if (!accessToken) {
       navigate('/login');
     }
@@ -33,6 +40,7 @@ export const Settings = () => {
       dispatch(member.actions.setLearnTunes([]));
       dispatch(member.actions.setMember(null));
       dispatch(member.actions.setRelations(null));
+      dispatch(member.actions.setProfileText(null));
       dispatch(member.actions.setMember(null));
       dispatch(relations.actions.setRelations(null));
     });
@@ -80,9 +88,92 @@ export const Settings = () => {
       });
   };
 
-  return (
+  let profileMail = '';
+  if (mail) {
+    profileMail = mail;
+  } else {
+    profileMail = email;
+  }
+
+  let profileCity = '';
+  if (city) {
+    profileCity = city;
+  } else {
+    profileCity = town;
+  }
+
+  let freeText = '';
+  if (words) {
+    freeText = words;
+  } else {
+    freeText = profileText;
+  }
+
+  const patch = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      memberId: memberId,
+      email: profileMail,
+      town: profileCity,
+      profileText: freeText
+    })
+  };
+
+  const onProfileUpdate = (event) => {
+    setLoading(true);
+    event.preventDefault();
+    fetch(UPDATE_URL, patch)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.response);
+        /*   if (data.success) {
+          batch(() => {
+            dispatch(member.actions.setMemberName(null));
+            dispatch(member.actions.setEmail(null));
+            dispatch(member.actions.setTown(null));
+            dispatch(member.actions.setProfileText(null));
+            setLoading(false);
+          }); 
+        }*/
+      });
+  };
+
+  return loading ? (
+    <h1>Loading</h1>
+  ) : (
     <>
-      <p>{profileText}</p>
+      <Container>
+        <form>
+          <h1>Do you want to change your info?</h1>
+
+          <p>{town}</p>
+          <input
+            id="town"
+            type="text"
+            placeholder="In which town do you live?"
+            value={city}
+            onChange={(event) => setCity(event.target.value)}></input>
+
+          <p>{email}</p>
+          <input
+            id="email"
+            type="email"
+            placeholder="mail"
+            value={mail}
+            onChange={(event) => setMail(event.target.value)}></input>
+
+          <p>{profileText}</p>
+          <input
+            id="profileText"
+            type="profileText"
+            placeholder="Profile text"
+            value={words}
+            onChange={(event) => setWords(event.target.value)}></input>
+          <Btn onClick={onProfileUpdate}>Change the info!</Btn>
+        </form>
+      </Container>
+
       <Btn onClick={logout}>Log out</Btn>
       <Btn
         delete
@@ -94,6 +185,33 @@ export const Settings = () => {
     </>
   );
 };
+
+const Container = styled.div`
+  color: white;
+  
+  p {
+    font-size: 20px;
+  }
+
+  input {
+    background-color: var(--secondary-color);
+    border: none;
+    border-bottom: 1px solid black;
+
+      margin: 15px;
+    padding: 5px;
+    width: 250px;  
+
+    text-align: center;
+    font-size: 16px;
+    
+
+
+    ::placeholder {
+      color: white;
+      opacity: 1;
+  }
+`;
 
 const Btn = styled.button`
   background-color: ${(props) => (props.delete ? '#fc6666' : 'white')};
