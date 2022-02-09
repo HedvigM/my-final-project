@@ -122,38 +122,35 @@ app.get('/member/:id', async (req, res) => {
   }
 });
 
-/* app.patch('/member/:memberId/town/:town', async (req, res) => {
-  const { memberId, town } = req.params;
-  const { memberName, password } = req.body;
+app.patch('/member/update', async (req, res) => {
+  const { memberId, memberName, email, town, profileText } = req.body;
+
   try {
     const queriedMember = await Member.findById(memberId);
 
     if (queriedMember) {
       const updatedMember = await Member.findByIdAndUpdate(
         memberId,
+
         {
-          $push: {
-            town: town
+          $set: {
+            memberName,
+            email,
+            town,
+            profileText
           }
         },
         { new: true }
       );
-
-      res.status(200).json({
-        response: {
-          town: updatedMember.town
-        },
-        success: true
-      });
+      res.status(200).json({ response: updatedMember, success: true });
     } else {
       res.status(404).json({ response: 'Member not found', success: false });
     }
   } catch (error) {
     res.status(400).json({ response: error, success: false });
   }
-}); */
+});
 
-/* POPULATE */
 /* Gör så att man bara kan följa en användare en gång... */
 app.post('/following/:following/followed/:followed', async (req, res) => {
   const { following, followed } = req.params;
@@ -172,10 +169,6 @@ app.post('/following/:following/followed/:followed', async (req, res) => {
     res.status(400).json({ response: error, success: false });
   }
 });
-
-// It would be nice to implement this.
-/* .populate('following', 'memberName')
-.populate('followed', 'memberName') */
 
 app.get('/relations', async (req, res) => {
   const relations = await Relations.find({}).select('-__v').exec();
