@@ -15,32 +15,35 @@ export const ProfileScreen = () => {
 
   useEffect(() => {
     if (!accessToken) {
+      console.log('skicka iväg från profilescreen till login');
       navigate('/login');
     }
   }, [accessToken, navigate]);
 
   return (
-    <Container>
-      <Header />
-      <InnerContainer>
-        <Profile />
-      </InnerContainer>
-
-      <Color>
+    accessToken && (
+      <Container>
+        <Header />
         <InnerContainer>
-          <Following />
+          <Profile />
         </InnerContainer>
-      </Color>
 
-      <Img>
-        <div className="overlay">
+        <Color>
           <InnerContainer>
-            <MyTunes />
+            <Following />
           </InnerContainer>
-        </div>
-      </Img>
-      <Footer />
-    </Container>
+        </Color>
+
+        <Img>
+          <div className="overlay">
+            <InnerContainer>
+              <MyTunes />
+            </InnerContainer>
+          </div>
+        </Img>
+        <Footer />
+      </Container>
+    )
   );
 };
 

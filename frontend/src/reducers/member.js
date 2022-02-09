@@ -30,7 +30,7 @@ export const member = createSlice({
       store.town = action.payload;
     },
     setProfileText: (store, action) => {
-      store.memberId = action.payload;
+      store.profileText = action.payload;
     },
     setKnowTunes: (store, action) => {
       store.knowTunes = action.payload;

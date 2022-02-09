@@ -19,7 +19,7 @@ export const Settings = () => {
   const accessToken = useSelector((store) => store.member.accessToken);
   console.log('accessToken', accessToken);
   const profileText = useSelector((store) => store.member.profileText);
-  const memberName = useSelector((store) => store.member.memberName);
+  // const memberName = useSelector((store) => store.member.memberName);
   const town = useSelector((store) => store.member.town);
   const email = useSelector((store) => store.member.email);
   const memberId = useSelector((store) => store.member.memberId);
@@ -71,6 +71,7 @@ export const Settings = () => {
   };
 
   const deleteFetch = async (memberId) => {
+    console.log('här kör vi delete-fetchen');
     fetch(DELETE(memberId), options)
       .then((res) => res.json())
       .then((data) => {
@@ -126,16 +127,20 @@ export const Settings = () => {
     fetch(UPDATE_URL, patch)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.response);
-        /*   if (data.success) {
+        console.log('DATA', data.response);
+        if (data.success) {
+          console.log('data.success = true');
           batch(() => {
-            dispatch(member.actions.setMemberName(null));
-            dispatch(member.actions.setEmail(null));
-            dispatch(member.actions.setTown(null));
-            dispatch(member.actions.setProfileText(null));
+            console.log("let's batch this!!");
+            console.log(data.response);
+            dispatch(member.actions.setEmail(data.response.email));
+            dispatch(member.actions.setTown(data.response.town));
+            dispatch(member.actions.setProfileText(data.response.profileText));
             setLoading(false);
-          }); 
-        }*/
+          });
+        } else {
+          console.log('data.success = false');
+        }
       });
   };
 

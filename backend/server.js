@@ -134,7 +134,6 @@ app.patch('/member/update', async (req, res) => {
 
         {
           $set: {
-            memberName,
             email,
             town,
             profileText
