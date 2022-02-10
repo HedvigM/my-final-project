@@ -174,9 +174,6 @@ const InnerContainer = styled.div`
     font-size: 16px;
   }
 
-  /* background-color: #ff885e; */
-  /*  border: 1px solid pink; */
-
   /* Mobil */
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
@@ -188,36 +185,31 @@ const InnerContainer = styled.div`
     min-width: 500px;
     max-width: 700px;
   }
-
-  /* Stor Dator - */
-  @media (min-width: 1200px) {
-  }
 `;
 
 const Green = styled.div`
-background-color: var(--main-color);
-
+  background-color: var(--main-color);
 
   input {
     background-color: var(--main-color);
     border: none;
     border-bottom: 1px solid black;
 
-      margin: 15px;
+    margin: 15px;
     padding: 5px;
-    width: 300px;  
+    width: 300px;
 
     text-align: center;
-     text-transform: uppercase; 
-
+    text-transform: uppercase;
 
     ::placeholder {
       color: black;
       opacity: 1;
-  }
-  /* Liten Dator - */
-  @media (min-width: 992px) {
-    margin: 100px;
-    padding: 15px;
+    }
+    /* Liten Dator - */
+    @media (min-width: 992px) {
+      margin: 100px;
+      padding: 15px;
+    }
   }
 `;

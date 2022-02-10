@@ -77,6 +77,4 @@ const Container = styled.div`
     font-size: 1.17em;
     margin: 0px;
   }
-  p {
-  }
 `;

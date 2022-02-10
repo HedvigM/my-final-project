@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { member } from '../reducers/member';
-/* import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; */
+
 import styled from 'styled-components';
 import {
   POPULAR_URL,
@@ -146,11 +146,7 @@ const LinkStyle = styled(Link)`
 `;
 
 const Btn = styled.button`
-  /*  background-color: ${(props) =>
-    props.pagination ? 'var(--main-color)' : 'var(--secondary-color)'}; */
-
   background-color: var(--main-color);
-
   color: black;
   margin: 3px;
   width: 70px;
@@ -220,48 +216,9 @@ const InnerContainer = styled.div`
     min-width: 200px;
     max-width: 300px;
   }
-
-  /* Liten Dator - */
-  @media (min-width: 992px) {
-  }
-
-  /* Stor Dator - */
-  @media (min-width: 1200px) {
-  }
 `;
 
 const Green = styled.div`
-background-color: var(--main-color);
-
-
-  input {
-    background-color: var(--main-color);
-    border: none;
-    border-bottom: 1px solid black;
-
-      margin: 15px;
-    padding: 5px;
-    width: 250px;  
-
-    text-align: center;
-     text-transform: uppercase; 
-
-
-    ::placeholder {
-      color: black;
-      opacity: 1;
-  }
-  /* Liten Dator - */
-  @media (min-width: 992px) {
-    margin: 60px;
-    padding: 15px;
-  }
-`;
-
-/* const Tune = styled.div`
-  border-bottom: 2px solid black;
-`; */
-/* const Div = styled.div`
   background-color: var(--main-color);
 
   input {
@@ -271,54 +228,19 @@ background-color: var(--main-color);
 
     margin: 15px;
     padding: 5px;
-    width: 300px;
+    width: 250px;
 
-    /* align-self: center; */
-/*   text-align: center; */
-/* text-transform: uppercase; */
+    text-align: center;
+    text-transform: uppercase;
 
-/* ::placeholder {
+    ::placeholder {
       color: black;
-      opacity: 1; */
-/* font-family: var(--font); Aktuellt först när det finns ett typsnitt*/
-
-/*   @media (min-width: 0px) and (max-width: 767px) {
-        max-width: 200px;
-        h1 {
-          font-size: 2em;
-        }
-      } */
-/*   } */
-/*`; */
-
-/* const Container = styled.div` */
-/* a {
-  color: black;
-  text-decoration: none;
-}
-a:hover {
-  /* color taken from the picture on the site */
-/*  color: #2a6d38; */
-/*}
-a:active {
-  color: var(--secondary-color);
-} */
-
-/* background-color: var(--main-color);
-text-align: center; */
-/*   margin-top: 20px; */
-/* @media (min-width: 0px) and (max-width: 991px) {
-  margin-top: auto;
-  h1 {
-    font-size: 1em;
-    padding: 10px;
-  } */
-/*   h3 {
-    margin-top: 0px;
+      opacity: 1;
+    }
+    /* Liten Dator - */
+    @media (min-width: 992px) {
+      margin: 60px;
+      padding: 15px;
+    }
   }
-}
-@media (min-width: 992px) {
-  padding: 30px;
-  margin-top: 50px; */
-/* }
-`; */
+`;

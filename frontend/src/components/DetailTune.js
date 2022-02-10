@@ -57,20 +57,16 @@ export const DetailTune = (tune) => {
         )}
       </Members>
 
-      <Tune>
+      <div>
         <p>Type: {details.type}</p>
         <p>Key: {key}</p>
         <div width="100%" id="sheetMusic">
           (laddar)
         </div>
-      </Tune>
+      </div>
     </Container>
   );
 };
-const Tune = styled.div`
-  p {
-  }
-`;
 
 const Members = styled.div`
   margin: 30px 0px;

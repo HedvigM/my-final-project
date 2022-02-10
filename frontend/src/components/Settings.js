@@ -185,7 +185,7 @@ export const Settings = () => {
 
 const Container = styled.div`
   color: white;
-  
+
   p {
     font-size: 20px;
   }
@@ -195,18 +195,17 @@ const Container = styled.div`
     border: none;
     border-bottom: 1px solid black;
 
-      margin: 15px;
+    margin: 15px;
     padding: 5px;
-    width: 250px;  
+    width: 250px;
 
     text-align: center;
     font-size: 16px;
-    
-
 
     ::placeholder {
       color: white;
       opacity: 1;
+    }
   }
 `;
 

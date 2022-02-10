@@ -77,8 +77,7 @@ const StyledFooter = styled.footer`
     text-decoration: none;
   }
   a:hover {
-    /* color taken from the picture on the site */
-    /* color: #2a6d38; */
+    color: #2a6d38;
     color: var(--main-color);
   }
   a:active {

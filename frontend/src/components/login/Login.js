@@ -89,7 +89,6 @@ export const Login = () => {
 
   return (
     <>
-      {/*Sign in/ Sign up Radio Buttons  */}
       <label htmlFor="signin">Sign in</label>
       <input
         id="signin"
@@ -163,29 +162,20 @@ export const Login = () => {
 };
 
 const Div = styled.div`
-input {
-  background-color: var(--main-color);
-  border: none;
-  border-bottom: 1px solid black;
+  input {
+    background-color: var(--main-color);
+    border: none;
+    border-bottom: 1px solid black;
 
-  margin: 15px;
-  padding: 5px;
-  width: 300px;
+    margin: 15px;
+    padding: 5px;
+    width: 300px;
 
-  text-align: center;
+    text-align: center;
 
-
-
-  ::placeholder {
-    color: black;
-    opacity: 1;
-    /* font-family: var(--font); Aktuellt först när det finns ett typsnitt*/
-
-
-  /*   @media (min-width: 0px) and (max-width: 767px) {
-      max-width: 200px;
-      h1 {
-        font-size: 2em;
-      }
-    } */
-}`;
+    ::placeholder {
+      color: black;
+      opacity: 1;
+    }
+  }
+`;

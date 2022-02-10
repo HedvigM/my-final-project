@@ -43,7 +43,6 @@ const MemberSchema = new mongoose.Schema({
     type: String
   }
 });
-/* Update with town and a description (like a profile text). */
 
 const RelationsSchema = new mongoose.Schema({
   following: {
@@ -67,7 +66,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//Check if the connection to the server is ok.
+// Check if the connection to the server is ok.
 app.use((req, res, next) => {
   if (mongoose.connection.readyState === 1) {
     next();
@@ -101,13 +100,11 @@ app.get('/', (req, res) => {
 });
 
 // authenticateUser function is needed...
-
 app.get('/members', async (req, res) => {
   const members = await Member.find({}).limit(20).exec();
   res.status(200).json({ response: members, success: true });
 });
 
-// searching for a single member for the "TunesIncommon" Page.
 app.get('/member/:id', async (req, res) => {
   const { id } = req.params;
   try {
@@ -123,7 +120,7 @@ app.get('/member/:id', async (req, res) => {
 });
 
 app.patch('/member/update', async (req, res) => {
-  const { memberId, memberName, email, town, profileText } = req.body;
+  const { memberId, email, town, profileText } = req.body;
 
   try {
     const queriedMember = await Member.findById(memberId);
@@ -150,7 +147,6 @@ app.patch('/member/update', async (req, res) => {
   }
 });
 
-/* Gör så att man bara kan följa en användare en gång... */
 app.post('/following/:following/followed/:followed', async (req, res) => {
   const { following, followed } = req.params;
 
@@ -174,7 +170,6 @@ app.get('/relations', async (req, res) => {
   res.status(200).json({ response: relations, success: true });
 });
 
-/* Gör så att man bara kan lägga till en låt en gång... */
 app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
   const { memberId, tuneId } = req.params;
   try {
@@ -205,7 +200,6 @@ app.patch('/member/:memberId/tune/:tuneId', async (req, res) => {
   }
 });
 
-/* Gör så att man bara kan lägga till en låt en gång... */
 app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
   const { memberId, tuneId } = req.params;
   try {
@@ -239,7 +233,6 @@ app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
 app.post('/signup', async (req, res) => {
   const { memberName, password, email, town } = req.body;
 
-  // I will need to explain this more to my future self.
   try {
     const salt = bcrypt.genSaltSync();
 
@@ -275,7 +268,6 @@ app.post('/signup', async (req, res) => {
 });
 
 app.post('/signin', async (req, res) => {
-  //  const { memberName, password } = req.body;
   const loginMember = req.body;
 
   try {
