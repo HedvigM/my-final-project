@@ -71,41 +71,8 @@ export const SearchTunes = () => {
         )
       );
   };
-  const searchedTunes = () =>
-    searchList.map((item, index) => (
-      <InnerContainer key={index}>
-        <Tunes>
-          <LinkStyle to={`/details/${item.id}`}>
-            <p>
-              {item.name}, ({item.type})
-            </p>
-          </LinkStyle>
-          <Right>
-            {knowTunes.includes(item.id) ? (
-              <R>
-                <p>❤️</p>
-              </R>
-            ) : (
-              <R>
-                <Btn onClick={() => AddKnowTune(item.id)}>Know</Btn>
-              </R>
-            )}
 
-            {learnTunes.includes(item.id) ? (
-              <R>
-                <p>📚</p>
-              </R>
-            ) : (
-              <R>
-                <Btn onClick={() => AddLearnTune(item.id)}>Learn</Btn>
-              </R>
-            )}
-          </Right>
-        </Tunes>
-      </InnerContainer>
-    ));
-
-  const popularTunes = () =>
+  const tunes = (popularList) =>
     popularList.map((item, index) => (
       <InnerContainer key={index}>
         <Tunes>
@@ -154,7 +121,7 @@ export const SearchTunes = () => {
         </InnerContainer>
       </Green>
 
-      {value ? searchedTunes() : popularTunes()}
+      {value ? tunes(searchList) : tunes(popularList)}
       <InnerContainer>
         <Pagination>
           <Btn className="accent" onClick={previousPage}>

@@ -17,9 +17,7 @@ export const Settings = () => {
   const navigate = useNavigate();
 
   const accessToken = useSelector((store) => store.member.accessToken);
-  console.log('accessToken', accessToken);
   const profileText = useSelector((store) => store.member.profileText);
-  // const memberName = useSelector((store) => store.member.memberName);
   const town = useSelector((store) => store.member.town);
   const email = useSelector((store) => store.member.email);
   const memberId = useSelector((store) => store.member.memberId);
@@ -127,19 +125,13 @@ export const Settings = () => {
     fetch(UPDATE_URL, patch)
       .then((res) => res.json())
       .then((data) => {
-        console.log('DATA', data.response);
         if (data.success) {
-          console.log('data.success = true');
           batch(() => {
-            console.log("let's batch this!!");
-            console.log(data.response);
             dispatch(member.actions.setEmail(data.response.email));
             dispatch(member.actions.setTown(data.response.town));
             dispatch(member.actions.setProfileText(data.response.profileText));
             setLoading(false);
           });
-        } else {
-          console.log('data.success = false');
         }
       });
   };

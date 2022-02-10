@@ -24,7 +24,6 @@ export const Following = () => {
         fetch(API_URL(`member/${item}`))
           .then((res) => res.json())
           .then((data) => {
-            console.log('data', data);
             return data.response.memberName;
           })
       )
