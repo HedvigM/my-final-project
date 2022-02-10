@@ -23,7 +23,7 @@ export const SearchMembers = () => {
       actualFollowing.push(item.following);
     }
 
-    // if the logged in user is following -> push the one that the user is following.
+    // if the logged in user is following -> push the one that the user is followed.
     if (item.following === memberId) {
       actualFollowed.push(item.followed);
     }
@@ -54,11 +54,6 @@ export const SearchMembers = () => {
       );
   };
 
-  list.filter(
-    (item) =>
-      !value || item.memberName.toLowerCase().includes(value.toLowerCase())
-  );
-
   return (
     <>
       <Green>
@@ -78,8 +73,9 @@ export const SearchMembers = () => {
           {list
             .filter(
               (item) =>
-                !value ||
-                item.memberName.toLowerCase().includes(value.toLowerCase())
+                (!value && memberId !== item._id) ||
+                (item.memberName.toLowerCase().includes(value.toLowerCase()) &&
+                  memberId !== item._id)
             )
             .map((item, index) => (
               <Relations key={index}>
@@ -123,7 +119,7 @@ const Btn = styled.button`
 
   color: black;
   margin: 3px;
-  width: 70px;
+
   padding: 3px;
   font-size: 15px;
   border-radius: 4px;
