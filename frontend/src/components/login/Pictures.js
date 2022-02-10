@@ -59,8 +59,14 @@ const InnerContainer = styled.div`
   max-width: 500px;
   margin: 0 auto;
   height: 100%;
-  /* background-color: #ff885e; */
-  /* border: 3px solid red;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    text-align: center;
+  }
+
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
