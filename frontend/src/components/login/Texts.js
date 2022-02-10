@@ -24,31 +24,48 @@ export const Cards = () => {
 
 export const About = () => {
   const text = [
-    'Jag som gjort webbsidan heter Hedvig Mejstedt och är själv musiker. Jag drabbas ofta av nervositet på en session när någon frågar mig om jag vill starta en låt. Nervositeten gör ofta det svårt att komma på en låt att dra igång. Jag har många gånger önskat att det fanns en app som denna, det är därför jag nu har skapat den. Jag antar att det finns fler som jag - som vill ha alla sina låtar samlade på ett ställe med noter.'
+    'Keep you tunes at one place. See what tunes you and your session pal have together!'
   ];
   return text.map((item, index) => <p key={index}>{item}</p>);
 };
 
 const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
   grid-gap: 10px;
 
-  min-width: 334px;
-  max-width: 500px;
   margin: 0 auto;
   height: 100%;
 
-  @media (min-width: 0px) and (max-width: 767px) {
+  @media (min-width: 0px) {
     min-width: 200px;
-    max-width: 300px;
+    max-width: 500px;
+  }
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0fr;
+    grid-gap: 10px;
+    min-width: 334px;
+    max-width: 500px;
   }
 `;
 
 const Card = styled.div`
   background-color: var(--main-color);
-  border: 1px solid black;
-  padding: 5px;
+  padding: 0px;
+  margin: 10px 0px;
+
+  p {
+    margin: 10px;
+  }
+
+  /* Liten Dator - */
+  @media (min-width: 992px) {
+    background-color: var(--main-color);
+    padding: 5px;
+    margin: 30px 0px;
+  }
 `;
 
 const Emoji = styled.p`
