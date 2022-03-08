@@ -6,13 +6,14 @@ import { API_URL } from '../utils/url';
 
 export const DetailTune = (tune) => {
   const [list, setList] = useState([]);
-  const detailedTune = tune.tune;
   const [detailedTuneAsNumber, setDetailedTuneAsNumber] = useState([]);
   const [details, setDetails] = useState([]);
   const [key, setKey] = useState('');
   const [abc, setAbc] = useState(
     '|:E2BE dEBE|E2BE AFDF|E2BE dEBE|BABc dAFD:|!d2fd c2ec|defg afge|d2fd c2ec|BABc dAFA|!d2fd c2ec|defg afge|afge fdec|BABc dAFD|'
   );
+
+  const detailedTune = tune.tune;
 
   // fetching all the members from the database.
   useEffect(() => {
@@ -36,7 +37,7 @@ export const DetailTune = (tune) => {
     );
   }, [detailedTune]);
 
-  let lineBreak = function (string) {
+  let lineBreak = (string) => {
     return string.replaceAll('!', '\n');
   };
 
