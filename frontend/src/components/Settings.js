@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector, batch } from 'react-redux';
-import { DELETE, UPDATE_URL } from '../utils/url';
-import { member } from '../reducers/member';
-import { relations } from '../reducers/relations';
+
 import styled from 'styled-components';
 import swal from 'sweetalert';
+
+import { relations } from '../reducers/relations';
+import { DELETE, UPDATE_URL } from '../utils/url';
+import { member } from '../reducers/member';
 
 export const Settings = () => {
   const [mail, setMail] = useState('');
@@ -69,7 +71,6 @@ export const Settings = () => {
   };
 
   const deleteFetch = async (memberId) => {
-    console.log('här kör vi delete-fetchen');
     fetch(DELETE(memberId), options)
       .then((res) => res.json())
       .then((data) => {
