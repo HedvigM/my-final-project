@@ -1,14 +1,14 @@
 {
-  "name": "project-auth-backend",
+  "name": "",
   "version": "1.0.0",
-  "description": "Starter project to get up and running with express quickly",
+  "description": "Mark the tunes you know and the ones you want to learn, and find out what tunes you and your friends have in common.",
   "type": "module",
   "scripts": {
     "start": "babel-node server.js",
     "dev": "nodemon server.js --exec babel-node",
     "lint": "eslint ."
   },
-  "author": "",
+  "author": "Hedvig Mejstedt",
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.17.0",
