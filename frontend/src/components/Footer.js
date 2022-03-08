@@ -28,7 +28,7 @@ export const Footer = () => {
             href="https://github.com/HedvigM"
             target="_blank"
             tabindex="0"
-            rel="noreferrer"
+            rel="noreferrer noopener"
             aria-label="a link to my GitHub account">
             <FontAwesomeIcon icon={['fab', 'github']} />
           </Icon>
@@ -36,7 +36,7 @@ export const Footer = () => {
             href="https://www.linkedin.com/in/hedvig-mejstedt"
             target="_blank"
             tabindex="0"
-            rel="noreferrer"
+            rel="noreferrer noopener"
             aria-label="a link to my linkedin account">
             <FontAwesomeIcon icon={['fab', 'linkedin']} />
           </Icon>
@@ -44,7 +44,7 @@ export const Footer = () => {
             href="https://stackoverflow.com/users/16650863/hedvig"
             target="_blank"
             tabindex="0"
-            rel="noreferrer"
+            rel="noreferrer noopener"
             aria-label="a link to my stack-overflow account">
             <FontAwesomeIcon icon={['fab', 'stack-overflow']} />
           </Icon>
@@ -52,7 +52,7 @@ export const Footer = () => {
             href="https://mejstedt.se"
             target="_blank"
             tabindex="0"
-            rel="noreferrer"
+            rel="noreferrer noopener"
             aria-label="a link to my portfolio">
             <FontAwesomeIcon icon={faMountain} />
           </Icon>
@@ -90,21 +90,21 @@ const Icons = styled.div`
 `;
 
 const StyledFooter = styled.footer`
-a {
-  color: black;
-  font-size: 0.8em;
-  text-decoration: none;
-}
-a:hover {
-  /* color taken from the picture on the site */
-  color: #2a6d38;
-}
-a:active {
-  color: var(--secondary-color);
-}
+  a {
+    color: black;
+    font-size: 0.8em;
+    text-decoration: none;
+  }
+  a:hover {
+    /* color taken from the picture on the site */
+    color: #2a6d38;
+  }
+  a:active {
+    color: var(--secondary-color);
+  }
 
-  /* Mobil */
-  @media (min-width: 0px)  {
+  /* mobile */
+  @media (min-width: 0px) {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -112,18 +112,11 @@ a:active {
     color: black;
   }
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     font-size: 1.7em;
   }
 
-  /* Stor Dator - */
-  @media (min-width: 1200px) {
-  }
-
-/*   background-color: var(--main-color);
-  text-align: center;
-  /*   margin-top: 20px; */
   @media (min-width: 0px) and (max-width: 991px) {
     margin-top: auto;
     h1 {
@@ -136,5 +129,5 @@ a:active {
   }
   @media (min-width: 992px) {
     padding: 30px;
-  } */
+  }
 `;
