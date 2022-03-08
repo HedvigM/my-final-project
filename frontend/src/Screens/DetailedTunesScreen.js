@@ -35,20 +35,16 @@ const InnerContainer = styled.div`
   margin: 0 auto;
   height: 100%;
 
-  /* Mobil */
+  /* Mobile */
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
   }
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     min-width: 500px;
     max-width: 700px;
-  }
-
-  /* Stor Dator - */
-  @media (min-width: 1200px) {
   }
 `;
 
