@@ -11,7 +11,7 @@ export const Following = () => {
   const relations = useSelector((store) => store.relations.relations);
 
   useEffect(() => {
-    let followingId = [];
+    const followingId = [];
 
     relations.forEach((item) => {
       if (item.following === memberId) {
@@ -34,7 +34,7 @@ export const Following = () => {
   }, [memberId, relations]);
 
   return loading ? (
-    <h1>Laddar</h1>
+    <h1>Loading</h1>
   ) : (
     <Text>
       <h1>The members i'm following are:</h1>
@@ -50,7 +50,7 @@ const Text = styled.div`
     font-size: 1.17em;
   }
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     h1 {
       font-size: 2em;
