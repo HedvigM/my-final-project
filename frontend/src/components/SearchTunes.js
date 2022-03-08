@@ -23,7 +23,7 @@ export const SearchTunes = () => {
 
   const dispatch = useDispatch();
 
-  const OnSearchHandle = async () => {
+  const onSearchHandle = async () => {
     fetch(SEARCH_TUNE(value))
       .then((res) => res.json())
       .then((data) => {
@@ -52,7 +52,7 @@ export const SearchTunes = () => {
     headers: { 'Content-Type': 'application/json' }
   };
 
-  const AddKnowTune = async (tuneId) => {
+  const addKnowTune = async (tuneId) => {
     fetch(KNOW_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
       .then((data) =>
@@ -62,7 +62,7 @@ export const SearchTunes = () => {
       );
   };
 
-  const AddLearnTune = async (tuneId) => {
+  const addLearnTune = async (tuneId) => {
     fetch(LEARN_TUNE_URL(memberId, tuneId), options)
       .then((res) => res.json())
       .then((data) =>
@@ -87,7 +87,7 @@ export const SearchTunes = () => {
                 <p>❤️</p>
               </R>
             ) : (
-              <Btn onClick={() => AddKnowTune(item.id)}>Know</Btn>
+              <Btn onClick={() => addKnowTune(item.id)}>Know</Btn>
             )}
 
             {learnTunes.includes(item.id) ? (
@@ -96,7 +96,7 @@ export const SearchTunes = () => {
               </R>
             ) : (
               <R>
-                <Btn onClick={() => AddLearnTune(item.id)}>Learn</Btn>
+                <Btn onClick={() => addLearnTune(item.id)}>Learn</Btn>
               </R>
             )}
           </Right>
@@ -115,7 +115,7 @@ export const SearchTunes = () => {
             placeholder="Type in a tune 👇"
             onChange={(event) => setValue(event.target.value)}
           />
-          <Btn className="accent" onClick={OnSearchHandle}>
+          <Btn className="accent" onClick={onSearchHandle}>
             Search!
           </Btn>
         </InnerContainer>
