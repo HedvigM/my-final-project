@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Profile } from '../components/Profile';
 
+import { Profile } from '../components/Profile';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { TunesIncommon } from '../components/TunesIncommon';
@@ -28,11 +28,11 @@ export const DetailedMemberScreen = () => {
         <Profile member={member} />
       </InnerContainer>
       <Img>
-        <div className="overlay">
+        <Overlay>
           <InnerContainer>
             <TunesIncommon member={member} />
           </InnerContainer>
-        </div>
+        </Overlay>
       </Img>
 
       <Footer />
@@ -46,15 +46,7 @@ const Img = styled.div`
   background-size: cover;
   margin: 0px;
 
-  .overlay {
-    background-color: #04040469;
-
-    margin: 0px;
-    width: 100%;
-    height: 100%;
-  }
-
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     .overlay {
       background-color: #04040469;
@@ -68,6 +60,13 @@ const Img = styled.div`
   }
 `;
 
+const Overlay = styled.div`
+  background-color: #04040469;
+  margin: 0px;
+  width: 100%;
+  height: 100%;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,18 +78,10 @@ const InnerContainer = styled.div`
   max-width: 500px;
   margin: 0 auto;
   height: 100%;
-  /* background-color: #ff885e; */
-  /* border: 3px solid red;*/
+
+  /* mobile */
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
-  }
-
-  /* Liten Dator - */
-  @media (min-width: 992px) {
-  }
-
-  /* Stor Dator - */
-  @media (min-width: 1200px) {
   }
 `;
