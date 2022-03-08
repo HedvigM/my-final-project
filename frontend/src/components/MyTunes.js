@@ -36,9 +36,7 @@ export const MyTunes = () => {
       learnTunes.map((item) =>
         fetch(TUNE_URL(item))
           .then((res) => res.json())
-          .then((data) => {
-            return data.name;
-          })
+          .then((data) => data.name)
       )
     ).then((values) => {
       setLearn(values);
