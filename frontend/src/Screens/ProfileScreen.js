@@ -15,7 +15,6 @@ export const ProfileScreen = () => {
 
   useEffect(() => {
     if (!accessToken) {
-      console.log('skicka iväg från profilescreen till login');
       navigate('/login');
     }
   }, [accessToken, navigate]);
@@ -35,11 +34,11 @@ export const ProfileScreen = () => {
         </Color>
 
         <Img>
-          <div className="overlay">
+          <Overlay>
             <InnerContainer>
               <MyTunes />
             </InnerContainer>
-          </div>
+          </Overlay>
         </Img>
         <Footer />
       </Container>
@@ -55,13 +54,12 @@ const Img = styled.div`
   background-image: url('/yan-ming.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+`;
 
-  .overlay {
-    background-color: #04040469;
-
-    width: 100%;
-    height: 100%;
-  }
+const Overlay = styled.div`
+  background-color: #04040469;
+  width: 100%;
+  height: 100%;
 `;
 
 const Container = styled.div`
