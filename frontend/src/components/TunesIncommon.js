@@ -10,7 +10,7 @@ export const TunesIncommon = (member) => {
   const [tuneNames, setTuneNames] = useState([]);
   const detailedMember = member.member;
 
-  const LoggedInMember = useSelector((store) => store.member.knowTunes);
+  const loggedInMember = useSelector((store) => store.member.knowTunes);
 
   useEffect(() => {
     setLoading(true);
@@ -25,16 +25,16 @@ export const TunesIncommon = (member) => {
   }, [detailedMember]);
 
   useEffect(() => {
-    if (LoggedInMember && list.knowTunes) {
+    if (loggedInMember && list.knowTunes) {
       const commonTunes = [];
-      LoggedInMember.forEach((tuneId) => {
+      loggedInMember.forEach((tuneId) => {
         if (list.knowTunes.includes(tuneId)) {
           commonTunes.push(tuneId);
         }
       });
       setCommonTunes(commonTunes);
     }
-  }, [LoggedInMember, list]);
+  }, [loggedInMember, list]);
 
   useEffect(() => {
     Promise.all(
