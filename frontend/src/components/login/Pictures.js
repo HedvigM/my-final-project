@@ -5,7 +5,7 @@ export const HeroPic = () => {
   return (
     <Violin>
       <InnerContainer>
-        <h1>Music App</h1>
+        <h1>Tunes & Friends</h1>
       </InnerContainer>
     </Violin>
   );
