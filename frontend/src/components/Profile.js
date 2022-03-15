@@ -1,46 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { API_URL } from '../utils/url';
+import React from 'react';
 import styled from 'styled-components';
-import md5 from 'md5';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export const Profile = (member) => {
-  const [detailedMember, setDetailedMember] = useState({});
-  const [loading, setLoading] = useState(true);
-  const memberId = useSelector((store) => store.member.memberId);
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(user);
 
-  let profileId = '';
-  if (member.member) {
-    profileId = member.member;
-  } else {
-    profileId = memberId;
+  if (isLoading) {
+    return <div>Loading ...</div>;
   }
 
-  useEffect(() => {
-    setLoading(true);
-
-    fetch(API_URL(`member/${profileId}`))
-      .then((res) => res.json())
-      .then((data) => {
-        setDetailedMember(data.response);
-        setLoading(false);
-      });
-  }, [profileId]);
-
-  return loading ? (
-    <h1>Laddar</h1>
-  ) : (
-    <PicNameCity>
-      <Img
-        src={`https://www.gravatar.com/avatar/${md5(
-          detailedMember.email
-        )}?d=retro`}
-      />
-      <NameCity>
-        <h1>{detailedMember.memberName}</h1>
-        <h2>{detailedMember.town}</h2>
-      </NameCity>
-    </PicNameCity>
+  return (
+    isAuthenticated && (
+      <>
+        <PicNameCity>
+          <Img src={user.picture} alt={user.name} />
+          <NameCity>
+            <h2>{user.name}</h2>
+            <h3>Town??</h3>
+          </NameCity>
+        </PicNameCity>
+      </>
+    )
   );
 };
 
@@ -55,7 +36,7 @@ const NameCity = styled.div`
     margin-top: 5px;
   }
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     margin: 5px;
     margin-left: 40px;
@@ -78,7 +59,7 @@ const Img = styled.img`
   border-radius: 50%;
   align-self: center;
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     height: 200px;
   }
@@ -89,7 +70,7 @@ const PicNameCity = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 10px;
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     padding: 60px 0px;
   }

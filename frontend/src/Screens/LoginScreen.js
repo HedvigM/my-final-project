@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { Login } from '../components/login/Login';
+/* import { Login } from '../components/login/Login'; */
+import { LoginAuth0 } from '../components/login/LoginAuth0';
 import { HeroPic, Quote, SecondPic } from '../components/login/Pictures';
 import { About, Cards } from '../components/login/Texts';
 import { Footer } from '../components/login/Footer';
 
 export const LoginScreen = () => {
   const navigate = useNavigate();
-
+  /*
   const accessToken = useSelector((store) => store.member.accessToken);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ export const LoginScreen = () => {
       navigate('/login');
     }
   }, [accessToken, navigate]);
-
+*/
   return (
     <Container>
       <HeroPic />
@@ -27,7 +28,7 @@ export const LoginScreen = () => {
       <LoginContainer>
         <InnerContainer>
           <LoginInnerContainer>
-            <Login />
+            <LoginAuth0 />
           </LoginInnerContainer>
         </InnerContainer>
       </LoginContainer>

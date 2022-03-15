@@ -1,0 +1,14 @@
+I have made a new login system that messes with the whole app... I can now use google to sign in Yey! But i need to update the rest of the app accordingly. 
+
+I have changed the memberschema in the server.js, and the sign up endpoint. Now i need to change the rest of the endpoints. 
+
+The log out function is not working at the moment. The function that redirected before is not doing its job, so i removed it in the meantime. 
+
+TODO:
+1. change the api endpoints. 
+2. look at the utils.
+3. look at the API calls in the app and change them acordingly to the changes. 
+4. Do a refactoring on the server.js document and make smaller components. 
+
+5. Incorporate the lottie! =) 
+6. Look at the mobile version thingie.

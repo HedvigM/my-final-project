@@ -5,9 +5,16 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+import { Auth0Provider } from '@auth0/auth0-react';
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Auth0Provider
+      domain="dev-a6frsqhf.eu.auth0.com"
+      clientId="whWHkjIwxWuX1lXdQjzzOBn45AApdsg9"
+      redirectUri={window.location.origin}>
+      <App />
+    </Auth0Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

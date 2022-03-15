@@ -58,7 +58,6 @@ const App = () => {
           <div>
             <Routes>
               <Route path="/" element={<ProfileScreen />} />
-
               <Route path="/login" element={<LoginScreen />} />
 
               <Route path="/search-members" element={<SearchMemberScreen />} />

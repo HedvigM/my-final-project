@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import styled from 'styled-components/macro';
 import { Profile } from '../components/Profile';
 import { Following } from '../components/Following';
@@ -10,17 +12,23 @@ import { Footer } from '../components/Footer';
 
 export const ProfileScreen = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, isLoading } = useAuth0();
+  console.log(isAuthenticated);
+  /*  const accessToken = useSelector((store) => store.member.accessToken); */
 
-  const accessToken = useSelector((store) => store.member.accessToken);
-
-  useEffect(() => {
-    if (!accessToken) {
+  /*   useEffect(() => {
+    if (!isAuthenticated) {
       navigate('/login');
     }
-  }, [accessToken, navigate]);
+  }, [isAuthenticated, navigate]);
+*/
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
-    accessToken && (
+    /* accessToken && ( */
+    isAuthenticated && (
       <Container>
         <Header />
         <InnerContainer>

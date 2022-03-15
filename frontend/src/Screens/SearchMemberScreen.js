@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
+
 import { useSelector } from 'react-redux';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
@@ -8,20 +10,28 @@ import styled from 'styled-components';
 
 export const SearchMemberScreen = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, isLoading } = useAuth0();
 
-  const accessToken = useSelector((store) => store.member.accessToken);
+  /*   const accessToken = useSelector((store) => store.member.accessToken); */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!accessToken) {
       navigate('/login');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken, navigate]); */
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+
   return (
-    <Container>
-      <Header />
-      <SearchMembers />
-      <Footer />
-    </Container>
+    isAuthenticated && (
+      <Container>
+        <Header />
+        <SearchMembers />
+        <Footer />
+      </Container>
+    )
   );
 };
 

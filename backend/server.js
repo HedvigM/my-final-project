@@ -2,29 +2,33 @@ import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import listEndpoints from 'express-list-endpoints';
-import crypto from 'crypto';
-import bcrypt from 'bcrypt';
+/* import crypto from 'crypto'; */
+/* import bcrypt from 'bcrypt'; */
 
 const mongoUrl = process.env.MONGO_URL || 'mongodb://localhost/session';
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const MemberSchema = new mongoose.Schema({
-  email: {
+  /*  email: {
     type: String
-  },
-  memberName: {
+  }, */
+  /*  memberName: {
     type: String,
     unique: true,
     required: true
-  },
-  password: {
+  }, */
+  /*  password: {
     type: String,
     required: true
-  },
-  accessToken: {
+  }, */
+  /*  accessToken: {
     type: String,
     default: () => crypto.randomBytes(128).toString('hex')
+  }, */
+  memberId: {
+    type: String,
+    required: true
   },
   knowTunes: [
     {
@@ -231,30 +235,19 @@ app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
-  const { memberName, password, email, town } = req.body;
+  const { memberId, town } = req.body;
 
   try {
-    const salt = bcrypt.genSaltSync();
-
-    if (password.length < 5) {
-      throw 'Password must be at least 5 characters long';
-    }
-
     const newMember = await new Member({
-      memberName,
-      password: bcrypt.hashSync(password, salt),
-      email,
+      memberId,
       town
     }).save();
 
     res.status(201).json({
       response: {
         memberId: newMember._id,
-        memberName: newMember.memberName,
-        email: newMember.email,
         town: newMember.town,
         profileText: newMember.profileText,
-        accessToken: newMember.accessToken,
         knowTunes: newMember.knowTunes,
         learnTunes: newMember.learnTunes
       },

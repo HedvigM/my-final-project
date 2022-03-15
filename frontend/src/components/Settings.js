@@ -1,36 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React /* , { useEffect, useState } */ from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector, batch } from 'react-redux';
+import { useDispatch /* , useSelector, batch */ } from 'react-redux';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import styled from 'styled-components';
 import swal from 'sweetalert';
 
-import { relations } from '../reducers/relations';
+/* import { relations } from '../reducers/relations';
 import { DELETE, UPDATE_URL } from '../utils/url';
-import { member } from '../reducers/member';
+import { member } from '../reducers/member'; */
 
 export const Settings = () => {
-  const [mail, setMail] = useState('');
+  const { logout } = useAuth0();
+  /*  const [mail, setMail] = useState('');
   const [city, setCity] = useState('');
   const [words, setWords] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); */
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  /*  const dispatch = useDispatch();
+  const navigate = useNavigate(); */
 
-  const accessToken = useSelector((store) => store.member.accessToken);
+  /*   const accessToken = useSelector((store) => store.member.accessToken);
   const profileText = useSelector((store) => store.member.profileText);
   const town = useSelector((store) => store.member.town);
   const email = useSelector((store) => store.member.email);
-  const memberId = useSelector((store) => store.member.memberId);
+  const memberId = useSelector((store) => store.member.memberId); */
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (!accessToken) {
       navigate('/login');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken, navigate]); */
 
-  const logout = () => {
+  /*   const logout = () => {
     batch(() => {
       dispatch(member.actions.setMemberId(null));
       dispatch(member.actions.setMemberName(null));
@@ -44,8 +46,8 @@ export const Settings = () => {
       dispatch(member.actions.setMember(null));
       dispatch(relations.actions.setRelations(null));
     });
-  };
-
+  }; */
+  /* 
   const onDelete = (memberId) => {
     swal({
       title: 'Are you sure?',
@@ -63,9 +65,9 @@ export const Settings = () => {
         swal('Your profile is safe!');
       }
     });
-  };
+  }; */
 
-  const options = {
+  /*   const options = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   };
@@ -86,9 +88,9 @@ export const Settings = () => {
           });
         }
       });
-  };
+  }; */
 
-  let profileMail = '';
+  /*   let profileMail = '';
   if (mail) {
     profileMail = mail;
   } else {
@@ -107,9 +109,9 @@ export const Settings = () => {
     freeText = words;
   } else {
     freeText = profileText;
-  }
+  } */
 
-  const patch = {
+  /*  const patch = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -118,9 +120,9 @@ export const Settings = () => {
       town: profileCity,
       profileText: freeText
     })
-  };
+  }; */
 
-  const onProfileUpdate = (event) => {
+  /*   const onProfileUpdate = (event) => {
     setLoading(true);
     event.preventDefault();
     fetch(UPDATE_URL, patch)
@@ -135,13 +137,14 @@ export const Settings = () => {
           });
         }
       });
-  };
+  }; */
 
-  return loading ? (
+  /*  return loading ? (
     <h1>Loading</h1>
-  ) : (
+  ) :  */
+  return (
     <>
-      <Container>
+      {/*     <Container>
         <form>
           <h1>Do you want to change your info?</h1>
 
@@ -170,21 +173,23 @@ export const Settings = () => {
             onChange={(event) => setWords(event.target.value)}></input>
           <Btn onClick={onProfileUpdate}>Change the info!</Btn>
         </form>
-      </Container>
+      </Container> */}
 
-      <Btn onClick={logout}>Log out</Btn>
-      <Btn
+      <Btn onClick={() => logout({ returnTo: window.location.origin })}>
+        Log Out
+      </Btn>
+      {/*   <Btn
         delete
         onClick={() => {
           onDelete(memberId);
         }}>
         Delete account
-      </Btn>
+      </Btn> */}
     </>
   );
 };
 
-const Container = styled.div`
+/* const Container = styled.div`
   color: white;
 
   p {
@@ -208,7 +213,7 @@ const Container = styled.div`
       opacity: 1;
     }
   }
-`;
+`; */
 
 const Btn = styled.button`
   background-color: ${(props) => (props.delete ? '#fc6666' : 'white')};

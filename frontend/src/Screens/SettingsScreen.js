@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 import { Settings } from '../components/Settings';
 import { Profile } from '../components/Profile';
@@ -9,30 +10,37 @@ import { Footer } from '../components/Footer';
 
 export const SettingsScreen = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, isLoading } = useAuth0();
 
-  const accessToken = useSelector((store) => store.member.accessToken);
+  /* const accessToken = useSelector((store) => store.member.accessToken); */
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!accessToken) {
       navigate('/login');
     }
-  }, [accessToken, navigate]);
+  }, [accessToken, navigate]); */
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
-    <Container>
-      <Header />
-      <InnerContainer>
-        <Profile />
-      </InnerContainer>
-      <Img>
-        <div className="overlay">
-          <InnerContainer>
-            <Settings />
-          </InnerContainer>
-        </div>
-      </Img>
-      <Footer />
-    </Container>
+    isAuthenticated && (
+      <Container>
+        <Header />
+        <InnerContainer>
+          <Profile />
+        </InnerContainer>
+        <Img>
+          <div className="overlay">
+            <InnerContainer>
+              <Settings />
+            </InnerContainer>
+          </div>
+        </Img>
+        <Footer />
+      </Container>
+    )
   );
 };
 
