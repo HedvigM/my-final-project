@@ -12,26 +12,18 @@ export const SearchTuneScreen = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth0();
 
-  /* const accessToken = useSelector((store) => store.member.accessToken); */
-
-  /*  useEffect(() => {
-    if (!accessToken) {
-      navigate('/login');
-    }
-  }, [accessToken, navigate]); */
-
   if (isLoading) {
     return <div>Loading ...</div>;
   }
 
-  return (
-    isAuthenticated && (
-      <Container>
-        <Header />
-        <SearchTunes />
-        <Footer />
-      </Container>
-    )
+  return isAuthenticated ? (
+    <Container>
+      <Header />
+      <SearchTunes />
+      <Footer />
+    </Container>
+  ) : (
+    navigate('/login')
   );
 };
 
