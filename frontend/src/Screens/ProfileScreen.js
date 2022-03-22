@@ -14,43 +14,35 @@ export const ProfileScreen = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth0();
   console.log(isAuthenticated);
-  /*  const accessToken = useSelector((store) => store.member.accessToken); */
 
-  /*   useEffect(() => {
-    if (!isAuthenticated) {
-      navigate('/login');
-    }
-  }, [isAuthenticated, navigate]);
-*/
   if (isLoading) {
     return <div>Loading ...</div>;
   }
 
-  return (
-    /* accessToken && ( */
-    isAuthenticated && (
-      <Container>
-        <Header />
+  return isAuthenticated ? (
+    <Container>
+      <Header />
+      <InnerContainer>
+        <Profile />
+      </InnerContainer>
+
+      <Color>
         <InnerContainer>
-          <Profile />
+          <Following />
         </InnerContainer>
+      </Color>
 
-        <Color>
+      <Img>
+        <Overlay>
           <InnerContainer>
-            <Following />
+            <MyTunes />
           </InnerContainer>
-        </Color>
-
-        <Img>
-          <Overlay>
-            <InnerContainer>
-              <MyTunes />
-            </InnerContainer>
-          </Overlay>
-        </Img>
-        <Footer />
-      </Container>
-    )
+        </Overlay>
+      </Img>
+      <Footer />
+    </Container>
+  ) : (
+    navigate('/login')
   );
 };
 
