@@ -26,16 +26,16 @@ export const DetailedTunesScreen = () => {
     return <div>Loading ...</div>;
   }
 
-  return (
-    isAuthenticated && (
-      <Container>
-        <Header />
-        <InnerContainer>
-          <DetailTune tune={tune} />
-        </InnerContainer>
-        <Footer />
-      </Container>
-    )
+  return isAuthenticated ? (
+    <Container>
+      <Header />
+      <InnerContainer>
+        <DetailTune tune={tune} />
+      </InnerContainer>
+      <Footer />
+    </Container>
+  ) : (
+    navigate('/login')
   );
 };
 
