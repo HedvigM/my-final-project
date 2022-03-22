@@ -5,9 +5,10 @@ I have changed the memberschema in the server.js, and the sign up endpoint. Now 
 The log out function is not working at the moment. The function that redirected before is not doing its job, so i removed it in the meantime. 
 
 TODO:
-1. change the api endpoints. 
-2. look at the utils.
-3. look at the API calls in the app and change them acordingly to the changes. 
+3. look at the redirects, the '/' should lead to the 'login' page... and then the profile page should have right redirects. 
+
+3b. add the 'login' as a choise to the header. 
+
 4. Do a refactoring on the server.js document and make smaller components. 
 
 5. Incorporate the lottie! =) 
