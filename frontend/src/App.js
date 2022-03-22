@@ -57,8 +57,11 @@ const App = () => {
         <div>
           <div>
             <Routes>
-              <Route path="/" element={<ProfileScreen />} />
+              {/* <Route path="/" element={<ProfileScreen />} />
+              <Route path="/login" element={<LoginScreen />} /> */}
+
               <Route path="/login" element={<LoginScreen />} />
+              <Route path="/profile" element={<ProfileScreen />} />
 
               <Route path="/search-members" element={<SearchMemberScreen />} />
 
