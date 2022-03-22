@@ -5,13 +5,10 @@ export const member = createSlice({
   initialState: {
     member: null,
     memberId: null,
-    memberName: null,
-    email: null,
     town: null,
     profileText: null,
     knowTunes: [],
-    learnTunes: [],
-    accessToken: null
+    learnTunes: []
   },
   reducers: {
     setMember: (store, action) => {
@@ -19,12 +16,6 @@ export const member = createSlice({
     },
     setMemberId: (store, action) => {
       store.memberId = action.payload;
-    },
-    setMemberName: (store, action) => {
-      store.memberName = action.payload;
-    },
-    setEmail: (store, action) => {
-      store.email = action.payload;
     },
     setTown: (store, action) => {
       store.town = action.payload;
@@ -37,9 +28,6 @@ export const member = createSlice({
     },
     setLearnTunes: (store, action) => {
       store.learnTunes = action.payload;
-    },
-    setAccessToken: (store, action) => {
-      store.accessToken = action.payload;
     }
   }
 });
