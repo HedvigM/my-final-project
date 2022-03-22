@@ -1,25 +1,20 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 /* import { Login } from '../components/login/Login'; */
 import { LoginAuth0 } from '../components/login/LoginAuth0';
+import { Header } from '../components/Header';
 import { HeroPic, Quote, SecondPic } from '../components/login/Pictures';
 import { About, Cards } from '../components/login/Texts';
 import { Footer } from '../components/login/Footer';
 
 export const LoginScreen = () => {
-  const navigate = useNavigate();
-  /*
-  const accessToken = useSelector((store) => store.member.accessToken);
+  const { isAuthenticated, isLoading } = useAuth0();
 
-  useEffect(() => {
-    if (!accessToken) {
-      navigate('/login');
-    }
-  }, [accessToken, navigate]);
-*/
-  return (
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
+  return !isAuthenticated ? (
     <Container>
       <HeroPic />
       <Cards />
@@ -40,6 +35,20 @@ export const LoginScreen = () => {
       <SecondPic />
       <Footer />
     </Container>
+  ) : (
+    <>
+      <Header />
+      <Container>
+        <HeroPic />
+
+        <InnerContainer>
+          <h1>This page is under development.</h1>
+        </InnerContainer>
+
+        <SecondPic />
+        <Footer />
+      </Container>
+    </>
   );
 };
 
