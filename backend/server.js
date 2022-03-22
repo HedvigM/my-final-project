@@ -234,44 +234,15 @@ app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
   }
 });
 
-app.post('/signup', async (req, res) => {
-  const { memberId, town } = req.body;
-
-  try {
-    const newMember = await new Member({
-      memberId,
-      town
-    }).save();
-
-    res.status(201).json({
-      response: {
-        memberId: newMember._id,
-        town: newMember.town,
-        profileText: newMember.profileText,
-        knowTunes: newMember.knowTunes,
-        learnTunes: newMember.learnTunes
-      },
-      success: true
-    });
-  } catch (error) {
-    res
-      .status(400)
-      .json({ response: 'Could not create member', success: false });
-  }
-});
-
 app.post('/signin', async (req, res) => {
-  const loginMember = req.body;
+  const { memberId } = req.body;
 
   try {
     const databaseMember = await Member.findOne({
-      memberName: loginMember.memberName
+      memberId
     });
 
-    if (
-      databaseMember &&
-      bcrypt.compareSync(loginMember.password, databaseMember.password)
-    ) {
+    if (databaseMember) {
       res.status(200).json({
         response: {
           memberId: databaseMember._id,
@@ -286,9 +257,20 @@ app.post('/signin', async (req, res) => {
         success: true
       });
     } else {
-      res
-        .status(401)
-        .json({ response: 'Name and password dont match', success: false });
+      const newMember = await new Member({
+        memberId
+      }).save();
+
+      res.status(201).json({
+        response: {
+          memberId: newMember._id,
+          town: newMember.town,
+          profileText: newMember.profileText,
+          knowTunes: newMember.knowTunes,
+          learnTunes: newMember.learnTunes
+        },
+        success: true
+      });
     }
   } catch (error) {
     res.status(400).json({ response: error, success: false });
