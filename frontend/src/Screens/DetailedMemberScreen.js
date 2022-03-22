@@ -28,24 +28,24 @@ export const DetailedMemberScreen = () => {
     return <div>Loading ...</div>;
   }
 
-  return (
-    isAuthenticated && (
-      <Container>
-        <Header />
-        <InnerContainer>
-          <Profile member={member} />
-        </InnerContainer>
-        <Img>
-          <Overlay>
-            <InnerContainer>
-              <TunesIncommon member={member} />
-            </InnerContainer>
-          </Overlay>
-        </Img>
+  return isAuthenticated ? (
+    <Container>
+      <Header />
+      <InnerContainer>
+        <Profile member={member} />
+      </InnerContainer>
+      <Img>
+        <Overlay>
+          <InnerContainer>
+            <TunesIncommon member={member} />
+          </InnerContainer>
+        </Overlay>
+      </Img>
 
-        <Footer />
-      </Container>
-    )
+      <Footer />
+    </Container>
+  ) : (
+    navigate('/login')
   );
 };
 
