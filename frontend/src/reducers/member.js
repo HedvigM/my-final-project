@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 export const member = createSlice({
   name: 'member',
   initialState: {
-    member: null,
+    memberName: null,
     memberId: null,
     town: null,
     profileText: null,
@@ -11,8 +11,8 @@ export const member = createSlice({
     learnTunes: []
   },
   reducers: {
-    setMember: (store, action) => {
-      store.member = action.payload;
+    setMemberName: (store, action) => {
+      store.memberName = action.payload;
     },
     setMemberId: (store, action) => {
       store.memberId = action.payload;
