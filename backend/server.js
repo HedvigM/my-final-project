@@ -13,11 +13,9 @@ const MemberSchema = new mongoose.Schema({
   /*  email: {
     type: String
   }, */
-  /*  memberName: {
-    type: String,
-    unique: true,
-    required: true
-  }, */
+  memberName: {
+    type: String
+  },
   /*  password: {
     type: String,
     required: true
@@ -235,7 +233,7 @@ app.patch('/member/:memberId/tune/learn/:tuneId', async (req, res) => {
 });
 
 app.post('/signin', async (req, res) => {
-  const { memberId } = req.body;
+  const { memberId, memberName } = req.body;
 
   try {
     const databaseMember = await Member.findOne({
@@ -247,10 +245,8 @@ app.post('/signin', async (req, res) => {
         response: {
           memberId: databaseMember._id,
           memberName: databaseMember.memberName,
-          email: databaseMember.email,
           town: databaseMember.town,
           profileText: databaseMember.profileText,
-          accessToken: databaseMember.accessToken,
           knowTunes: databaseMember.knowTunes,
           learnTunes: databaseMember.learnTunes
         },
@@ -258,12 +254,14 @@ app.post('/signin', async (req, res) => {
       });
     } else {
       const newMember = await new Member({
-        memberId
+        memberId,
+        memberName
       }).save();
 
       res.status(201).json({
         response: {
           memberId: newMember._id,
+          memberName: databaseMember.memberName,
           town: newMember.town,
           profileText: newMember.profileText,
           knowTunes: newMember.knowTunes,
