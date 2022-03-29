@@ -10,20 +10,10 @@ mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.Promise = Promise;
 
 const MemberSchema = new mongoose.Schema({
-  /*  email: {
-    type: String
-  }, */
   memberName: {
     type: String
   },
-  /*  password: {
-    type: String,
-    required: true
-  }, */
-  /*  accessToken: {
-    type: String,
-    default: () => crypto.randomBytes(128).toString('hex')
-  }, */
+
   memberId: {
     type: String,
     required: true
