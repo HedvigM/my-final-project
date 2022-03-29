@@ -44,10 +44,10 @@ export const LoginScreen = () => {
 
         <InnerContainer>
           <h1>This page is under development.</h1>
-          <Logout />
         </InnerContainer>
 
         <SecondPic />
+        <Logout />
         <Footer />
       </Container>
     </>
