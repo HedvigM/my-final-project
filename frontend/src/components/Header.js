@@ -5,6 +5,12 @@ import styled from 'styled-components/macro';
 export const Header = () => {
   return (
     <Container>
+      <Ic className="item-0">
+        <Link to={'/'}>
+          {' '}
+          <h3>Start</h3>
+        </Link>
+      </Ic>
       <Ic className="item-1">
         <Link to={'/profile'}>
           {' '}
@@ -29,7 +35,7 @@ export const Header = () => {
 };
 
 const Container = styled.div`
-  /* Mobil */
+  /* Mobile */
   @media (min-width: 0px) {
     display: flex;
     flex-direction: row;
@@ -38,17 +44,17 @@ const Container = styled.div`
     color: white;
   }
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
   }
 
-  /* Stor Dator - */
+  /* big laptop - */
   @media (min-width: 1200px) {
   }
 `;
 
 const Ic = styled.div`
-  /* Mobil */
+  /* Mobile */
   @media (min-width: 0px) {
     font-size: 0.8em;
   }
@@ -65,12 +71,12 @@ const Ic = styled.div`
   a:active {
     color: var(--main-color);
   }
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     font-size: 1.7em;
   }
 
-  /* Stor Dator - */
+  /* big laptop - */
   @media (min-width: 1200px) {
   }
 `;
