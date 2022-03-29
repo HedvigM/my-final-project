@@ -1,57 +1,31 @@
-import React /* , { useEffect, useState } */ from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch /* , useSelector, batch */ } from 'react-redux';
-import { useAuth0 } from '@auth0/auth0-react';
+import React, { /* useEffect, */ useState } from 'react';
+import { useDispatch, useSelector, batch } from 'react-redux';
 
 import styled from 'styled-components';
 import swal from 'sweetalert';
 
-/* import { relations } from '../reducers/relations';
+import { relations } from '../reducers/relations';
 import { DELETE, UPDATE_URL } from '../utils/url';
-import { member } from '../reducers/member'; */
+import { member } from '../reducers/member';
+import { DeleteBtn } from './styledComponents/Buttons';
 
 export const Settings = () => {
-  const { logout } = useAuth0();
-  /*  const [mail, setMail] = useState('');
+  const [mail, setMail] = useState('');
   const [city, setCity] = useState('');
   const [words, setWords] = useState('');
-  const [loading, setLoading] = useState(false); */
+  const [loading, setLoading] = useState(false);
 
-  /*  const dispatch = useDispatch();
-  const navigate = useNavigate(); */
+  const dispatch = useDispatch();
 
-  /*   const accessToken = useSelector((store) => store.member.accessToken);
   const profileText = useSelector((store) => store.member.profileText);
   const town = useSelector((store) => store.member.town);
   const email = useSelector((store) => store.member.email);
-  const memberId = useSelector((store) => store.member.memberId); */
+  const memberId = useSelector((store) => store.member.memberId);
 
-  /*  useEffect(() => {
-    if (!accessToken) {
-      navigate('/login');
-    }
-  }, [accessToken, navigate]); */
-
-  /*   const logout = () => {
-    batch(() => {
-      dispatch(member.actions.setMemberId(null));
-      dispatch(member.actions.setMemberName(null));
-      dispatch(member.actions.setAccessToken(null));
-      dispatch(member.actions.setMember(null));
-      dispatch(member.actions.setKnowTunes([]));
-      dispatch(member.actions.setLearnTunes([]));
-      dispatch(member.actions.setMember(null));
-      dispatch(member.actions.setRelations(null));
-      dispatch(member.actions.setProfileText(null));
-      dispatch(member.actions.setMember(null));
-      dispatch(relations.actions.setRelations(null));
-    });
-  }; */
-  /* 
   const onDelete = (memberId) => {
     swal({
       title: 'Are you sure?',
-      text: 'Once deleted, you will not be able to recover this imaginary file!',
+      text: 'Once deleted, you will not be able to recover this profile!',
       icon: 'warning',
       buttons: true,
       dangerMode: true
@@ -65,9 +39,9 @@ export const Settings = () => {
         swal('Your profile is safe!');
       }
     });
-  }; */
+  };
 
-  /*   const options = {
+  const options = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' }
   };
@@ -80,17 +54,15 @@ export const Settings = () => {
           batch(() => {
             dispatch(member.actions.setMemberId(null));
             dispatch(member.actions.setMemberName(null));
-            dispatch(member.actions.setAccessToken(null));
             dispatch(member.actions.setKnowTunes(null));
             dispatch(member.actions.setLearnTunes(null));
-            dispatch(member.actions.setMember(null));
             dispatch(relations.actions.setRelations(null));
           });
         }
       });
-  }; */
+  };
 
-  /*   let profileMail = '';
+  let profileMail = '';
   if (mail) {
     profileMail = mail;
   } else {
@@ -109,9 +81,9 @@ export const Settings = () => {
     freeText = words;
   } else {
     freeText = profileText;
-  } */
+  }
 
-  /*  const patch = {
+  const patch = {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -120,9 +92,9 @@ export const Settings = () => {
       town: profileCity,
       profileText: freeText
     })
-  }; */
+  };
 
-  /*   const onProfileUpdate = (event) => {
+  const onProfileUpdate = (event) => {
     setLoading(true);
     event.preventDefault();
     fetch(UPDATE_URL, patch)
@@ -137,14 +109,14 @@ export const Settings = () => {
           });
         }
       });
-  }; */
+  };
+  if (loading) {
+    return <div>Loading ...</div>;
+  }
 
-  /*  return loading ? (
-    <h1>Loading</h1>
-  ) :  */
   return (
     <>
-      {/*     <Container>
+      <Container>
         <form>
           <h1>Do you want to change your info?</h1>
 
@@ -171,25 +143,22 @@ export const Settings = () => {
             placeholder="Profile text"
             value={words}
             onChange={(event) => setWords(event.target.value)}></input>
-          <Btn onClick={onProfileUpdate}>Change the info!</Btn>
+          <DeleteBtn onClick={onProfileUpdate}>Change the info!</DeleteBtn>
         </form>
-      </Container> */}
+      </Container>
 
-      <Btn onClick={() => logout({ returnTo: window.location.origin })}>
-        Log Out
-      </Btn>
-      {/*   <Btn
+      <DeleteBtn
         delete
         onClick={() => {
           onDelete(memberId);
         }}>
         Delete account
-      </Btn> */}
+      </DeleteBtn>
     </>
   );
 };
 
-/* const Container = styled.div`
+const Container = styled.div`
   color: white;
 
   p {
@@ -212,28 +181,5 @@ export const Settings = () => {
       color: white;
       opacity: 1;
     }
-  }
-`; */
-
-const Btn = styled.button`
-  background-color: ${(props) => (props.delete ? '#fc6666' : 'white')};
-
-  color: black;
-  margin: 3px;
-  padding: 3px;
-  font-size: 15px;
-  border-radius: 4px;
-  border: none;
-  transition-duration: 0.2s;
-  box-shadow: none;
-  font-family: var(--button-font);
-  white-space: nowrap;
-
-  :hover {
-    background-color: white;
-    color: var(--secondary-color);
-    transition-duration: 0.2s;
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-      0 17px 50px 0 rgba(0, 0, 0, 0.19);
   }
 `;
