@@ -5,6 +5,7 @@ import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
+import { Btn } from './styledComponents/Buttons';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
@@ -82,13 +83,10 @@ export const SearchMembers = () => {
                 <LinkStyle to={`/member/${item._id}`}>
                   <p>{item.memberName}</p>
                 </LinkStyle>
+
                 <Right>
                   {actualFollowed.includes(item._id) ? (
-                    <R>
-                      <Btn following onClick={() => AddFollowHandel(item._id)}>
-                        🎻 following
-                      </Btn>
-                    </R>
+                    <R>🎻 following</R>
                   ) : (
                     <R>
                       <Btn follow onClick={() => AddFollowHandel(item._id)}>
@@ -111,31 +109,6 @@ export const SearchMembers = () => {
 const R = styled.div`
   display: grid;
   justify-self: right;
-`;
-
-const Btn = styled.button`
-  background-color: ${(props) =>
-    props.follow ? 'var(--main-color)' : 'white'};
-
-  color: black;
-  margin: 3px;
-
-  padding: 3px;
-  font-size: 15px;
-  border-radius: 4px;
-  border: none;
-  transition-duration: 0.2s;
-  box-shadow: none;
-  font-family: var(--button-font);
-  white-space: nowrap;
-
-  :hover {
-    background-color: white;
-    color: var(--secondary-color);
-    transition-duration: 0.2s;
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-      0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  }
 `;
 
 const LinkStyle = styled(Link)`
@@ -174,13 +147,13 @@ const InnerContainer = styled.div`
     font-size: 16px;
   }
 
-  /* Mobil */
+  /* Mobile */
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;
   }
 
-  /* Liten Dator - */
+  /* small laptop - */
   @media (min-width: 992px) {
     min-width: 500px;
     max-width: 700px;
@@ -206,7 +179,7 @@ const Green = styled.div`
       color: black;
       opacity: 1;
     }
-    /* Liten Dator - */
+    /* small laptop - */
     @media (min-width: 992px) {
       margin: 100px;
       padding: 15px;
