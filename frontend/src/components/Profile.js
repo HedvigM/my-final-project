@@ -1,10 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 
 export const Profile = (member) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
-  console.log(user.sub);
+  const town = useSelector((store) => store.member.town);
+  const profileText = useSelector((store) => store.member.profileText);
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -17,7 +19,9 @@ export const Profile = (member) => {
           <Img src={user.picture} alt={user.name} />
           <NameCity>
             <h2>{user.name}</h2>
-            <h3>Town??</h3>
+            <h3>{town}</h3>
+            <p>{profileText}</p>
+            {/* Make it possible to save a town */}
           </NameCity>
         </PicNameCity>
       </>
