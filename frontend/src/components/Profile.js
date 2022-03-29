@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
+import { API_URL } from '../utils/url';
 
 export const Profile = (member) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [detailedMember, setDetailedMember] = useState({});
+  const [loading, setLoading] = useState(true);
   const town = useSelector((store) => store.member.town);
   const profileText = useSelector((store) => store.member.profileText);
 
-  if (isLoading) {
+  let profileId = '';
+  if (member.member) {
+    profileId = member.member;
+  } else {
+    profileId = user;
+  }
+
+  useEffect(() => {
+    setLoading(true);
+
+    fetch(API_URL(`member/${profileId}`))
+      .then((res) => res.json())
+      .then((data) => {
+        setDetailedMember(data.response);
+        setLoading(false);
+      });
+  }, [profileId]);
+
+  if (isLoading || loading) {
     return <div>Loading ...</div>;
   }
 
@@ -22,6 +43,8 @@ export const Profile = (member) => {
             <h3>{town}</h3>
             <p>{profileText}</p>
             {/* Make it possible to save a town */}
+            <h1>{detailedMember.memberName}</h1>
+            <h2>{detailedMember.town}</h2>
           </NameCity>
         </PicNameCity>
       </>
