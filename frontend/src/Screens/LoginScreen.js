@@ -8,6 +8,7 @@ import { HeroPic, Quote, SecondPic } from '../components/login/Pictures';
 import { About, Cards } from '../components/login/Texts';
 import { Footer } from '../components/login/Footer';
 import { Logout } from '../components/login/Loguot';
+import { SaveMember } from '../components/login/SaveMember';
 
 export const LoginScreen = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -38,6 +39,7 @@ export const LoginScreen = () => {
     </Container>
   ) : (
     <>
+      <SaveMember />
       <Header />
       <Container>
         <HeroPic />
