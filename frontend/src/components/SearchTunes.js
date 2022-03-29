@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { member } from '../reducers/member';
+import { BtnTunes } from './styledComponents/Buttons';
 
 import styled from 'styled-components';
 import {
@@ -87,7 +88,7 @@ export const SearchTunes = () => {
                 <p>❤️</p>
               </R>
             ) : (
-              <Btn onClick={() => addKnowTune(item.id)}>Know</Btn>
+              <BtnTunes onClick={() => addKnowTune(item.id)}>Know</BtnTunes>
             )}
 
             {learnTunes.includes(item.id) ? (
@@ -96,7 +97,7 @@ export const SearchTunes = () => {
               </R>
             ) : (
               <R>
-                <Btn onClick={() => addLearnTune(item.id)}>Learn</Btn>
+                <BtnTunes onClick={() => addLearnTune(item.id)}>Learn</BtnTunes>
               </R>
             )}
           </Right>
@@ -115,22 +116,22 @@ export const SearchTunes = () => {
             placeholder="Type in a tune 👇"
             onChange={(event) => setValue(event.target.value)}
           />
-          <Btn className="accent" onClick={onSearchHandle}>
+          <BtnTunes className="accent" onClick={onSearchHandle}>
             Search!
-          </Btn>
+          </BtnTunes>
         </InnerContainer>
       </Green>
 
       {value ? tunes(searchList) : tunes(popularList)}
       <InnerContainer>
         <Pagination>
-          <Btn className="accent" onClick={previousPage}>
+          <BtnTunes className="accent" onClick={previousPage}>
             Previous
-          </Btn>
+          </BtnTunes>
           {pageCount}
-          <Btn className="accent" onClick={nextPage}>
+          <BtnTunes className="accent" onClick={nextPage}>
             Next
-          </Btn>
+          </BtnTunes>
         </Pagination>
       </InnerContainer>
     </div>
@@ -145,28 +146,6 @@ const LinkStyle = styled(Link)`
   align-self: center;
 `;
 
-const Btn = styled.button`
-  background-color: var(--main-color);
-  color: black;
-  margin: 3px;
-  width: 70px;
-  padding: 3px;
-  font-size: 15px;
-  border-radius: 4px;
-  border: none;
-  transition-duration: 0.2s;
-  box-shadow: none;
-  font-family: var(--button-font);
-  white-space: nowrap;
-
-  :hover {
-    background-color: white;
-    color: var(--secondary-color);
-    transition-duration: 0.2s;
-    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-      0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  }
-`;
 const R = styled.div`
   display: grid;
   justify-self: right;
