@@ -13,7 +13,6 @@ import { Footer } from '../components/Footer';
 export const ProfileScreen = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth0();
-  console.log(isAuthenticated);
 
   if (isLoading) {
     return <div>Loading ...</div>;
