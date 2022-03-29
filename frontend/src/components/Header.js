@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <Container>
       <Ic className="item-1">
-        <Link to={'/'}>
+        <Link to={'/profile'}>
           {' '}
           <h3>🎻 My Tunes</h3>
         </Link>
