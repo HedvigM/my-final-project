@@ -1,15 +1,21 @@
-I have made a new login system that messes with the whole app... I can now use google to sign in Yey! But i need to update the rest of the app accordingly. 
+I have made a new login system that messes with the whole app... I can now use google to sign in Yey! But i need to update the rest of the app accordingly.
 
-I have changed the memberschema in the server.js, and the sign up endpoint. Now i need to change the rest of the endpoints. 
+I have changed the memberschema in the server.js, and the sign up endpoint. Now i need to change the rest of the endpoints.
 
-The log out function is not working at the moment. The function that redirected before is not doing its job, so i removed it in the meantime. 
+The log out function is not working at the moment. The function that redirected before is not doing its job, so i removed it in the meantime.
 
-TODO:
-3. look at the redirects, the '/' should lead to the 'login' page... and then the profile page should have right redirects. 
+TODO: 3. the members page dont work at the moment.
+-Nu kan man spara en medlem, fast i postman står det "false" som att requestet inte gått igenom.
 
-3b. add the 'login' as a choise to the header. 
+- man kan spara en och samma vän flera gånger.
 
-4. Do a refactoring on the server.js document and make smaller components. 
+4. Do a refactoring on the server.js document and make smaller components.
 
-5. Incorporate the lottie! =) 
+5. Incorporate the lottie! =)
 6. Look at the mobile version thingie.
+
+If i were to change anything:
+
+- rename "login" and loginscreen to "startpage" or "startscreen".
+- Make it possible to save a town on profile component.
+- möjlighet att "unfollow" en person på "search member" sidan.
