@@ -24,6 +24,7 @@ export const LoginScreen = () => {
 
       <LoginContainer>
         <InnerContainer>
+          <h1>Log in with google:</h1>
           <LoginInnerContainer>
             <LoginAuth0 />
           </LoginInnerContainer>
@@ -58,6 +59,8 @@ export const LoginScreen = () => {
 
 const LoginInnerContainer = styled.div`
   padding: 80px 0;
+  display: flex;
+  justify-content: center;
 `;
 
 const LoginContainer = styled.div`
