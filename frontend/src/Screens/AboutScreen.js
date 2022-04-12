@@ -1,27 +1,17 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 import styled from 'styled-components';
 import { About } from '../components/About';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
+import { LoadingLottie } from '../components/Lottie/LoadingLottie';
 
 export const AboutScreen = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
-  /* const navigate = useNavigate();
-  const accessToken = useSelector((store) => store.member.accessToken);
-
-  useEffect(() => {
-    if (!accessToken) {
-      navigate('/login');
-    }
-  }, [accessToken, navigate]); */
-
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingLottie />;
   }
 
   return (

@@ -11,12 +11,14 @@ import {
   SEARCH_TUNE
 } from '../utils/url';
 import { Link } from 'react-router-dom';
+import { LoadingLottie } from './Lottie/LoadingLottie';
 
 export const SearchTunes = () => {
   const [popularList, setPopularList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [value, setValue] = useState('');
   const [pageCount, setPageCount] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   const memberId = useSelector((store) => store.member.memberId);
   const learnTunes = useSelector((store) => store.member.learnTunes);
@@ -25,18 +27,22 @@ export const SearchTunes = () => {
   const dispatch = useDispatch();
 
   const onSearchHandle = async () => {
+    setLoading(true);
     fetch(SEARCH_TUNE(value))
       .then((res) => res.json())
       .then((data) => {
         setSearchList(data.tunes);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch(POPULAR_URL(pageCount))
       .then((res) => res.json())
       .then((data) => {
         setPopularList(data.tunes);
+        setLoading(false);
       });
   }, [pageCount]);
 
@@ -104,6 +110,10 @@ export const SearchTunes = () => {
         </Tunes>
       </InnerContainer>
     ));
+
+  if (loading) {
+    return <LoadingLottie />;
+  }
 
   return (
     <div>
@@ -190,7 +200,7 @@ const InnerContainer = styled.div`
     font-size: 16px;
   }
 
-  /* Mobil */
+  /* mobile */
   @media (min-width: 0px) and (max-width: 767px) {
     min-width: 200px;
     max-width: 300px;

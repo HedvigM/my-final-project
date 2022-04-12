@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 
@@ -9,23 +8,16 @@ import { Profile } from '../components/Profile';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { TunesIncommon } from '../components/TunesIncommon';
+import { LoadingLottie } from '../components/Lottie/LoadingLottie';
 
 export const DetailedMemberScreen = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading } = useAuth0();
 
   const { member } = useParams();
   const navigate = useNavigate();
 
-  /*  const accessToken = useSelector((store) => store.member.accessToken);
-
-  useEffect(() => {
-    if (!accessToken) {
-      navigate('/login');
-    }
-  }, [accessToken, navigate]); */
-
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingLottie />;
   }
 
   return isAuthenticated ? (

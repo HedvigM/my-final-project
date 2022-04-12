@@ -1,29 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 
 import { Footer } from '../components/Footer';
 import { DetailTune } from '../components/DetailTune';
 import { Header } from '../components/Header';
+import { LoadingLottie } from '../components/Lottie/LoadingLottie';
 
 export const DetailedTunesScreen = () => {
   const { tune } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth0();
 
-  /*   const accessToken = useSelector((store) => store.member.accessToken); */
-
-  /*  useEffect(() => {
-    if (!accessToken) {
-      navigate('/login');
-    }
-  }, [accessToken, navigate]); */
-
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingLottie />;
   }
 
   return isAuthenticated ? (

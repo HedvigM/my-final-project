@@ -4,16 +4,16 @@ import { SearchTunes } from '../components/SearchTunes';
 import { useAuth0 } from '@auth0/auth0-react';
 import styled from 'styled-components';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { LoadingLottie } from '../components/Lottie/LoadingLottie';
 
 export const SearchTuneScreen = () => {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading } = useAuth0();
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <LoadingLottie />;
   }
 
   return isAuthenticated ? (

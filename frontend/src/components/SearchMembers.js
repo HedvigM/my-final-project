@@ -6,10 +6,12 @@ import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
 import { Btn } from './styledComponents/Buttons';
+import { LoadingLottie } from './Lottie/LoadingLottie';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
   const [value, setValue] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const memberId = useSelector((store) => store.member.memberId);
   const following = useSelector((store) => store.relations.relations);
@@ -34,10 +36,12 @@ export const SearchMembers = () => {
 
   // fetching all the members from the database.
   useEffect(() => {
+    setLoading(true);
     fetch(API_URL('members'))
       .then((res) => res.json())
       .then((data) => {
         setList(data.response);
+        setLoading(false);
       });
   }, []);
 
@@ -54,6 +58,10 @@ export const SearchMembers = () => {
         dispatch(relations.actions.setRelations([...following, data.response]))
       );
   };
+
+  if (loading) {
+    return <LoadingLottie />;
+  }
 
   return (
     <>
