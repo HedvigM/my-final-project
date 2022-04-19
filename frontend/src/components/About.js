@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { H1 } from './styledComponents/Layout';
 
 export const About = () => {
   return (
@@ -19,10 +19,3 @@ export const About = () => {
     </>
   );
 };
-const H1 = styled.h1`
-  text-align: center;
-  /* small laptop - */
-  @media (min-width: 992px) {
-    font-size: 3em;
-  }
-`;

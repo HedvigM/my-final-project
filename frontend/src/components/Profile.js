@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useAuth0 } from '@auth0/auth0-react';
 import { API_URL } from '../utils/url';
+import { H1, H2, H3, P } from './styledComponents/Layout';
 
 export const Profile = (member) => {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -30,7 +31,7 @@ export const Profile = (member) => {
   }, [profileId]);
 
   if (isLoading || loading) {
-    return <div>Loading ...</div>;
+    return <H1>Loading ...</H1>;
   }
 
   return (
@@ -39,12 +40,12 @@ export const Profile = (member) => {
         <PicNameCity>
           <Img src={user.picture} alt={user.name} />
           <NameCity>
-            <h2>{user.name}</h2>
-            <h3>{town}</h3>
-            <p>{profileText}</p>
+            <H2>{user.name}</H2>
+            <H3>{town}</H3>
+            <P>{profileText}</P>
             {/* Make it possible to save a town */}
-            <h1>{detailedMember.memberName}</h1>
-            <h2>{detailedMember.town}</h2>
+            <H1>{detailedMember.memberName}</H1>
+            <H2>{detailedMember.town}</H2>
           </NameCity>
         </PicNameCity>
       </>
@@ -55,16 +56,16 @@ export const Profile = (member) => {
 const NameCity = styled.div`
   margin: 5px;
 
-  h1 {
+  /*   h1 {
     margin-bottom: 5px;
   }
 
   h2 {
     margin-top: 5px;
-  }
+  } */
 
   /* small laptop - */
-  @media (min-width: 992px) {
+  /* @media (min-width: 992px) {
     margin: 5px;
     margin-left: 40px;
 
@@ -77,7 +78,7 @@ const NameCity = styled.div`
       margin-top: 5px;
       font-size: 2.5em;
     }
-  }
+  } */
 `;
 
 const Img = styled.img`

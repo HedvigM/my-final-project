@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { TUNE_URL } from '../utils/url';
 import abcjs from 'abcjs';
 import { API_URL } from '../utils/url';
+import {
+  H1,
+  H2,
+  P,
+  ComponentContainer,
+  Members
+} from '../components/styledComponents/Layout';
 
 export const DetailTune = (tune) => {
   const [list, setList] = useState([]);
@@ -44,52 +50,28 @@ export const DetailTune = (tune) => {
   abcjs.renderAbc('sheetMusic', lineBreak(abc), { responsive: 'resize' });
 
   return (
-    <Container>
-      <Members>
-        <h1>{details.name}</h1>
+    <>
+      <ComponentContainer>
+        <Members>
+          <H1>{details.name}</H1>
 
-        <h2>Members that knows the tune:</h2>
-        {/* This function prints the members that know this specific tune */}
-        {list.map(
-          (item) =>
-            item.knowTunes.includes(detailedTuneAsNumber) && (
-              <p key={item._id}>{item.memberName}</p>
-            )
-        )}
-      </Members>
-
+          <H2>Members that knows the tune:</H2>
+          {/* This function prints the members that know this specific tune */}
+          {list.map(
+            (item) =>
+              item.knowTunes.includes(detailedTuneAsNumber) && (
+                <P key={item._id}>{item.memberName}</P>
+              )
+          )}
+        </Members>
+      </ComponentContainer>
       <div>
-        <p>Type: {details.type}</p>
-        <p>Key: {key}</p>
+        <P>Type: {details.type}</P>
+        <P>Key: {key}</P>
         <div width="100%" id="sheetMusic">
           (laddar)
         </div>
       </div>
-    </Container>
+    </>
   );
 };
-
-const Members = styled.div`
-  margin: 30px 0px;
-`;
-
-const Container = styled.div`
-  color: black;
-  h1 {
-    margin: 0px;
-  }
-  h2 {
-    font-size: 1.17em;
-  }
-  /* Liten Dator - */
-  @media (min-width: 992px) {
-    h1 {
-      font-size: 3em;
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    h2 {
-      font-size: 1.17em;
-    }
-  }
-`;

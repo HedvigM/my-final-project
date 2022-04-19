@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import styled from 'styled-components';
 import { API_URL, TUNE_URL } from '../utils/url';
+import { Div } from './styledComponents/Layout';
 
 export const TunesIncommon = (member) => {
   const [list, setList] = useState({});
@@ -65,46 +65,3 @@ export const TunesIncommon = (member) => {
     </Div>
   );
 };
-
-const Div = styled.div`
-  padding-top: 30px;
-  padding-bottom: 30px;
-
-  h1,
-  h2,
-  p {
-    color: white;
-    margin: 0px;
-  }
-  h1 {
-    font-size: 1.17em;
-    margin: 0px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-  }
-  p {
-    padding-bottom: 20px;
-  }
-
-  .noTunes {
-    text-align: center;
-  }
-
-  /* Liten Dator - */
-  @media (min-width: 992px) {
-    .noTunes {
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.5em;
-      padding-bottom: 40px;
-    }
-    h2 {
-      font-size: 2.3em;
-    }
-    p {
-      padding-top: 40px;
-      font-size: 1.7em;
-    }
-  }
-`;

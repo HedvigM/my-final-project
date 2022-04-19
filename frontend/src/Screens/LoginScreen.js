@@ -10,6 +10,14 @@ import { Logout } from '../components/login/Loguot';
 import { SaveMember } from '../components/login/SaveMember';
 import { LoadingLottie } from '../components/Lottie/LoadingLottie';
 
+import {
+  Container,
+  InnerContainer,
+  LoginInnerContainer,
+  LoginContainer,
+  H1
+} from '../components/styledComponents/Layout';
+
 export const LoginScreen = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
@@ -24,7 +32,7 @@ export const LoginScreen = () => {
 
       <LoginContainer>
         <InnerContainer>
-          <h1>Log in with google:</h1>
+          <H1>Log in with google:</H1>
           <LoginInnerContainer>
             <LoginAuth0 />
           </LoginInnerContainer>
@@ -46,7 +54,7 @@ export const LoginScreen = () => {
         <HeroPic />
 
         <InnerContainer>
-          <h1>This page is under development.</h1>
+          <H1>This page is under development.</H1>
           <LoadingLottie />
         </InnerContainer>
 
@@ -57,33 +65,3 @@ export const LoginScreen = () => {
     </>
   );
 };
-
-const LoginInnerContainer = styled.div`
-  padding: 80px 0;
-  display: flex;
-  justify-content: center;
-`;
-
-const LoginContainer = styled.div`
-  background-color: var(--main-color);
-  margin: 0;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-`;
-
-const InnerContainer = styled.div`
-  min-width: 334px;
-  max-width: 500px;
-  margin: 0 auto;
-  height: 100%;
-
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 200px;
-    max-width: 300px;
-  }
-`;

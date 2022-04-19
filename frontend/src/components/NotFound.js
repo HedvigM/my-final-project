@@ -1,5 +1,6 @@
 import React from 'react';
+import { H1 } from './styledComponents/Layout';
 
 export const NotFound = () => {
-  return <h1>Hi! This Page is not found! </h1>;
+  return <H1>Hi! This Page is not found! </H1>;
 };

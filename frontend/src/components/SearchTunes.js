@@ -10,8 +10,15 @@ import {
   LEARN_TUNE_URL,
   SEARCH_TUNE
 } from '../utils/url';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { LoadingLottie } from './Lottie/LoadingLottie';
+import {
+  Green,
+  LinkStyle,
+  InnerComponentContainer,
+  R,
+  Right
+} from './styledComponents/Layout';
 
 export const SearchTunes = () => {
   const [popularList, setPopularList] = useState([]);
@@ -81,7 +88,7 @@ export const SearchTunes = () => {
 
   const tunes = (popularList) =>
     popularList.map((item, index) => (
-      <InnerContainer key={index}>
+      <InnerComponentContainer key={index}>
         <Tunes>
           <LinkStyle to={`/details/${item.id}`}>
             <p>
@@ -108,7 +115,7 @@ export const SearchTunes = () => {
             )}
           </Right>
         </Tunes>
-      </InnerContainer>
+      </InnerComponentContainer>
     ));
 
   if (loading) {
@@ -118,7 +125,7 @@ export const SearchTunes = () => {
   return (
     <div>
       <Green>
-        <InnerContainer>
+        <InnerComponentContainer>
           <input
             className="input"
             type="text"
@@ -129,11 +136,11 @@ export const SearchTunes = () => {
           <BtnTunes className="accent" onClick={onSearchHandle}>
             Search!
           </BtnTunes>
-        </InnerContainer>
+        </InnerComponentContainer>
       </Green>
 
       {value ? tunes(searchList) : tunes(popularList)}
-      <InnerContainer>
+      <InnerComponentContainer>
         <Pagination>
           <BtnTunes className="accent" onClick={previousPage}>
             Previous
@@ -143,35 +150,10 @@ export const SearchTunes = () => {
             Next
           </BtnTunes>
         </Pagination>
-      </InnerContainer>
+      </InnerComponentContainer>
     </div>
   );
 };
-
-const LinkStyle = styled(Link)`
-  text-decoration: none;
-  color: black;
-  display: grid;
-  justify-self: left;
-  align-self: center;
-`;
-
-const R = styled.div`
-  display: grid;
-  justify-self: right;
-`;
-
-const Right = styled.div`
-  display: grid;
-  justify-self: right;
-  align-self: center;
-
-  p {
-    margin: 3px;
-    font-size: 12px;
-    font-style: italic;
-  }
-`;
 
 const Tunes = styled.div`
   border-bottom: 1px solid black;
@@ -184,52 +166,4 @@ const Pagination = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px 0px;
-`;
-
-const InnerContainer = styled.div`
-  min-width: 334px;
-  max-width: 500px;
-  margin: 0 auto;
-  height: 100%;
-
-  .accent {
-    background-color: var(--secondary-color);
-    color: white;
-  }
-  .input {
-    font-size: 16px;
-  }
-
-  /* mobile */
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 200px;
-    max-width: 300px;
-  }
-`;
-
-const Green = styled.div`
-  background-color: var(--main-color);
-
-  input {
-    background-color: var(--main-color);
-    border: none;
-    border-bottom: 1px solid black;
-
-    margin: 15px;
-    padding: 5px;
-    width: 250px;
-
-    text-align: center;
-    text-transform: uppercase;
-
-    ::placeholder {
-      color: black;
-      opacity: 1;
-    }
-    /* Liten Dator - */
-    @media (min-width: 992px) {
-      margin: 60px;
-      padding: 15px;
-    }
-  }
 `;

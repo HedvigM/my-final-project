@@ -9,6 +9,12 @@ import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { TunesIncommon } from '../components/TunesIncommon';
 import { LoadingLottie } from '../components/Lottie/LoadingLottie';
+import {
+  Container,
+  InnerContainer,
+  Img,
+  Overlay
+} from '../components/styledComponents/Layout';
 
 export const DetailedMemberScreen = () => {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -40,49 +46,3 @@ export const DetailedMemberScreen = () => {
     navigate('/login')
   );
 };
-
-const Img = styled.div`
-  background-image: url('/yan-ming.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  margin: 0px;
-
-  /* small laptop - */
-  @media (min-width: 992px) {
-    .overlay {
-      background-color: #04040469;
-
-      margin: 0px;
-      width: 100%;
-      height: 100%;
-      padding-top: 200px;
-      padding-bottom: 200px;
-    }
-  }
-`;
-
-const Overlay = styled.div`
-  background-color: #04040469;
-  margin: 0px;
-  width: 100%;
-  height: 100%;
-`;
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-`;
-const InnerContainer = styled.div`
-  min-width: 334px;
-  max-width: 500px;
-  margin: 0 auto;
-  height: 100%;
-
-  /* mobile */
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 200px;
-    max-width: 300px;
-  }
-`;

@@ -1,13 +1,13 @@
 import React, { /* useEffect, */ useState } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
 
-import styled from 'styled-components';
 import swal from 'sweetalert';
 
 import { relations } from '../reducers/relations';
 import { DELETE, UPDATE_URL } from '../utils/url';
 import { member } from '../reducers/member';
 import { DeleteBtn } from './styledComponents/Buttons';
+import { H1, P, ComponentContainer } from './styledComponents/Layout';
 
 export const Settings = () => {
   const [mail, setMail] = useState('');
@@ -116,11 +116,11 @@ export const Settings = () => {
 
   return (
     <>
-      <Container>
+      <ComponentContainer>
         <form>
-          <h1>Do you want to change your info?</h1>
+          <H1>Do you want to change your info?</H1>
 
-          <p>{town}</p>
+          <P>{town}</P>
           <input
             id="town"
             type="text"
@@ -128,7 +128,7 @@ export const Settings = () => {
             value={city}
             onChange={(event) => setCity(event.target.value)}></input>
 
-          <p>{email}</p>
+          <P>{email}</P>
           <input
             id="email"
             type="email"
@@ -136,7 +136,7 @@ export const Settings = () => {
             value={mail}
             onChange={(event) => setMail(event.target.value)}></input>
 
-          <p>{profileText}</p>
+          <P>{profileText}</P>
           <input
             id="profileText"
             type="profileText"
@@ -145,7 +145,7 @@ export const Settings = () => {
             onChange={(event) => setWords(event.target.value)}></input>
           <DeleteBtn onClick={onProfileUpdate}>Change the info!</DeleteBtn>
         </form>
-      </Container>
+      </ComponentContainer>
 
       <DeleteBtn
         delete
@@ -157,29 +157,3 @@ export const Settings = () => {
     </>
   );
 };
-
-const Container = styled.div`
-  color: white;
-
-  p {
-    font-size: 20px;
-  }
-
-  input {
-    background-color: var(--secondary-color);
-    border: none;
-    border-bottom: 1px solid black;
-
-    margin: 15px;
-    padding: 5px;
-    width: 250px;
-
-    text-align: center;
-    font-size: 16px;
-
-    ::placeholder {
-      color: white;
-      opacity: 1;
-    }
-  }
-`;

@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import { relations } from '../reducers/relations';
 import styled from 'styled-components';
 import { API_URL } from '../utils/url';
 import { FOLLOW_URL } from '../utils/url';
 import { Btn } from './styledComponents/Buttons';
 import { LoadingLottie } from './Lottie/LoadingLottie';
+import {
+  Green,
+  InnerComponentContainer,
+  LinkStyle
+} from './styledComponents/Layout';
 
 export const SearchMembers = () => {
   const [list, setList] = useState([]);
@@ -66,7 +71,7 @@ export const SearchMembers = () => {
   return (
     <>
       <Green>
-        <InnerContainer>
+        <InnerComponentContainer>
           <input
             className="input"
             type="text"
@@ -74,10 +79,10 @@ export const SearchMembers = () => {
             placeholder="Search for a member 👇"
             onChange={(event) => setValue(event.target.value)}
           />
-        </InnerContainer>
+        </InnerComponentContainer>
       </Green>
       <div>
-        <InnerContainer>
+        <InnerComponentContainer>
           <h1>Members</h1>
           {list
             .filter(
@@ -108,7 +113,7 @@ export const SearchMembers = () => {
                 </Right>
               </Relations>
             ))}
-        </InnerContainer>
+        </InnerComponentContainer>
       </div>
     </>
   );
@@ -117,14 +122,6 @@ export const SearchMembers = () => {
 const R = styled.div`
   display: grid;
   justify-self: right;
-`;
-
-const LinkStyle = styled(Link)`
-  text-decoration: none;
-  color: black;
-  display: grid;
-  justify-self: left;
-  align-self: center;
 `;
 
 const Right = styled.div`
@@ -143,54 +140,4 @@ const Relations = styled.div`
   border-bottom: 1px solid black;
   display: grid;
   grid-template-columns: 1fr 1fr;
-`;
-
-const InnerContainer = styled.div`
-  min-width: 334px;
-  max-width: 500px;
-  margin: 0 auto;
-  height: 100%;
-
-  .input {
-    font-size: 16px;
-  }
-
-  /* Mobile */
-  @media (min-width: 0px) and (max-width: 767px) {
-    min-width: 200px;
-    max-width: 300px;
-  }
-
-  /* small laptop - */
-  @media (min-width: 992px) {
-    min-width: 500px;
-    max-width: 700px;
-  }
-`;
-
-const Green = styled.div`
-  background-color: var(--main-color);
-
-  input {
-    background-color: var(--main-color);
-    border: none;
-    border-bottom: 1px solid black;
-
-    margin: 15px;
-    padding: 5px;
-    width: 300px;
-
-    text-align: center;
-    text-transform: uppercase;
-
-    ::placeholder {
-      color: black;
-      opacity: 1;
-    }
-    /* small laptop - */
-    @media (min-width: 992px) {
-      margin: 100px;
-      padding: 15px;
-    }
-  }
 `;

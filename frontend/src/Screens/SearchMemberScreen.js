@@ -5,8 +5,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { SearchMembers } from '../components/SearchMembers';
-import styled from 'styled-components';
 import { LoadingLottie } from '../components/Lottie/LoadingLottie';
+import { Container } from '../components/styledComponents/Layout';
 
 export const SearchMemberScreen = () => {
   const navigate = useNavigate();
@@ -26,10 +26,3 @@ export const SearchMemberScreen = () => {
     navigate('/login')
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-`;

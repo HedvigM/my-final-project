@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { TUNE_URL } from '../utils/url';
+import { LoadingLottie } from './Lottie/LoadingLottie';
+import { H1, P, ComponentContainer } from './styledComponents/Layout';
 
 export const MyTunes = () => {
   const [know, setKnow] = useState([]);
@@ -45,34 +47,26 @@ export const MyTunes = () => {
   }, [learnTunes]);
 
   if (loading) {
-    return <h1>LOADING</h1>;
+    return <LoadingLottie />;
   }
 
   if (!loading) {
     return (
-      <Container>
-        <h1>Tunes I know:</h1>
-        {know.map((item, index) => (
-          <p key={index}>{item}</p>
-        ))}
+      <ComponentContainer>
+        <div>
+          <H1>Tunes I know:</H1>
+          {know.map((item, index) => (
+            <P key={index}>{item}</P>
+          ))}
+        </div>
 
-        <h1>Tunes I want to learn:</h1>
-        {learn.map((item, index) => (
-          <p key={index}>{item}</p>
-        ))}
-      </Container>
+        <div>
+          <H1>Tunes I want to learn:</H1>
+          {learn.map((item, index) => (
+            <P key={index}>{item}</P>
+          ))}
+        </div>
+      </ComponentContainer>
     );
   }
 };
-
-const Container = styled.div`
-  color: white;
-  padding: 16px 0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-
-  h1 {
-    font-size: 1.17em;
-    margin: 0px;
-  }
-`;
